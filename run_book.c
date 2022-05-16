@@ -5,11 +5,13 @@ typedef struct{
 	char* author[50];
 	char* genre[50];
 	int release;
-} books;
+	int taken;
+	int id;
+} Books;
 
 void create_book(){
 	FILE* file;
-	books bookt;
+	Books bookt;
 	file=NULL;
 	file=fopen("book.txt","a+");
 	if(file==NULL){
@@ -31,9 +33,12 @@ void create_book(){
 
 	printf("Release date of the book\n");
 	scanf("%d", &bookt.release);
+
+	printf("ID of the book\n");
+	scanf("%d", &bookt.id);	
+
+	bookt.taken=0;
 	
-
-
 /*	fprintf(file,"%s","[\n");
 	fprintf(file,"%s","]\n");
 */
@@ -42,7 +47,7 @@ void create_book(){
 	if(fgetc(file)!='['){
 		fprintf(file,"%s","[\n");
 		//printf("passage du test\n");
-	}
+	}	
 
 	fprintf(file,"%s","	{\n");
 	fprintf(file,"%s","		\"Title\"  : ");
@@ -53,9 +58,18 @@ void create_book(){
 	fprintf(file,"%s;\n",bookt.genre);
 	fprintf(file,"%s","		\"Release\": ");
 	fprintf(file,"%d;\n  ",bookt.release);
+	fprintf(file,"%s","		\"ID\"     : ");
+	fprintf(file,"%d;\n  ",bookt.id);
+	fprintf(file,"%s","		\"taken\"  : ");
+	fprintf(file,"%d;\n",bookt.taken);
 	fprintf(file,"%s","\n");
-	fprintf(file,"%s","	},");		
+	fprintf(file,"%s","	},");	
 	fprintf(file,"%s","\n");
+
+	fseek(file, -0, SEEK_END);
+	if(fgetc(file)!=']'){
+		fprintf(file,"%s","]\n");
+	}
 
 }
 
@@ -70,7 +84,6 @@ void create_book(){
 
 
 int main(){
-	create_book();
 	create_book();
 	return 0;
 }
