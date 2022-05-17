@@ -53,6 +53,7 @@ void create_id(){
 
 void line_to_id_date(char* line, char* id, char* date){
 	//
+	printf("line :%s\n", line);
 
 	//Statement & Initialization :
 	char tmp ='0';
@@ -73,8 +74,9 @@ void line_to_id_date(char* line, char* id, char* date){
 	}
 }
 
-void read_id(Id* list){
+Id* read_id(){
 	//
+	Id* list;
 
 	//Statement & Initialization :
 	FILE* file =NULL;
@@ -172,6 +174,7 @@ void read_id(Id* list){
 						//Fill the lists (list[i].books[j][0] et list[i].books[j][1])
 						fgets(tmp2, 20, file);
 						line_to_id_date(tmp2, list[i].books[j][0], list[i].books[j][1]);
+						printf("tmp2 :%s\n", tmp2);
 					}
 				}
 			}
@@ -192,16 +195,15 @@ void read_id(Id* list){
 		list[i].password[j] ='\0';
 	}
 
-	free(list);
 	fclose(file);
+	return list;
 }
 
 int main(){
-	Id* list =NULL;
+	Id* list_id =NULL;
 	//create_id();
-	read_id(list);
-	printf("list[0].login :%s\n", list[0].login);
+	list_id =read_id();
 
-	free(list);
+	free(list_id);
 	return 0;
 }
