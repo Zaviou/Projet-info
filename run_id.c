@@ -51,6 +51,28 @@ void create_id(){
 	fclose(file);
 }
 
+void line_to_id_date(char* line, char* id, char* date){
+	//
+
+	//Statement & Initialization :
+	char tmp ='0';
+	int i =0, mark_id =0, mark_date =0;
+
+	//
+	for(i =0; i <strlen(line); i++){
+		tmp =line[i];
+		//Get id
+		if(i >2 && i <6){
+			id[mark_id] =tmp;
+			mark_id ++;
+		//Get date
+		}else if(i >8 & i <17){
+			date[mark_date] =tmp;
+			mark_date ++;
+		}
+	}
+}
+
 void read_id(Id* list){
 	//
 
@@ -58,7 +80,7 @@ void read_id(Id* list){
 	FILE* file =NULL;
 	list =NULL;
 	int id_nb =0, i =0, j =0, nb_borrowed_books =0;
-	char tmp =' ', tmp3 =' ';
+	char tmp =' ';
 	char tmp2[SIZE_MAX];
 
 	//Open the file "id.txt"
@@ -91,31 +113,69 @@ void read_id(Id* list){
 		tmp =fgetc(file);
 			if(tmp =='"'){
 				fgets(tmp2, 14, file);
+
 				//Get login
 				if(strcmp(tmp2, "Login\"    : \"") ==0){
 					fgets(list[i].login, SIZE_MAX +3, file);
-					printf("list[%d].login : %s\n", i, list[i].login);
+
 				//Get password
 				}else if(strcmp(tmp2, "Password\" : \"") ==0){
 					fgets(list[i].password, SIZE_MAX +3, file);
-					printf("list[%d].password : %s\n", i, list[i].password);
+
 				//Get role
 				}else if(strcmp(tmp2, "Role\"     : \"") ==0){
 					list[i].role =fgetc(file) -48;
-					printf("list[%d].role : %d\n", i, list[i].role);
+
 				//Get the borrowed books
 				}else if(strcmp(tmp2, "Books\"    : [") ==0){
-					printf("Books !\n");
-					/*//Get the number of borrowed books
+
+					//Get the number of borrowed books
+					nb_borrowed_books =0;
 					do{
-						tmp3 =fgetc(file);
-						if(tmp3 =='{'){
-							id_nb ++;
+						tmp =fgetc(file);
+						if(tmp ==';'){
+							nb_borrowed_books ++;
 						}
-					}while(tmp !=EOF);*/	
+					}while(tmp !=']');
+
+						//Get each book (book's id and date)
+					//Allocate memory for the list of books (list[i].books)
+					list[i].books =malloc (nb_borrowed_books * sizeof(char*));
+					if(list[i].books ==NULL){
+						printf("Erreur d'allocation de mémoire. Impossible de créer une liste list[i].books.\n");
+						exit(1);
+					}
+
+					//Allocate memory and fill the list of book's id and their date of borrowing (list[i].books)
+					fseek(file, -4 -(nb_borrowed_books *19), SEEK_CUR);
+					for(j =0; j <nb_borrowed_books; j++){
+						list[i].books[j] =malloc (2 * sizeof(char));
+						if(list[i].books[j] ==NULL){
+							printf("Erreur d'allocation de mémoire. Impossible de créer une liste list[i].books[j].\n");
+							exit(1);
+						}
+
+						//Allocate memory the list of book's id(list[i].books[j][0])
+						list[i].books[j][0] =malloc (2 * sizeof(char));
+						if(list[i].books[j] ==NULL){
+							printf("Erreur d'allocation de mémoire. Impossible de créer une liste list[i].books[j][0].\n");
+							exit(1);
+						}
+
+						//Allocate memory the list of book's id and their date of borrowing (list[i].books[j][1])
+						list[i].books[j][1] =malloc (2 * sizeof(char));
+						if(list[i].books[j] ==NULL){
+							printf("Erreur d'allocation de mémoire. Impossible de créer une liste list[i].books[j][1].\n");
+							exit(1);
+						}
+
+						//Fill the lists (list[i].books[j][0] et list[i].books[j][1])
+						fgets(tmp2, 20, file);
+						line_to_id_date(tmp2, list[i].books[j][0], list[i].books[j][1]);
+					}
 				}
 			}
-		}while(tmp !=EOF);
+		}while(tmp !='}');
 
 		//Delete the '";\n' character from the login
 		j =0;
@@ -140,6 +200,7 @@ int main(){
 	Id* list =NULL;
 	//create_id();
 	read_id(list);
+	printf("list[0].login :%s\n", list[0].login);
 
 	free(list);
 	return 0;

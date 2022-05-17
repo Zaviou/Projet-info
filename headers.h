@@ -16,20 +16,18 @@ typedef struct{
 typedef struct {
 	char login[SIZE_MAX];
 	char password[SIZE_MAX];
-	int** books;
+	char*** books;
 	int role;
 } Id;
 
-/*
-//run_book.c
+//run_book.o
 void create_book();
 int read_book(Books* list);
 
-//run_id.c
+//run_id.o
 void create_id();
 void read_id(Id* list);
 
-//iu.c
+//iu.o
 void start();
 void book_management ();
-*/
