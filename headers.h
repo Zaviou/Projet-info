@@ -22,11 +22,12 @@ typedef struct {
 
 //run_book.o
 void create_book();
+void line_to_id_date(char* line, char* id, char* date)
 int read_book(Books* list);
 
 //run_id.o
 void create_id();
-void read_id(Id* list);
+Id* read_id();
 
 //iu.o
 void start();
