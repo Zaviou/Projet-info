@@ -48,8 +48,8 @@ void create_id(){
 	fprintf(file, "\"%s\";\n", login);
 	fprintf(file, "%s", "		\"Password\" : ");
 	fprintf(file, "\"%s\";\n", pw);
-	fprintf(file, "%s", "		\"Role\"     : ");
-	fprintf(file, "%d;\n", role);
+	fprintf(file, "%s", "		\"Role\"     : \"");
+	fprintf(file, "%d\";\n", role);
 	fprintf(file, "%s", "		\"Books\"    : [");
 	fprintf(file, "%s", "\n			]");
 	fprintf(file, "%s", "\n	},");
@@ -64,8 +64,8 @@ void read_id(Id* list){
 	//Statement & Initialization :
 	FILE* file =NULL;
 	list =NULL;
-	int id_nb =0, i =0, j =0;
-	char tmp =' ';
+	int id_nb =0, i =0, j =0, nb_borrowed_books =0;
+	char tmp =' ', tmp3 =' ';
 	char tmp2[SIZE_MAX];
 
 	//Open the file "id.txt"
@@ -83,26 +83,60 @@ void read_id(Id* list){
 			id_nb ++;
 		}
 	}while(tmp !=EOF);
-	printf("id_nb : %d\n", id_nb);
 
-	//Get the informations about people
+	//Allocate the memory for the list of ids
+	list =malloc(id_nb *sizeof(Id));
+	if(list ==NULL){
+		printf("Erreur d'allocation de mémoire. Impossible de créer une liste d'identifiants.\n");
+		exit(1);
+	}
+
+	//Get the informations for all launchers
 	rewind(file);
-	for(i =0; i <SIZE_MAX; i ++){
+	for(i =0; i <id_nb; i ++){
 		do{
-			tmp =fgetc(file);
-				if(tmp =='"'){
-					fgets(tmp2, 14, file);
-					if(strcmp(tmp2, "Login\"    : \"") ==0){
-						printf("login !\n");
-					}else if(strcmp(tmp2, "Password\" : \"") ==0){
-						printf("Password !\n");
-					}else if(strcmp(tmp2, "Role\"     : \"") ==0){
-						printf("Role !\n");
-					}else if(strcmp(tmp2, "Books\"    : \"") ==0){
-						printf("Books !\n");
-					}
+		tmp =fgetc(file);
+			if(tmp =='"'){
+				fgets(tmp2, 14, file);
+				//Get login
+				if(strcmp(tmp2, "Login\"    : \"") ==0){
+					fgets(list[i].login, SIZE_MAX +3, file);
+					printf("list[%d].login : %s\n", i, list[i].login);
+				//Get password
+				}else if(strcmp(tmp2, "Password\" : \"") ==0){
+					fgets(list[i].password, SIZE_MAX +3, file);
+					printf("list[%d].password : %s\n", i, list[i].password);
+				//Get role
+				}else if(strcmp(tmp2, "Role\"     : \"") ==0){
+					list[i].role =fgetc(file) -48;
+					printf("list[%d].role : %d\n", i, list[i].role);
+				//Get the borrowed books
+				}else if(strcmp(tmp2, "Books\"    : [") ==0){
+					printf("Books !\n");
+					/*//Get the number of borrowed books
+					do{
+						tmp3 =fgetc(file);
+						if(tmp3 =='{'){
+							id_nb ++;
+						}
+					}while(tmp !=EOF);*/	
 				}
+			}
 		}while(tmp !=EOF);
+
+		//Delete the '";\n' character from the login
+		j =0;
+		while(list[i].login[j] !='"' && j <=SIZE_MAX +2){
+			j ++;
+		}
+		list[i].login[j] ='\0';
+
+		//Delete the '";\n' character from the password
+		j =0;
+		while(list[i].password[j] !='"' && j <=SIZE_MAX +2){
+			j ++;
+		}
+		list[i].password[j] ='\0';
 	}
 
 	free(list);
