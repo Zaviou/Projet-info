@@ -1,8 +1,8 @@
 #include "headers.h"
 
 typedef struct {
-	char login[50];
-	char password[50];
+	char login[SIZE_MAX];
+	char password[SIZE_MAX];
 	int** books;
 	int role;
 } Id;
@@ -54,6 +54,8 @@ void create_id(){
 	fprintf(file, "%s", "\n			]");
 	fprintf(file, "%s", "\n	},");
 	fprintf(file, "%s", "\n");
+
+	fclose(file);
 }
 
 void read_id(Id* list){
@@ -62,8 +64,9 @@ void read_id(Id* list){
 	//Statement & Initialization :
 	FILE* file =NULL;
 	list =NULL;
-	int id_nb =0;
+	int id_nb =0, i =0, j =0;
 	char tmp =' ';
+	char tmp2[SIZE_MAX];
 
 	//Open the file "id.txt"
 	file =fopen("id.txt","r");
@@ -78,12 +81,32 @@ void read_id(Id* list){
 		tmp =fgetc(file);
 		if(tmp =='{'){
 			id_nb ++;
-			printf("oki\n");
 		}
 	}while(tmp !=EOF);
 	printf("id_nb : %d\n", id_nb);
 
+	//Get the informations about people
+	rewind(file);
+	for(i =0; i <SIZE_MAX; i ++){
+		do{
+			tmp =fgetc(file);
+				if(tmp =='"'){
+					fgets(tmp2, 14, file);
+					if(strcmp(tmp2, "Login\"    : \"") ==0){
+						printf("login !\n");
+					}else if(strcmp(tmp2, "Password\" : \"") ==0){
+						printf("Password !\n");
+					}else if(strcmp(tmp2, "Role\"     : \"") ==0){
+						printf("Role !\n");
+					}else if(strcmp(tmp2, "Books\"    : \"") ==0){
+						printf("Books !\n");
+					}
+				}
+		}while(tmp !=EOF);
+	}
+
 	free(list);
+	fclose(file);
 }
 
 int main(){
