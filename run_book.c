@@ -1,9 +1,9 @@
 #include "headers.h"
 
 typedef struct{
-	char* title[50];
-	char* author[50];
-	char* genre[50];
+	char title[SIZE_MAX];
+	char author[SIZE_MAX];
+	char genre[SIZE_MAX];
 	int release;
 	int taken;
 	int id;
@@ -70,7 +70,7 @@ void create_book(){
 	if(fgetc(file)!=']'){
 		fprintf(file,"%s","]\n");
 	}
-
+	fclose(file);
 }
 
 int read_book(Books* list){
@@ -79,7 +79,7 @@ int read_book(Books* list){
 	list=NULL;
 	FILE* file;
 	file=NULL;
-	file=fopen("book.txt","w");
+	file=fopen("book.txt","r");
 	do{
 		tmp=fgetc(file);
 		if(tmp=='{'){
@@ -91,9 +91,15 @@ int read_book(Books* list){
 		printf("Erreur allocation memoire.");
 		exit(1);
 	}
+	rewind(file);
 	for(i=0;i<book_nb;i++){
-		
+		while(fgets(list[i].title,SIZE_MAX,file)!=NULL){
+			printf("%s\n",list[i].title);
+		}
+		//printf("oki\n");
 	}
+	free(list);
+	fclose(file);
 	return 0;
 }
 
@@ -108,8 +114,8 @@ int read_book(Books* list){
 
 
 int main(){
-	Books* list;
-	create_book();
+	Books* list=NULL;
+	//create_book();
 	read_book(list);
 	free(list);
 	return 0;
