@@ -8,9 +8,9 @@ typedef struct{
 	char title[SIZE_MAX];
 	char author[SIZE_MAX];
 	char genre[SIZE_MAX];
-	int release;
+	char release[8];
+	char id[3];
 	int taken;
-	int id;
 } Books;
 
 typedef struct {
@@ -22,11 +22,11 @@ typedef struct {
 
 //run_book.o
 void create_book();
-void line_to_id_date(char* line, char* id, char* date)
-int read_book(Books* list);
+Books* read_book();
 
 //run_id.o
 void create_id();
+void line_to_id_date(char* line, char* id, char* date);
 Id* read_id();
 
 //iu.o
