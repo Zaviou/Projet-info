@@ -46,7 +46,6 @@ void create_book(){
 	rewind(file);
 	if(fgetc(file)!='['){
 		fprintf(file,"%s","[\n");
-		//printf("passage du test\n");
 	}
 
 	fprintf(file, "%s","	{\n");
