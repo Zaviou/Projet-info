@@ -1,12 +1,5 @@
 #include "headers.h"
 
-typedef struct {
-	char login[SIZE_MAX];
-	char password[SIZE_MAX];
-	int** books;
-	int role;
-} Id;
-
 void create_id(){
 	//This function has to ask the user his login, password and role, then put thoses informations in the file "id.tkt".
 

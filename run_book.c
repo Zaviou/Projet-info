@@ -1,14 +1,5 @@
 #include "headers.h"
 
-typedef struct{
-	char title[SIZE_MAX];
-	char author[SIZE_MAX];
-	char genre[SIZE_MAX];
-	int release;
-	int taken;
-	int id;
-} Books;
-
 void create_book(){
 	FILE* file;
 	Books bookt;
