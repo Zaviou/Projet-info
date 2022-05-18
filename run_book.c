@@ -70,7 +70,7 @@ void create_book(Books* list_book, int book_nb){
 	fprintf(file, "%s","		\"Author\" : ");
 	fprintf(file, "\"%s\";\n",bookt.author);
 	fprintf(file, "%s","		\"Genre\"  : ");
-	fprintf(file, "\"%s\";\n",bookt.genre);
+	fprintf(file, "\"%s\";\n",bookt.genre); 
 	fprintf(file, "%s","		\"Release\": ");
 	fprintf(file, "\"%s\";\n  ",bookt.release);
 	fprintf(file, "%s","		\"ID\"     : ");
