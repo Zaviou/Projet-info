@@ -53,7 +53,6 @@ void create_id(){
 
 void line_to_id_date(char* line, char* id, char* date){
 	//
-	printf("line :%s\n", line);
 
 	//Statement & Initialization :
 	char tmp ='0';
