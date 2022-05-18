@@ -11,19 +11,24 @@ void create_book(){
 		//Ask the user the informations about the book
 	//Title
 	printf("Title of the book\n");
-	scanf("%s", &bookt.title);
+	scanf("%s", bookt.title);
 	//Author
 	printf("Name of the author\n");
-	scanf("%s", &bookt.author);
+	scanf("%s", bookt.author);
 	//Genre
 	printf("Genre of the book\n");
-	scanf("%s", &bookt.genre);
+	scanf("%s", bookt.genre);
 	//Date of release (release)
 	printf("Release date of the book\n");
-	scanf("%s", &bookt.release);
+	scanf("%s", bookt.release);
+	printf("bookt.release :%s\n", bookt.release);
 	//Id
 	printf("ID of the book\n");
-	scanf("%s", &bookt.id);	
+	scanf("%s", bookt.id);
+
+	printf("\n");
+	printf("bookt.release :%s\n", bookt.release);
+	printf("bookt.id :%s\n", bookt.id);
 
 	bookt.taken=0;
 
