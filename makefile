@@ -6,7 +6,7 @@ exe: run_id.o display_list_books.o
 main.o: main.c
 	gcc -c main.c main.o
 
-display_list_books.o: display_list_books.c
+display_list_books.o: display_list_books.c headers.h
 	gcc -c  display_list_books.c -o display_list_books.o
 
 run_book.o: run_book.c headers.h
