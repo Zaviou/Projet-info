@@ -21,8 +21,8 @@ typedef struct {
 } Id;
 
 //run_book.o
-void create_book();
-Books* read_book();
+void create_book(Books* list_book, int book_nb);
+Books* read_book(int book_nb[1]);
 
 //run_id.o
 void create_id(Id* list_id, int id_nb);
