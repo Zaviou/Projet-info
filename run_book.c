@@ -52,6 +52,10 @@ void create_book(){
 	fprintf(file, "\"%s\";\n",bookt.genre);
 	fprintf(file, "%s","		\"Release\": ");
 	fprintf(file, "\"%s\";\n  ",bookt.release);
+
+	fprintf(file, "%s","		\"Release\": ");
+	fprintf(file, "\"%s\";\n  ",bookt.release);
+
 	fprintf(file, "%s","		\"ID\"     : ");
 	fprintf(file, "\"%s\";\n  ",bookt.id);
 	fprintf(file, "%s","		\"taken\"  : ");
