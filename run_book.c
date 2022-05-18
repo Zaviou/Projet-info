@@ -8,14 +8,6 @@ void create_book(){
 	Books bookt;
 	file=NULL;
 
-		//Write the informations in the file "book.txt"
-	//Open the file "book.txt"
-	file=fopen("book.txt","a+");
-	if(file==NULL){
-		printf("Can't open the file book.txt\n");
-		exit(1);
-	}
-
 		//Ask the user the informations about the book
 	//Title
 	printf("Title of the book\n");
@@ -34,6 +26,14 @@ void create_book(){
 	scanf("%s", &bookt.id);	
 
 	bookt.taken=0;
+
+		//Write the informations in the file "book.txt"
+	//Open the file "book.txt"
+	file=fopen("book.txt","a+");
+	if(file==NULL){
+		printf("Can't open the file book.txt\n");
+		exit(1);
+	}
 
 	rewind(file);
 
@@ -98,13 +98,6 @@ Books* read_book(){
 		printf("Erreur allocation memoire.");
 		exit(1);
 	}
-
-	rewind(file);
-	/*for(i=0;i<book_nb;i++){
-		while(fgets(list[i].title,SIZE_MAX,file)!=NULL){
-			printf("%s\n",list[i].title);
-		}
-	}*/
 
 	//Get the informations for all launchers
 	rewind(file);
