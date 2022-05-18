@@ -1,6 +1,6 @@
 #include "headers.h"
 
-void create_id(int id_nb, Id* list_id){
+void create_id(Id* list_id, int id_nb){
 	//This function has to ask the user his login, password and role, then put thoses informations in the file "id.tkt".
 
 	//Statement & Initialization :
@@ -15,7 +15,6 @@ void create_id(int id_nb, Id* list_id){
 
 	printf("Veuillez entrer un login.\n");
 	scanf("%s", login);
-	//fgets(login, 50, stdin);
 
 	printf("Veuillez entrer un mot de passe.\n");
 	scanf("%s", pw);
@@ -37,18 +36,21 @@ void create_id(int id_nb, Id* list_id){
 		fprintf(file,"%s","[\n");
 	}
 
-	printf("1 %d\n", list_id[0].login);
-	//Put the informations in the list of ID
-	list_id_tmp =malloc((id_nb+1) * sizeof(Id));
-	if(list_id_tmp==NULL){
-		printf("Erreur d'allocation de mémoire. Impossible de créer une liste d'identifiants.\n");
+		//Put the informations in the list of ID (list_id)
+	//Increase the lenght of the ID list (list_id)
+	list_id_tmp =realloc(list_id, (id_nb +1) *sizeof(Id));
+	if(list_id_tmp ==NULL){
+		printf("Impossible d'alouer d'augmenter la taille de la list d'id.\n");
 		exit(1);
 	}
-	/*for(i=0;i<SIZE_MAX;i++){
-		list_id_tmp[id_nb+1].login[i]=login[i];
-		list_id_tmp[id_nb+1].password[i]=pw[i];
+	list_id =list_id_tmp;
+
+	//Add the informations
+	for(i =0; i <SIZE_MAX; i++){
+		list_id[id_nb].login[i] =login[i];
+		list_id[id_nb].password[i] =pw[i];
 	}
-	list_id_tmp[id_nb+1].role=role;*/
+	list_id[id_nb].role =role;
 
 	//Write
 	fprintf(file, "%s", "	{\n");
@@ -94,7 +96,7 @@ Id* read_id(int id_nb[1]){
 	
 	//Statement & Initialization :
 	Id* list;
-	*id_nb=0;
+	(*id_nb)=0;
 	FILE* file =NULL;
 	list =NULL;
 	int i =0, j =0, nb_borrowed_books =0;
@@ -113,12 +115,12 @@ Id* read_id(int id_nb[1]){
 	do{
 		tmp =fgetc(file);
 		if(tmp =='{'){
-			id_nb ++;
+			(*id_nb) ++;
 		}
 	}while(tmp !=EOF);
 
 	//Allocate the memory for the list of ids (list)
-	list =malloc(*id_nb * sizeof(Id));
+	list =malloc((*id_nb) * sizeof(Id));
 	if(list ==NULL){
 		printf("Erreur d'allocation de mémoire. Impossible de créer une liste d'identifiants.\n");
 		exit(1);
@@ -126,7 +128,7 @@ Id* read_id(int id_nb[1]){
 
 	//Get the informations for all launchers
 	rewind(file);
-	for(i =0; i <*id_nb; i ++){
+	for(i =0; i <(*id_nb); i ++){
 		do{
 		tmp =fgetc(file);
 			if(tmp =='"'){
@@ -216,11 +218,15 @@ Id* read_id(int id_nb[1]){
 }
 
 int main(){
+	//
+
+	//Statement & Initialization :
 	int id_nb =0;
 	Id* list_id =NULL;
-	list_id =read_id(&id_nb);
-	//create_id(id_nb, list_id);
 
-	free(list_id);
+	list_id =read_id(&id_nb);
+	create_id(list_id, id_nb);
+
+	//free(list_id);
 	return 0;
 }
