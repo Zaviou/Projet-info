@@ -193,7 +193,6 @@ Id* read_id(int id_nb[1]){
 						//Fill the lists (list[i].books[j][0] et list[i].books[j][1])
 						fgets(tmp2, 20, file);
 						line_to_id_date(tmp2, list[i].books[j][0], list[i].books[j][1]);
-						printf("tmp2 :%s\n", tmp2);
 					}
 				}
 			}
@@ -218,7 +217,7 @@ Id* read_id(int id_nb[1]){
 	return list;
 }
 
-int main(){
+/*int main(){
 	//
 
 	//Statement & Initialization :
@@ -230,4 +229,4 @@ int main(){
 
 	//free(list_id);
 	return 0;
-}
+}*/
