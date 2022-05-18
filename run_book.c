@@ -7,7 +7,7 @@ void create_book(Books* list_book, int book_nb){
 	FILE* file;
 	Books bookt;
 	file=NULL;
-	Id* list_book_tmp =NULL;
+	Books* list_book_tmp =NULL;
 	int i;
 
 	system("clear");
@@ -32,9 +32,9 @@ void create_book(Books* list_book, int book_nb){
 
 	bookt.taken=0;
 
-		//Put the informations in the list of ID (list_id)
-	//Increase the lenght of the ID list (list_id)
-	list_book_tmp =realloc(list_book, (book_nb +1) *sizeof(Id));
+		//Put the informations in the list of ID (list_book)
+	//Increase the lenght of the ID list (list_book)
+	list_book_tmp =realloc(list_book, (book_nb +1) *sizeof(Books));
 	if(list_book_tmp ==NULL){
 		printf("Impossible d'augmenter la taille de la list de livres.\n");
 		exit(1);
@@ -42,11 +42,18 @@ void create_book(Books* list_book, int book_nb){
 	list_book =list_book_tmp;
 
 	//Add the informations
-	/*for(i =0; i <SIZE_MAX; i++){
-		list_id[id_nb].login[i] =login[i];
-		list_id[id_nb].password[i] =pw[i];
+	for(i =0; i <SIZE_MAX; i++){
+		list_book[book_nb].title[i] =bookt.title[i];
+		list_book[book_nb].author[i] =bookt.author[i];
+		list_book[book_nb].genre[i] =bookt.genre[i];
 	}
-	list_id[id_nb].role =role;*/
+	for(i =0; i <9; i++){
+		list_book[book_nb].release[i] =bookt.release[i];
+	}
+	for(i =0; i <4; i++){
+		list_book[book_nb].id[i] =bookt.id[i];
+	}
+	list_book[book_nb].taken =bookt.taken;
 
 		//Write the informations in the file "book.txt"
 	//Open the file "book.txt"
@@ -85,6 +92,7 @@ void create_book(Books* list_book, int book_nb){
 	if(fgetc(file)!=']'){
 		fprintf(file,"%s","]\n");
 	}*/
+
 	fclose(file);
 }
 
@@ -110,7 +118,7 @@ Books* read_book(int book_nb[1]){
 	do{
 		tmp=fgetc(file);
 		if(tmp=='{'){
-			*book_nb++;
+			(*book_nb)++;
 		}
 	} while(tmp!=EOF);
 
@@ -123,7 +131,7 @@ Books* read_book(int book_nb[1]){
 
 	//Get the informations for all launchers
 	rewind(file);
-	for(i =0; i <*book_nb; i ++){
+	for(i =0; i <(*book_nb); i ++){
 		do{
 		tmp =fgetc(file);
 			if(tmp =='"'){
@@ -144,7 +152,7 @@ Books* read_book(int book_nb[1]){
 
 				//Get release date
 				}else if(strcmp(tmp2, "Release\": \"") ==0){
-					fgets(list[i].release, 8, file);
+					fgets(list[i].release, 9, file);
 
 				//Get id
 				}else if(strcmp(tmp2, "ID\"     : \"") ==0){
@@ -178,14 +186,10 @@ Books* read_book(int book_nb[1]){
 		}
 		list[i].genre[j] ='\0';
 	}
-	printf("list[0].title :%s\n", list[0].title);
-	printf("list[0].author :%s\n", list[0].author);
-	printf("list[0].genre :%s\n", list[0].genre);
-	printf("list[0].release :%s\n", list[0].release);
-	printf("list[0].id :%s\n", list[0].id);
-	printf("list[0].taken :%d\n", list[0].taken);
 
 	fclose(file);
+
+	return list;
 }
 
 int main(){
@@ -196,8 +200,8 @@ int main(){
 	int book_nb =0;
 
 	list_books =read_book(&book_nb);
+	printf("list_books[0].title :%s\n", list_books[0].title);
 	create_book(list_books, book_nb);
 
-	free(list_books);
 	return 0;
 }
