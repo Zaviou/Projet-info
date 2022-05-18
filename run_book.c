@@ -1,12 +1,16 @@
 #include "headers.h"
 
-void create_book(){
+void create_book(Books* list_book, int book_nb){
 	//
 
 	//Statement & Initialization :
 	FILE* file;
 	Books bookt;
 	file=NULL;
+	Id* list_book_tmp =NULL;
+	int i;
+
+	system("clear");
 
 		//Ask the user the informations about the book
 	//Title
@@ -26,11 +30,23 @@ void create_book(){
 	printf("ID of the book\n");
 	scanf("%s", bookt.id);
 
-	printf("\n");
-	printf("bookt.release :%s\n", bookt.release);
-	printf("bookt.id :%s\n", bookt.id);
-
 	bookt.taken=0;
+
+		//Put the informations in the list of ID (list_id)
+	//Increase the lenght of the ID list (list_id)
+	list_book_tmp =realloc(list_book, (book_nb +1) *sizeof(Id));
+	if(list_book_tmp ==NULL){
+		printf("Impossible d'augmenter la taille de la list de livres.\n");
+		exit(1);
+	}
+	list_book =list_book_tmp;
+
+	//Add the informations
+	/*for(i =0; i <SIZE_MAX; i++){
+		list_id[id_nb].login[i] =login[i];
+		list_id[id_nb].password[i] =pw[i];
+	}
+	list_id[id_nb].role =role;*/
 
 		//Write the informations in the file "book.txt"
 	//Open the file "book.txt"
@@ -72,11 +88,12 @@ void create_book(){
 	fclose(file);
 }
 
-Books* read_book(){
+Books* read_book(int book_nb[1]){
 	//
 
 	//Statement & Initialization :
-	int i =0, j =0, book_nb=0;
+	int i =0, j =0;
+	(*book_nb)=0;
 	Books* list=NULL;
 	FILE* file=NULL;
 	char tmp =' ';
@@ -89,16 +106,16 @@ Books* read_book(){
 		exit(1);
 	}
 
-	//Get the number of book (book_nb)
+	//Get the number of book (*book_nb)
 	do{
 		tmp=fgetc(file);
 		if(tmp=='{'){
-			book_nb++;
+			*book_nb++;
 		}
 	} while(tmp!=EOF);
 
 	//Allocate the memory for the list of books (list)
-	list=malloc((book_nb) * sizeof(Books));
+	list=malloc((*book_nb) * sizeof(Books));
 	if (list == NULL) {
 		printf("Erreur allocation memoire.");
 		exit(1);
@@ -106,7 +123,7 @@ Books* read_book(){
 
 	//Get the informations for all launchers
 	rewind(file);
-	for(i =0; i <book_nb; i ++){
+	for(i =0; i <*book_nb; i ++){
 		do{
 		tmp =fgetc(file);
 			if(tmp =='"'){
@@ -172,9 +189,14 @@ Books* read_book(){
 }
 
 int main(){
+	//
+
+	//Statement & Initialization :
 	Books* list_books=NULL;
-	//list_books =read_book();
-	create_book();
+	int book_nb =0;
+
+	list_books =read_book(&book_nb);
+	create_book(list_books, book_nb);
 
 	free(list_books);
 	return 0;

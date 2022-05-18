@@ -13,34 +13,22 @@ void create_id(Id* list_id, int id_nb){
 
 	system("clear");
 
+		//Ask the user the informations about the book
+	//Login
 	printf("Veuillez entrer un login.\n");
 	scanf("%s", login);
-
+	//Password
 	printf("Veuillez entrer un mot de passe.\n");
 	scanf("%s", pw);
-
+	//Role
 	printf("Veuillez spécifier si vous êtes :\n1. un étudiant ?\n2. un professeur ?\n");
 	scanf("%d", &role);
-
-		//Write the informations in the file "id.txt"
-	//Open the file "id.txt"
-	file =fopen("id.txt","a+");
-	if(file ==NULL){
-		printf("Can't open the file id.txt\n");
-		exit(1);
-	}
-
-	//Check if there is already a id in the file
-	rewind(file);
-	if(fgetc(file)!='['){
-		fprintf(file,"%s","[\n");
-	}
 
 		//Put the informations in the list of ID (list_id)
 	//Increase the lenght of the ID list (list_id)
 	list_id_tmp =realloc(list_id, (id_nb +1) *sizeof(Id));
 	if(list_id_tmp ==NULL){
-		printf("Impossible d'alouer d'augmenter la taille de la list d'id.\n");
+		printf("Impossible d'augmenter la taille de la list d'id.\n");
 		exit(1);
 	}
 	list_id =list_id_tmp;
@@ -52,7 +40,20 @@ void create_id(Id* list_id, int id_nb){
 	}
 	list_id[id_nb].role =role;
 
-	//Write
+		//Write the informations in the file "id.txt"
+	//Check if there is already a id in the file
+	rewind(file);
+	if(fgetc(file)!='['){
+		fprintf(file,"%s","[\n");
+	}
+
+	//Open the file "id.txt"
+	file =fopen("id.txt","a+");
+	if(file ==NULL){
+		printf("Can't open the file id.txt\n");
+		exit(1);
+	}
+
 	fprintf(file, "%s", "	{\n");
 	fprintf(file, "%s", "		\"Login\"    : ");
 	fprintf(file, "\"%s\";\n", login);
