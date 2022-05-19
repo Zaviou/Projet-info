@@ -131,7 +131,7 @@ Id* read_id(int id_nb[1]){
 	rewind(file);
 	for(i =0; i <(*id_nb); i ++){
 		do{
-		tmp =fgetc(file);
+			tmp =fgetc(file);
 			if(tmp =='"'){
 				fgets(tmp2, 14, file);
 

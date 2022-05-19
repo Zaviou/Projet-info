@@ -13,8 +13,58 @@ char* get_date(){
 	return asctime(timeinfo);
 }
 
-void delete_book_from_file(int book_cursor){
+void book_is_taken(int book_cursor, char* title){
+	//
 
+	//Statement & Initialization :
+	FILE* file;
+	char tmp ='0';
+	char tmp2[12];
+	char tempo_title[SIZE_MAX +3];
+	int i =0, change =0;
+
+	//Open the file "book.txt"
+	file=fopen("book.txt","r+");
+	if(file ==NULL){
+		printf("Can't open the file book.txt\n");
+		exit(1);
+	}
+
+		//Find the place where to change the value of "list_book[book_cursor].taken" in "book.txt"
+	//Find title
+	rewind(file);
+	do{
+		tmp =fgetc(file);
+		if(tmp =='"'){
+			tempo_title[0] ='\0';
+			fgets(tmp2, 12, file);
+			if(strcmp(tmp2, "Title\"  : \"") ==0){
+				fgets(tempo_title, SIZE_MAX +3, file);
+			}
+
+			//Delete the '";\n' character from the tempo_title
+			i =0;
+			while(tempo_title[i] !='"' && i <=SIZE_MAX +2){
+				i ++;
+			}
+			tempo_title[i] ='\0';
+		}
+	}while(tmp !=EOF && (strcmp(tempo_title, title) !=0));
+
+	//Find taken
+	do{
+		tmp =fgetc(file);
+		if(tmp =='"'){
+			tempo_title[0] ='\0';
+			fgets(tmp2, 12, file);
+				 if(strcmp(tmp2, "taken\"  : \"") ==0){
+					fprintf(file, "1");
+					change =1;
+				}
+		}
+	}while(tmp !=EOF && change ==0);
+
+	fclose(file);
 }
 
 void get_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cursor, char* title){
@@ -53,6 +103,7 @@ void get_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_curs
 	list_book[book_cursor].taken =0;
 
 	//Write in the files (book.txt and id.txt)
+	book_is_taken(book_cursor, title);
 
 	free(tmp);
 }
@@ -71,7 +122,7 @@ int main(){
 	list_book =read_book(&book_nb);
 	list_id =read_id(&id_nb);
 
-	get_book(list_id, list_book, book_nb, id_nb, 0, "ert");
+	get_book(list_id, list_book, book_nb, id_nb, 0, "aze");
 
 	return 0;
 }
