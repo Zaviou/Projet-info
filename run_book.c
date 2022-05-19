@@ -25,7 +25,6 @@ void create_book(Books* list_book, int book_nb){
 	//Date of release (release)
 	printf("Release date of the book\n");
 	scanf("%s", bookt.release);
-	printf("bookt.release :%s\n", bookt.release);
 	//Id
 	printf("ID of the book\n");
 	scanf("%s", bookt.id);
