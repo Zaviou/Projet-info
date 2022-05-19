@@ -41,17 +41,17 @@ void create_id(Id* list_id, int id_nb){
 	list_id[id_nb].role =role;
 
 		//Write the informations in the file "id.txt"
-	//Check if there is already a id in the file
-	rewind(file);
-	if(fgetc(file)!='['){
-		fprintf(file,"%s","[\n");
-	}
-
 	//Open the file "id.txt"
 	file =fopen("id.txt","a+");
 	if(file ==NULL){
 		printf("Can't open the file id.txt\n");
 		exit(1);
+	}
+
+	//Check if there is already a id in the file
+	rewind(file);
+	if(fgetc(file)!='['){
+		fprintf(file,"%s","[\n");
 	}
 
 	fprintf(file, "%s", "	{\n");
@@ -85,7 +85,7 @@ void line_to_id_date(char* line, char* id, char* date){
 			id[mark_id] =tmp;
 			mark_id ++;
 		//Get date
-		}else if(i >8 & i <17){
+		}else if(i >8 & i <34){
 			date[mark_date] =tmp;
 			mark_date ++;
 		}
@@ -168,7 +168,7 @@ Id* read_id(int id_nb[1]){
 					}
 
 					//Allocate memory and fill the list of book's id and their date of borrowing (list[i].books)
-					fseek(file, -4 -(nb_borrowed_books *19), SEEK_CUR);
+					fseek(file, -4 -(nb_borrowed_books *35), SEEK_CUR);
 					for(j =0; j <nb_borrowed_books; j++){
 						list[i].books[j] =malloc (2 * sizeof(char));
 						if(list[i].books[j] ==NULL){
@@ -177,21 +177,21 @@ Id* read_id(int id_nb[1]){
 						}
 
 						//Allocate memory the list of book's id(list[i].books[j][0])
-						list[i].books[j][0] =malloc (2 * sizeof(char));
+						list[i].books[j][0] =malloc (3 * sizeof(char));
 						if(list[i].books[j] ==NULL){
 							printf("Erreur d'allocation de mémoire. Impossible de créer une liste list[i].books[j][0].\n");
 							exit(1);
 						}
 
 						//Allocate memory the list of book's id and their date of borrowing (list[i].books[j][1])
-						list[i].books[j][1] =malloc (2 * sizeof(char));
+						list[i].books[j][1] =malloc (24 * sizeof(char));
 						if(list[i].books[j] ==NULL){
 							printf("Erreur d'allocation de mémoire. Impossible de créer une liste list[i].books[j][1].\n");
 							exit(1);
 						}
 
 						//Fill the lists (list[i].books[j][0] et list[i].books[j][1])
-						fgets(tmp2, 20, file);
+						fgets(tmp2, 29, file);
 						line_to_id_date(tmp2, list[i].books[j][0], list[i].books[j][1]);
 					}
 				}
