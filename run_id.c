@@ -158,6 +158,7 @@ Id* read_id(int id_nb[1]){
 							nb_borrowed_books ++;
 						}
 					}while(tmp !=']');
+					list[i].nb_borrowed_books =nb_borrowed_books;
 
 						//Get each book (book's id and date)
 					//Allocate memory for the list of books (list[i].books)

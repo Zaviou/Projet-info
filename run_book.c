@@ -155,7 +155,7 @@ Books* read_book(int book_nb[1]){
 
 				//Get id
 				}else if(strcmp(tmp2, "ID\"     : \"") ==0){
-					fgets(list[i].id, 3, file);
+					fgets(list[i].id, 4, file);
 
 				//Get taken
 				}else if(strcmp(tmp2, "taken\"  : \"") ==0){
