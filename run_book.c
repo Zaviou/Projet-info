@@ -25,7 +25,6 @@ void create_book(Books* list_book, int book_nb){
 	//Date of release (release)
 	printf("Release date of the book\n");
 	scanf("%s", bookt.release);
-	printf("bookt.release :%s\n", bookt.release);
 	//Id
 	printf("ID of the book\n");
 	scanf("%s", bookt.id);
@@ -156,7 +155,7 @@ Books* read_book(int book_nb[1]){
 
 				//Get id
 				}else if(strcmp(tmp2, "ID\"     : \"") ==0){
-					fgets(list[i].id, 3, file);
+					fgets(list[i].id, 4, file);
 
 				//Get taken
 				}else if(strcmp(tmp2, "taken\"  : \"") ==0){
