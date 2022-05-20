@@ -75,7 +75,7 @@ void get_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_curs
 	char* date =NULL;
 	char** tmp =NULL;
 
-	//Find the id's book
+	//Find the id's book in book's list (list_book)
 	for(i =0; i <book_nb; i++){
 		if(strcmp(title, list_book[i].title) ==0){
 			book_cursor =i;
@@ -108,21 +108,74 @@ void get_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_curs
 	free(tmp);
 }
 
-void give_book();
+void give_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cursor, char* title){
+	//
+
+	//Statement & Initialization :
+	int i =0, book_cursor_book =0, book_cursor_id =0;
+	char** tmp =NULL;
+
+	//Find the id's book in book's list (list_book)
+	for(i =0; i <book_nb; i++){
+		if(strcmp(title, list_book[i].title) ==0){
+			book_cursor_book =i;
+		}
+	}
+
+	//Find the book in the borrowed books (list_id[id_cursor].books[i])
+	for(i =0; i <list_id[id_cursor].nb_borrowed_books; i++){
+		if(strcmp(list_book[book_cursor_book].id, list_id[id_cursor].books[i][0]) ==0){
+			book_cursor_id =i;
+		}
+	}
+	printf("book_cursor_id:%d!\n", book_cursor_id);
+
+		//Delete the book in the id's list (list_id[id_cursor].books)
+	//Shift the book in the id's list (list_id[id_cursor].books) from the book_cursor
+	for(i =book_cursor_id +1; i <list_id[id_cursor].nb_borrowed_books; i++){
+		list_id[id_cursor].books[i -1] =list_id[id_cursor].books[i];
+	}
+
+	//Decrease the lenght of the book list (list_id[id_cursor].books) of 1
+	tmp =realloc(list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -2], (list_id[id_cursor].nb_borrowed_books) *sizeof(char**));
+	if(tmp ==NULL){
+		printf("Impossible d'augmenter la taille de la list (list_id[%d].books).\n", id_cursor);
+		exit(1);
+	}
+	list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books] =tmp;
+	list_id[id_cursor].nb_borrowed_books --;
+
+	//Write in the file id.txt the decrease
+
+	free(tmp);
+}
 
 int main(){
 	//
 
 	//Statement & Initialization :
 	Books* list_book=NULL;
-	int book_nb =0;
 	Id* list_id =NULL;
-	int id_nb =0;
+	int id_nb =0, book_nb =1, i =0;
 
 	list_book =read_book(&book_nb);
 	list_id =read_id(&id_nb);
 
-	get_book(list_id, list_book, book_nb, id_nb, 0, "aze");
+	give_book(list_id, list_book, book_nb, id_nb, 0, "aze");
+	//get_book(list_id, list_book, book_nb, id_nb, 0, "aze");
 
 	return 0;
 }
+/*
+[
+	{
+		"Login"    : "aze";
+		"Password" : "qsd";
+		"Role"     : "1";
+		"Books"    : [
+			123 : Thu May 19 15:52:30 2022;
+			213 : Thu May 20 15:51:30 2023;
+			321 : Thu May 21 15:51:30 2024;
+			]
+	},
+*/

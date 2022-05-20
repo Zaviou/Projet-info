@@ -86,7 +86,7 @@ void line_to_id_date(char* line, char* id, char* date){
 			id[mark_id] =tmp;
 			mark_id ++;
 		//Get date
-		}else if(i >8 & i <34){
+		}else if(i >8 && i <33){
 			date[mark_date] =tmp;
 			mark_date ++;
 		}
@@ -193,7 +193,7 @@ Id* read_id(int id_nb[1]){
 						}
 
 						//Fill the lists (list[i].books[j][0] et list[i].books[j][1])
-						fgets(tmp2, 29, file);
+						fgets(tmp2, 36, file);
 						line_to_id_date(tmp2, list[i].books[j][0], list[i].books[j][1]);
 					}
 				}
