@@ -191,7 +191,7 @@ Books* read_book(int book_nb[1]){
 
 	return list;
 }
-
+/*
 int main(){
 	//
 
@@ -200,8 +200,7 @@ int main(){
 	int book_nb =0;
 
 	list_books =read_book(&book_nb);
-	printf("list_books[0].title :%s\n", list_books[0].title);
 	create_book(list_books, book_nb);
 
 	return 0;
-}
+}*/

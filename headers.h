@@ -17,6 +17,7 @@ typedef struct {
 	char login[SIZE_MAX];
 	char password[SIZE_MAX];
 	char*** books;
+	int nb_borrowed_books;
 	int role;
 } Id;
 

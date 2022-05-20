@@ -39,6 +39,7 @@ void create_id(Id* list_id, int id_nb){
 		list_id[id_nb].password[i] =pw[i];
 	}
 	list_id[id_nb].role =role;
+	list_id[id_nb].nb_borrowed_books =0;
 
 		//Write the informations in the file "id.txt"
 	//Check if there is already a id in the file
@@ -158,6 +159,7 @@ Id* read_id(int id_nb[1]){
 							nb_borrowed_books ++;
 						}
 					}while(tmp !=']');
+					list[i].nb_borrowed_books =nb_borrowed_books;
 
 						//Get each book (book's id and date)
 					//Allocate memory for the list of books (list[i].books)
