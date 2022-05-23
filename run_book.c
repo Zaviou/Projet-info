@@ -50,7 +50,7 @@ void create_book(Books* list_book, int book_nb){
 		list_book[book_nb].release[i] =bookt.release[i];
 	}
 	for(i =0; i <4; i++){
-		list_book[book_nb].id[i] =bookt.id[i];
+		list_book[book_nb].id =bookt.id;
 	}
 	list_book[book_nb].taken =bookt.taken;
 
@@ -155,7 +155,8 @@ Books* read_book(int book_nb[1]){
 
 				//Get id
 				}else if(strcmp(tmp2, "ID\"     : \"") ==0){
-					fgets(list[i].id, 4, file);
+					fgets(tmp2, 4, file);
+					list[i].id =strtol(tmp2, NULL, 10);
 
 				//Get taken
 				}else if(strcmp(tmp2, "taken\"  : \"") ==0){

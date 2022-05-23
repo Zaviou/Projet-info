@@ -11,7 +11,7 @@ typedef struct{
 	char author[SIZE_MAX];
 	char genre[SIZE_MAX];
 	char release[9];
-	long id[3];
+	long id;
 	int taken;
 } Books;
 
