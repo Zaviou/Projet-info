@@ -16,11 +16,11 @@ typedef struct{
 } Books;
 
 typedef struct {
-	long*** books;
 	int nb_borrowed_books;
 	int role;
 	char login[SIZE_MAX];
 	char password[SIZE_MAX];
+	char*** books;
 } Id;
 
 //run_book.o

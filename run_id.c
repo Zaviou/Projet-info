@@ -71,31 +71,27 @@ void create_id(Id* list_id, int id_nb){
 	fclose(file);
 }
 
-void line_to_id_date(char* line, long* id, long* date){
+void line_to_id_date(char* line, char* id, char* date){
 	//
 
 	//Statement & Initialization :
 	int i =0, mark_id =0, mark_date =0;
-	char tmp1[3];
-	char tmp2[10];
+	char tmp1[3] ="987";
+	char tmp2[11] ="1653310346";
+	char* resserve;
 
 	//
 	for(i =0; i <strlen(line); i++){
 		//Get id
-		if(i >2 && i <5){
-			tmp1[mark_id] =line[i];
+		if(i >2 && i <6){
+			id[mark_id] =line[i];
 			mark_id ++;
 		//Get date
 		}else if(i >8 && i <18){
-			tmp2[mark_date] =line[i];
+			date[mark_date] =line[i];
 			mark_date ++;
 		}
 	}
-	id =strtol(tmp1, NULL, 10);
-	date =strtol(tmp2, NULL, 10);
-
-	printf("tmp1 :%s!\ntmp2 :%s!\n", tmp1, tmp2);
-	printf("id :%lg!\ndate :%lg!\n", id, date);
 }
 
 Id* read_id(int id_nb[1]){
@@ -198,8 +194,7 @@ Id* read_id(int id_nb[1]){
 						}
 
 						//Fill the lists (list[i].books[j][0] et list[i].books[j][1])
-						fgets(tmp2, 36, file);	
-						printf("\ni :%d!\nphrase:%s!\n", i, tmp2);
+						fgets(tmp2, 25, file);	
 						line_to_id_date(tmp2, list[i].books[j][0], list[i].books[j][1]);
 					}
 				}
@@ -236,8 +231,6 @@ int main(){
 
 	list_id =read_id(&id_nb);
 	//create_id(list_id, id_nb);
-
-	printf("\nSeconds since january 1, 1970 = %ld\n", seconds);
 
 	return 0;
 }
