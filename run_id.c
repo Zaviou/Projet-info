@@ -71,26 +71,31 @@ void create_id(Id* list_id, int id_nb){
 	fclose(file);
 }
 
-void line_to_id_date(char* line, char* id, char* date){
+void line_to_id_date(char* line, long* id, long* date){
 	//
 
 	//Statement & Initialization :
-	char tmp ='0';
 	int i =0, mark_id =0, mark_date =0;
+	char tmp1[3];
+	char tmp2[10];
 
 	//
 	for(i =0; i <strlen(line); i++){
-		tmp =line[i];
 		//Get id
-		if(i >2 && i <6){
-			id[mark_id] =tmp;
+		if(i >2 && i <5){
+			tmp1[mark_id] =line[i];
 			mark_id ++;
 		//Get date
-		}else if(i >8 && i <33){
-			date[mark_date] =tmp;
+		}else if(i >8 && i <18){
+			tmp2[mark_date] =line[i];
 			mark_date ++;
 		}
 	}
+	id =strtol(tmp1, NULL, 10);
+	date =strtol(tmp2, NULL, 10);
+
+	printf("tmp1 :%s!\ntmp2 :%s!\n", tmp1, tmp2);
+	printf("id :%lg!\ndate :%lg!\n", id, date);
 }
 
 Id* read_id(int id_nb[1]){
@@ -170,7 +175,7 @@ Id* read_id(int id_nb[1]){
 					}
 
 					//Allocate memory and fill the list of book's id and their date of borrowing (list[i].books)
-					fseek(file, -4 -(nb_borrowed_books *35), SEEK_CUR);
+					fseek(file, -4 -(nb_borrowed_books *21), SEEK_CUR);
 					for(j =0; j <nb_borrowed_books; j++){
 						list[i].books[j] =malloc (2 * sizeof(char));
 						if(list[i].books[j] ==NULL){
@@ -193,7 +198,8 @@ Id* read_id(int id_nb[1]){
 						}
 
 						//Fill the lists (list[i].books[j][0] et list[i].books[j][1])
-						fgets(tmp2, 36, file);
+						fgets(tmp2, 36, file);	
+						printf("\ni :%d!\nphrase:%s!\n", i, tmp2);
 						line_to_id_date(tmp2, list[i].books[j][0], list[i].books[j][1]);
 					}
 				}
@@ -219,16 +225,19 @@ Id* read_id(int id_nb[1]){
 	return list;
 }
 
-/*int main(){
+int main(){
 	//
 
 	//Statement & Initialization :
 	int id_nb =0;
 	Id* list_id =NULL;
+	time_t seconds;
+	seconds =time(NULL);
 
 	list_id =read_id(&id_nb);
-	create_id(list_id, id_nb);
+	//create_id(list_id, id_nb);
 
-	//free(list_id);
+	printf("\nSeconds since january 1, 1970 = %ld\n", seconds);
+
 	return 0;
-}*/
+}
