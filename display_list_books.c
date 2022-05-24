@@ -1,42 +1,5 @@
 #include "headers.h"
 
-char* get_date(){
-	//
-
-	//Statement & Initialization :
-	time_t rawtime;
-	struct tm * timeinfo;
-
-	time(&rawtime);
-	timeinfo =localtime(&rawtime);
-
-	return asctime(timeinfo);
-}
-
-/* retourner int
-argument date en char format Thu May 19 15:52:30 2022
-comparer avec date actuelle avec get_date
-si temps entre les 2 dates < time_limit return 0:
-si temps >= return 1
-argument : si user élève/professeur type user
-type user : 1 student/ 2 porofessor
-*/
-
-/*
-int date_comparison (int type_user, char* date){
-	int time_limit;
-	if(type_user==1){
-		time_limit=120;
-	}
-	else{
-		time_limit=180;
-	} 	
-	
-	return 0;
-}
-*/
-
-
 void display(Id* list_id, int id_nb, char* login){
 	int i,cursor;
 	for(i=0;i<id_nb; i++){
@@ -53,10 +16,6 @@ void display(Id* list_id, int id_nb, char* login){
 	}
 }
 
-
-
-
-//attoi
 int date_comparison(long borrow_date, int type_user){
 	time_t seconds;
 	seconds = time(NULL);
@@ -89,32 +48,13 @@ int date_comparison(long borrow_date, int type_user){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 int main(){
 	//
-	int type_user=2;
-	long borrow_date=1653063512;
+
 	//Statement & Initialization :
 	int id_nb =0;
 	Id* list_id =NULL;
+
 	date_comparison(borrow_date, type_user);
 	list_id =read_id(&id_nb);
 //	display(list_id, id_nb, "zaviou");
