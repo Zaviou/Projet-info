@@ -1,7 +1,7 @@
 all: exe
 
 exe: run_id.o display_list_books.o
-	gcc run_id.o display_list_books.o -o exe
+	gcc run_id.o display_list_books.o -o exe -lm
 
 exec: run_book.o run_id.o
 	gcc run_book.o run_id.o -o exec
