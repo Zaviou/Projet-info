@@ -32,10 +32,10 @@ void line_to_id_date(char* line, char* id, char* date);
 Id* read_id();
 
 //get_give_book.c
-char* get_date();
+/*char* get_date();
 void book_is_taken(int book_cursor, char* title);
 void get_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cursor, char* title);
-//void give_book();
+void give_book();*/
 
 //translate.c
 long int char_to_long(char* str);

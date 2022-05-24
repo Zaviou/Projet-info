@@ -3,8 +3,8 @@ all: exe
 exe: run_id.o display_list_books.o run_book.o
 	gcc run_id.o display_list_books.o run_book.o -o exe
 
-exec: run_book.o run_id.o translate.o
-	gcc translate.o run_book.o run_id.o -o exec
+exec: run_book.o run_id.o get_give_book.o
+	gcc run_book.o run_id.o get_give_book.o -o exec
 
 main.o: main.c
 	gcc -c main.c main.o
