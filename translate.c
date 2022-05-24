@@ -13,6 +13,7 @@ long int char_to_long(char* str){
 	return res;
 }
 
+/*
 int main(){
 	//
 
@@ -25,3 +26,4 @@ int main(){
 
 	return 0;
 }
+*/
