@@ -2,10 +2,17 @@
 	{
 		"Login"    : "aze";
 		"Password" : "qsd";
-		"Role"     : "1";
+		"Role"     : "0";
 		"Books"    : [
 			123 : 1656587034;
 			156 : 1251287033;
 			321 : 0653287032;
+			]
+	},
+	{
+		"Login"    : "Xavier";
+		"Password" : "Reivax";
+		"Role"     : "0";
+		"Books"    : [
 			]
 	},
