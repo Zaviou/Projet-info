@@ -75,19 +75,20 @@ void line_to_id_date(char* line, char* id, char* date){
 	//
 
 	//Statement & Initialization :
-	char tmp ='0';
 	int i =0, mark_id =0, mark_date =0;
+	char tmp1[3] ="987";
+	char tmp2[11] ="1653310346";
+	char* resserve;
 
 	//
 	for(i =0; i <strlen(line); i++){
-		tmp =line[i];
 		//Get id
 		if(i >2 && i <6){
-			id[mark_id] =tmp;
+			id[mark_id] =line[i];
 			mark_id ++;
 		//Get date
-		}else if(i >8 && i <33){
-			date[mark_date] =tmp;
+		}else if(i >8 && i <18){
+			date[mark_date] =line[i];
 			mark_date ++;
 		}
 	}
@@ -170,7 +171,7 @@ Id* read_id(int id_nb[1]){
 					}
 
 					//Allocate memory and fill the list of book's id and their date of borrowing (list[i].books)
-					fseek(file, -4 -(nb_borrowed_books *35), SEEK_CUR);
+					fseek(file, -4 -(nb_borrowed_books *21), SEEK_CUR);
 					for(j =0; j <nb_borrowed_books; j++){
 						list[i].books[j] =malloc (2 * sizeof(char));
 						if(list[i].books[j] ==NULL){
@@ -193,7 +194,7 @@ Id* read_id(int id_nb[1]){
 						}
 
 						//Fill the lists (list[i].books[j][0] et list[i].books[j][1])
-						fgets(tmp2, 36, file);
+						fgets(tmp2, 25, file);	
 						line_to_id_date(tmp2, list[i].books[j][0], list[i].books[j][1]);
 					}
 				}
@@ -218,17 +219,18 @@ Id* read_id(int id_nb[1]){
 	fclose(file);
 	return list;
 }
-
-/*int main(){
+/*
+int main(){
 	//
 
 	//Statement & Initialization :
 	int id_nb =0;
 	Id* list_id =NULL;
+	time_t seconds;
+	seconds =time(NULL);
 
 	list_id =read_id(&id_nb);
-	create_id(list_id, id_nb);
+	//create_id(list_id, id_nb);
 
-	//free(list_id);
 	return 0;
 }*/

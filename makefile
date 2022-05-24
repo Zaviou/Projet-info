@@ -1,7 +1,11 @@
 all: exe
 
 exe: run_id.o display_list_books.o run_book.o
+<<<<<<< HEAD
 	gcc run_id.o display_list_books.o run_book.o -o exe
+=======
+	gcc run_id.o display_list_books.o -o exe
+>>>>>>> 884991e7b2d00d94fd3798d24851b4bb4986ca06
 
 exec: run_book.o run_id.o
 	gcc run_book.o run_id.o -o exec

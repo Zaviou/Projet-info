@@ -2,25 +2,24 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <assert.h>
 
 #define SIZE_MAX 50
 
 typedef struct{
+	long id;
+	int taken;
 	char title[SIZE_MAX];
 	char author[SIZE_MAX];
 	char genre[SIZE_MAX];
 	char release[9];
-	long id;
-	int taken;
 } Books;
 
 typedef struct {
-	char*** books;
 	int nb_borrowed_books;
 	int role;
 	char login[SIZE_MAX];
 	char password[SIZE_MAX];
+	char*** books;
 } Id;
 
 //run_book.o
@@ -28,9 +27,9 @@ void create_book(Books* list_book, int book_nb);
 Books* read_book(int book_nb[1]);
 
 //run_id.o
-/*void create_id(Id* list_id, int id_nb);
+void create_id(Id* list_id, int id_nb);
 void line_to_id_date(char* line, char* id, char* date);
-Id* read_id();*/
+Id* read_id();
 
 //get_give_book.c
 char* get_date();

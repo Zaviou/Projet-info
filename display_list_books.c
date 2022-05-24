@@ -1,42 +1,5 @@
 #include "headers.h"
 
-char* get_date(){
-	//
-
-	//Statement & Initialization :
-	time_t rawtime;
-	struct tm * timeinfo;
-
-	time(&rawtime);
-	timeinfo =localtime(&rawtime);
-
-	return asctime(timeinfo);
-}
-
-/* retourner int
-argument date en char format Thu May 19 15:52:30 2022
-comparer avec date actuelle avec get_date
-si temps entre les 2 dates < time_limit return 0:
-si temps >= return 1
-argument : si user élève/professeur type user
-type user : 1 student/ 2 porofessor
-*/
-
-/*
-int date_comparison (int type_user, char* date){
-	int time_limit;
-	if(type_user==1){
-		time_limit=120;
-	}
-	else{
-		time_limit=180;
-	} 	
-	
-	return 0;
-}
-*/
-
-
 void display(Id* list_id, int id_nb, char* login){
 	int i,cursor;
 	for(i=0;i<id_nb; i++){
@@ -53,10 +16,6 @@ void display(Id* list_id, int id_nb, char* login){
 	}
 }
 
-
-
-
-//attoi
 int date_comparison(long borrow_date, int type_user){
 	time_t seconds;
 	seconds = time(NULL);
@@ -87,15 +46,13 @@ int date_comparison(long borrow_date, int type_user){
 Books get_book_from_id (Books* list_book, long* id_book, int book_nb, int i){
 	for(i=0; i<book_nb; i++){
 		if(id_book==list_book[i].id){
-		return list_book[i];
+			return list_book[i];
 		}	
 	}
 }
 
 
 Books display_book(long* list_id, char* login, Books* list_book){
-	
-
 	printf("Voici les livres que vous avez emprunté :\n");
 	
 }
@@ -108,15 +65,9 @@ Books display_book(long* list_id, char* login, Books* list_book){
 
 int main(){
 	//
-	int i;
-	int type_user=2;
-	long borrow_date=1653063512;
-	long id_book=123;
 	
 	//Statement & Initialization :
 	char* username
-	
-	
 	int id_nb =0;
 	Books* list_book =NULL;
 	int book_nb =0;
