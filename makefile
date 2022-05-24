@@ -7,11 +7,14 @@ exe: run_id.o display_list_books.o run_book.o
 	gcc run_id.o display_list_books.o -o exe
 >>>>>>> 884991e7b2d00d94fd3798d24851b4bb4986ca06
 
-exec: run_book.o run_id.o
-	gcc run_book.o run_id.o -o exec
+exec: run_book.o run_id.o translate.o
+	gcc translate.o run_book.o run_id.o -o exec
 
 main.o: main.c
 	gcc -c main.c main.o
+
+translate.o: translate.c headers.h
+	gcc -c translate.c -o translate.o	
 
 get_give_book.o: get_give_book.c
 	gcc -c get_give_book.c -o get_give_book.o
