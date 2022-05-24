@@ -84,23 +84,21 @@ int date_comparison(long borrow_date, int type_user){
 		return 0;
 }
 
+Books get_book_from_id (Books* list_book, long* id_book, int book_nb, int i){
+	for(i=0; i<book_nb; i++){
+		if(id_book==list_book[i].id){
+		return list_book[i];
+		}	
+	}
+}
 
 
+Books display_book(long* list_id, char* login, Books* list_book){
+	
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	printf("Voici les livres que vous avez emprunté :\n");
+	
+}
 
 
 
@@ -110,13 +108,24 @@ int date_comparison(long borrow_date, int type_user){
 
 int main(){
 	//
+	int i;
 	int type_user=2;
 	long borrow_date=1653063512;
+	long id_book=123;
+	
 	//Statement & Initialization :
+	char* username
+	
+	
 	int id_nb =0;
+	Books* list_book =NULL;
+	int book_nb =0;
+	list_book =read_book(&book_nb);
 	Id* list_id =NULL;
+
 	date_comparison(borrow_date, type_user);
 	list_id =read_id(&id_nb);
+
 //	display(list_id, id_nb, "zaviou");
 //	create_id(list_id, id_nb);
 //	date_comparison(1, "Thu May 19 15:52:30 2022");

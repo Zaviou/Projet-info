@@ -16,7 +16,7 @@ typedef struct{
 } Books;
 
 typedef struct {
-	long*** books;
+	char*** books;
 	int nb_borrowed_books;
 	int role;
 	char login[SIZE_MAX];
