@@ -158,7 +158,7 @@ Books* read_book(int book_nb[1]){
 					fgets(tmp2, 4, file);
 					list[i].id =strtol(tmp2, NULL, 10);
 
-				//Get taken
+				//Get taken's value
 				}else if(strcmp(tmp2, "taken\"  : \"") ==0){
 					list[i].taken =fgetc(file) -48;
 				}
