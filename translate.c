@@ -8,7 +8,6 @@ long int char_to_long(char* str){
 	long int res =1000000000;
 
 	res = strtol(str, NULL, 10);
-	printf("The number(unsigned long integer) is %ld\n", res);
 
 	return res;
 }

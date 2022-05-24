@@ -16,4 +16,28 @@
  		"ID"     : "156";
  		"taken"  : "0";
 	},
+	{
+		"Title"  : "bouahahahaha";
+		"Author" : "1fg";
+		"Genre"  : "1vb";
+		"Release": "12/03/04";
+ 		"ID"     : "178";
+ 		"taken"  : "0";
+	},
+	{
+		"Title"  : "NBFDsDEKID";
+		"Author" : "1fg";
+		"Genre"  : "1vb";
+		"Release": "12/03/04";
+ 		"ID"     : "741";
+ 		"taken"  : "0";
+	},
+	{
+		"Title"  : "elpollllooooooooooooo";
+		"Author" : "1fg";
+		"Genre"  : "1vb";
+		"Release": "12/03/04";
+ 		"ID"     : "357";
+ 		"taken"  : "0";
+	},
 

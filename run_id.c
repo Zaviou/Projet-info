@@ -87,7 +87,7 @@ void line_to_id_date(char* line, char* id, char* date){
 			id[mark_id] =line[i];
 			mark_id ++;
 		//Get date
-		}else if(i >8 && i <18){
+		}else if(i >8 && i <19){
 			date[mark_date] =line[i];
 			mark_date ++;
 		}
