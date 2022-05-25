@@ -9,7 +9,7 @@ void create_id(Id* list_id, int id_nb){
 	int role;
 	FILE* file =NULL;
 	Id* list_id_tmp =NULL;
-	int i;
+	int i =0, nb_allowed_books =0;
 
 	system("clear");
 
@@ -63,6 +63,14 @@ void create_id(Id* list_id, int id_nb){
 	fprintf(file, "%s", "		\"Role\"     : \"");
 	fprintf(file, "%d\";\n", role);
 	fprintf(file, "%s", "		\"Books\"    : [");
+	if(role ==1){
+		nb_allowed_books =3;
+	} else{
+		nb_allowed_books =5;
+	}
+	for(i =0; i <nb_allowed_books; i++){
+		fprintf(file, "%s", "			                    \n");
+	}
 	fprintf(file, "%s", "\n			]");
 	fprintf(file, "%s", "\n	},");
 	fprintf(file, "%s", "\n");
@@ -102,7 +110,7 @@ Id* read_id(int id_nb[1]){
 	(*id_nb)=0;
 	FILE* file =NULL;
 	list =NULL;
-	int i =0, j =0, nb_borrowed_books =0;
+	int i =0, j =0, nb_borrowed_books =0, nb_allowed_books =0;
 	char tmp =' ';
 	char tmp2[SIZE_MAX];
 
@@ -171,7 +179,12 @@ Id* read_id(int id_nb[1]){
 					}
 
 					//Allocate memory and fill the list of book's id and their date of borrowing (list[i].books)
-					fseek(file, -4 -(nb_borrowed_books *21), SEEK_CUR);
+					if(list[i].role ==1){
+						nb_allowed_books =3;
+					} else{
+						nb_allowed_books =5;
+					}
+					fseek(file, -3 -(nb_allowed_books *21), SEEK_CUR);
 					for(j =0; j <nb_borrowed_books; j++){
 						list[i].books[j] =malloc (2 * sizeof(char));
 						if(list[i].books[j] ==NULL){

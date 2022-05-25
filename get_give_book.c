@@ -13,7 +13,7 @@ char* get_date(){
 	return asctime(timeinfo);
 }
 
-void book_is_taken(int book_cursor, char* title){
+void book_is_taken(int book_cursor, char* title, char taken){
 	//
 
 	//Statement & Initialization :
@@ -58,7 +58,7 @@ void book_is_taken(int book_cursor, char* title){
 			tempo_title[0] ='\0';
 			fgets(tmp2, 12, file);
 			 if(strcmp(tmp2, "taken\"  : \"") ==0){
-				fprintf(file, "1");
+				fprintf(file, "%c", taken);
 				change =1;
 			}
 		}
@@ -67,7 +67,7 @@ void book_is_taken(int book_cursor, char* title){
 	fclose(file);
 }
 
-void person_took_book(Id* list_id, int id_cursor){
+void rewrite_borrowed_book(Id* list_id, int id_cursor){
 	//
 
 	//Statement & Initialization :
@@ -75,7 +75,7 @@ void person_took_book(Id* list_id, int id_cursor){
 	char tmp ='0';
 	char tmp2[15];
 	char tempo_login[SIZE_MAX +3];
-	int i =0, change =0;
+	int i =0, nb_allowed_books =-1, change =0;
 
 	//Open the file "id.txt"
 	file =fopen("id.txt","r+");
@@ -106,16 +106,35 @@ void person_took_book(Id* list_id, int id_cursor){
 	}while(tmp !=EOF && (strcmp(tempo_login, list_id[id_cursor].login) !=0));
 
 	//Find books
+	if(list_id[id_cursor].role ==1){
+		nb_allowed_books =3;
+	} else{
+		nb_allowed_books =5;
+	}
 	do{
 		tmp =fgetc(file);
 		if(tmp =='"'){
 			tempo_login[0] ='\0';
 			fgets(tmp2, 14, file);
 			 if(strcmp(tmp2, "Books\"    : [") ==0){
-				fseek(file, 3 +(20 *(list_id[id_cursor].nb_borrowed_books -1)), SEEK_CUR);
-				fprintf(file, "\n			%s : ", list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][0]);
-				fprintf(file, "%s\n			]", list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][1]);
+				fseek(file, 4, SEEK_CUR);
+				printf("list_id[id_cursor].nb_borrowed_books -1 :%d!\n", list_id[id_cursor].nb_borrowed_books -1);
+				for(i =0; i <list_id[id_cursor].nb_borrowed_books -1; i++){
+					printf("list_id[id_cursor].books[i][0] :%s!\n", list_id[id_cursor].books[i][0]);
+					fprintf(file, "a");
+					/*fprintf(file, "%s : ", list_id[id_cursor].books[i][0]);
+					fprintf(file, "%s;", list_id[id_cursor].books[i][1]);*/
+					fseek(file, 3, SEEK_CUR);
+				}
+				for(i =list_id[id_cursor].nb_borrowed_books; i <nb_allowed_books; i++){
+					fprintf(file, "b");
+					//fprintf(file, "%s : ", "			                    ");
+					fseek(file, 3, SEEK_CUR);
+				}
 				change =1;
+				/*fseek(file, 4 +((list_id[id_cursor].nb_borrowed_books -1) *21), SEEK_CUR);
+				fprintf(file, "%s : ", list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][0]);
+				fprintf(file, "%s;", list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][1]);*/
 			}
 		}
 	}while(tmp !=EOF && change ==0);
@@ -141,6 +160,7 @@ void get_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_curs
 
 		//Add the book in the id's list (list_id[id_cursor].books)
 	//Increase the lenght of the book list (list_id[id_cursor].books) of 1
+	printf("list_id[id_cursor].nb_borrowed_books :%d!\n", list_id[id_cursor].nb_borrowed_books);
 	tmp =realloc(list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1], (list_id[id_cursor].nb_borrowed_books) *sizeof(char**));
 	if(tmp ==NULL){
 		printf("Impossible d'augmenter la taille de la list (list_id[%d].books).\n", id_cursor);
@@ -150,17 +170,14 @@ void get_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_curs
 
 	//Add the values
 	list_id[id_cursor].nb_borrowed_books ++;
-	sprintf(list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books][0], "%ld", list_book[book_cursor].id);
-	sprintf(list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books][1], "%ld", date);
-
-	//Change the book's status in the book list (list_book[book_cursor].taken)
-	list_book[book_cursor].taken =0;
-
+	printf("list_book[book_cursor].id :%ld!\n", list_book[book_cursor].id);
+	sprintf(list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][0], "%ld", list_book[book_cursor].id);
+	sprintf(list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][1], "%ld", date);
+	list_book[book_cursor].taken =1;
 
 	//Write in the files (book.txt and id.txt)
-	printf("\n			%s : ", list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][0]);
-	book_is_taken(book_cursor, title);
-	person_took_book(list_id, id_cursor);
+	book_is_taken(book_cursor, title, '1');
+	rewrite_borrowed_book(list_id, id_cursor);
 
 	free(tmp);
 }
@@ -169,7 +186,7 @@ void give_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cur
 	//
 
 	//Statement & Initialization :
-	int i =0, book_cursor_book =0, book_cursor_id =0;
+	int i =0, book_cursor_book =-1, book_cursor_id =-1;
 	char** tmp =NULL;
 	char id[3];
 
@@ -188,7 +205,6 @@ void give_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cur
 			book_cursor_id =i;
 		}
 	}
-	printf("book_cursor_id:%d!\n", book_cursor_id);
 
 		//Delete the book in the id's list (list_id[id_cursor].books)
 	//Shift the book in the id's list (list_id[id_cursor].books) from the book_cursor
@@ -205,7 +221,9 @@ void give_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cur
 	list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books] =tmp;
 	list_id[id_cursor].nb_borrowed_books --;
 
-	//Write in the file id.txt the decrease
+	//Write in the files (book.txt and id.txt)
+	book_is_taken(book_cursor_book, title, '0');
+	rewrite_borrowed_book(list_id, id_cursor);
 
 	free(tmp);
 }
@@ -221,21 +239,14 @@ int main(){
 	list_book =read_book(&book_nb);
 	list_id =read_id(&id_nb);
 
-	get_book(list_id, list_book, book_nb, id_nb, 0, "ert");
-	//give_book(list_id, list_book, book_nb, id_nb, 0, "aze");
+	//get_book(list_id, list_book, book_nb, id_nb, 0, "ert");
+	give_book(list_id, list_book, book_nb, id_nb, 0, "ert");
 
 	return 0;
 }
-/*
-[
-	{
-		"Login"    : "aze";
-		"Password" : "qsd";
-		"Role"     : "1";
-		"Books"    : [
-			123 : Thu May 19 15:52:30 2022;
-			213 : Thu May 20 15:51:30 2023;
-			321 : Thu May 21 15:51:30 2024;
-			]
-	},
-*/
+
+
+
+
+
+
