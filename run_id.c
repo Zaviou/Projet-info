@@ -11,7 +11,6 @@ void create_id(Id* list_id, int id_nb){
 	Id* list_id_tmp =NULL;
 	int i;
 
-	system("clear");
 
 		//Ask the user the informations about the book
 	//Login
