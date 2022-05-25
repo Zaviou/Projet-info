@@ -67,13 +67,13 @@ void book_is_taken(int book_cursor, char* title){
 	fclose(file);
 }
 
-void person_took_book(char* login, char* title){
+void person_took_book(Id* list_id, int id_cursor){
 	//
 
 	//Statement & Initialization :
 	FILE* file;
 	char tmp ='0';
-	char tmp2[14];
+	char tmp2[15];
 	char tempo_login[SIZE_MAX +3];
 	int i =0, change =0;
 
@@ -92,29 +92,29 @@ void person_took_book(char* login, char* title){
 		if(tmp =='"'){
 			tempo_login[0] ='0';
 			fgets(tmp2, 14, file);
-			printf("tmp2 :%s!\n", tmp2);
 			if(strcmp(tmp2, "Login\"    : \"") ==0){
 				fgets(tempo_login, SIZE_MAX +3, file);
 
-					//Delete the '";\n' character from the tempo_login
-					i =0;
-					while(tempo_login[i] !='"' && i <=SIZE_MAX +2){
-						i ++;
-					}
-					tempo_login[i] ='\0';
+				//Delete the '";\n' character from the tempo_login
+				i =0;
+				while(tempo_login[i] !='"' && i <=SIZE_MAX +2){
+					i ++;
+				}
+				tempo_login[i] ='\0';
 			}
 		}
-	}while(tmp !=EOF && (strcmp(tempo_login, login) !=0));
+	}while(tmp !=EOF && (strcmp(tempo_login, list_id[id_cursor].login) !=0));
 
 	//Find books
 	do{
 		tmp =fgetc(file);
 		if(tmp =='"'){
 			tempo_login[0] ='\0';
-			fgets(tmp2, 13, file);
-			 if(strcmp(tmp2, "\"Books\"    : [") ==0){
-				fprintf(file, "1\n");
-				printf("oui ?%s\n", tmp2);
+			fgets(tmp2, 14, file);
+			 if(strcmp(tmp2, "Books\"    : [") ==0){
+				fseek(file, 3 +(20 *(list_id[id_cursor].nb_borrowed_books -1)), SEEK_CUR);
+				fprintf(file, "\n			%s : ", list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][0]);
+				fprintf(file, "%s\n			]", list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][1]);
 				change =1;
 			}
 		}
@@ -128,8 +128,9 @@ void get_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_curs
 
 	//Statement & Initialization :
 	int i =0, book_cursor =0;
-	char* date =NULL;
 	char** tmp =NULL;
+	time_t date;
+	date = time(NULL);
 
 	//Find the id's book in book's list (list_book)
 	for(i =0; i <book_nb; i++){
@@ -137,10 +138,6 @@ void get_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_curs
 			book_cursor =i;
 		}
 	}
-
-	//Get the date
-	date =get_date();
-	date[24] ='\0';
 
 		//Add the book in the id's list (list_id[id_cursor].books)
 	//Increase the lenght of the book list (list_id[id_cursor].books) of 1
@@ -152,16 +149,18 @@ void get_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_curs
 	list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books] =tmp;
 
 	//Add the values
+	list_id[id_cursor].nb_borrowed_books ++;
 	sprintf(list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books][0], "%ld", list_book[book_cursor].id);
-	list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books][1] =date;
+	sprintf(list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books][1], "%ld", date);
 
 	//Change the book's status in the book list (list_book[book_cursor].taken)
 	list_book[book_cursor].taken =0;
 
 
 	//Write in the files (book.txt and id.txt)
+	printf("\n			%s : ", list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][0]);
 	book_is_taken(book_cursor, title);
-	person_took_book(list_id[id_cursor].login, title);
+	person_took_book(list_id, id_cursor);
 
 	free(tmp);
 }
