@@ -1,29 +1,21 @@
 [
 	{
-		"Login"    : "aze";
-		"Password" : "qsd";
-		"Role"     : "0";
-		"Books"    : [
-			823 : 1656587034;
-			456 : 1251287033;
-			221 : 0653287032;
-			]
-	},
-	{
-		"Login"    : "Zaviou";
-		"Password" : "pandator";
-		"Role"     : "2";
-		"Books"    : [
-			178 : 1653414076;
-			357 : 1653413606;
-			741 : 1653413376;
-			]
-	},
-	{
-		"Login"    : "pioupiou";
-		"Password" : "joouu";
+		"Login"    : "kikiriki";
+		"Password" : "cocorico";
 		"Role"     : "1";
 		"Books"    : [
+			b83 b		                     : 3477297;
+			357 : 1656587034;
+		]
+	},
+	{
+		"Login"    : "Yann";
+		"Password" : "e_ann";
+		"Role"     : "1";
+		"Books"    : [
+			726 : 1653477297;
+			                   
+			                   
 			]
 	},
 	{
@@ -31,15 +23,24 @@
 		"Password" : "pandator";
 		"Role"     : "2";
 		"Books"    : [
-			178 : 1656587034;
-			357 : 1251287033;
-			741 : 0653287032;
+			726 : 1653477297;
+			                   
+			                   
+			                   
 			]
 	},
 	{
 		"Login"    : "Xavier";
 		"Password" : "Reivax";
-		"Role"     : "0";
+		"Role"     : "2";
 		"Books"    : [
+			726 : 1653477297;
+			                   
+			                   
+			                   
 			]
 	},
+			483 : 1653477394;
+			726 : 1653477297;
+			357 : 1656587034;
+			                   
