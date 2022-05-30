@@ -68,7 +68,7 @@ void create_id(Id* list_id, int id_nb){
 		nb_allowed_books =5;
 	}
 	for(i =0; i <nb_allowed_books; i++){
-		fprintf(file, "%s", "			                    \n");
+		fprintf(file, "%s", "			                 \n");
 	}
 	fprintf(file, "%s", "\n			]");
 	fprintf(file, "%s", "\n	},");
@@ -183,7 +183,7 @@ Id* read_id(int id_nb[1]){
 					} else{
 						nb_allowed_books =5;
 					}
-					fseek(file, -3 -(nb_allowed_books *21), SEEK_CUR);
+					fseek(file, -4 -(nb_allowed_books *21), SEEK_CUR);
 					for(j =0; j <nb_borrowed_books; j++){
 						list[i].books[j] =malloc (2 * sizeof(char));
 						if(list[i].books[j] ==NULL){

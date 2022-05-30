@@ -118,23 +118,19 @@ void rewrite_borrowed_book(Id* list_id, int id_cursor){
 			fgets(tmp2, 14, file);
 			 if(strcmp(tmp2, "Books\"    : [") ==0){
 				fseek(file, 4, SEEK_CUR);
-				printf("list_id[id_cursor].nb_borrowed_books -1 :%d!\n", list_id[id_cursor].nb_borrowed_books -1);
-				for(i =0; i <list_id[id_cursor].nb_borrowed_books -1; i++){
-					printf("list_id[id_cursor].books[i][0] :%s!\n", list_id[id_cursor].books[i][0]);
-					fprintf(file, "a");
-					/*fprintf(file, "%s : ", list_id[id_cursor].books[i][0]);
-					fprintf(file, "%s;", list_id[id_cursor].books[i][1]);*/
-					fseek(file, 3, SEEK_CUR);
+	printf("list_id[id_cursor].nb_borrowed_books :%d!\n", list_id[id_cursor].nb_borrowed_books);
+	printf("list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][0] :%d!\n", list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][0]);
+				for(i =0; (i <list_id[id_cursor].nb_borrowed_books -1 && i <nb_allowed_books -1); i++){
+					fprintf(file, "%s : ", list_id[id_cursor].books[i][0]);
+					fprintf(file, "%s;\n			", list_id[id_cursor].books[i][1]);
 				}
 				for(i =list_id[id_cursor].nb_borrowed_books; i <nb_allowed_books; i++){
-					fprintf(file, "b");
-					//fprintf(file, "%s : ", "			                    ");
-					fseek(file, 3, SEEK_CUR);
+					fprintf(file, "                 \n");
+					if(i ==nb_allowed_books){
+						fprintf(file, "			");
+					}
 				}
 				change =1;
-				/*fseek(file, 4 +((list_id[id_cursor].nb_borrowed_books -1) *21), SEEK_CUR);
-				fprintf(file, "%s : ", list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][0]);
-				fprintf(file, "%s;", list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][1]);*/
 			}
 		}
 	}while(tmp !=EOF && change ==0);
@@ -160,19 +156,33 @@ void get_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_curs
 
 		//Add the book in the id's list (list_id[id_cursor].books)
 	//Increase the lenght of the book list (list_id[id_cursor].books) of 1
-	printf("list_id[id_cursor].nb_borrowed_books :%d!\n", list_id[id_cursor].nb_borrowed_books);
-	tmp =realloc(list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1], (list_id[id_cursor].nb_borrowed_books) *sizeof(char**));
+	tmp =realloc(list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books], (list_id[id_cursor].nb_borrowed_books) *sizeof(char**));
 	if(tmp ==NULL){
 		printf("Impossible d'augmenter la taille de la list (list_id[%d].books).\n", id_cursor);
 		exit(1);
 	}
 	list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books] =tmp;
 
+	//Allocate memory for the list of borrowed books (list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books][0])
+	list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books][0] =malloc(3 *sizeof(char));
+	if(list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books][0] ==NULL){
+		printf("Impossible d'allouer de l'espace pour l'id du livre emprunté (list_id[%d].books[%d][0]).\n", id_cursor, list_id[id_cursor].nb_borrowed_books);
+		exit(1);
+	}
+
+	//Allocate memory for the list of borrowed books (list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books][1])
+	list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books][1] =malloc(10 *sizeof(char));
+	if(list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books][1] ==NULL){
+		printf("Impossible d'allouer de l'espace pour la date d'emprunt (list_id[%d].books[%d][1]).\n", id_cursor, list_id[id_cursor].nb_borrowed_books);
+		exit(1);
+	}
+
 	//Add the values
 	list_id[id_cursor].nb_borrowed_books ++;
-	printf("list_book[book_cursor].id :%ld!\n", list_book[book_cursor].id);
-	sprintf(list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][0], "%ld", list_book[book_cursor].id);
 	sprintf(list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][1], "%ld", date);
+	sprintf(list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][0], "%ld", list_book[book_cursor].id);
+	printf("list_book[book_cursor].id :%d!\n", list_book[book_cursor].id);
+	printf("list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][0] :%d!\n", list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][0]);
 	list_book[book_cursor].taken =1;
 
 	//Write in the files (book.txt and id.txt)
@@ -196,10 +206,10 @@ void give_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cur
 			book_cursor_book =i;
 		}
 	}
+	list_book[book_cursor_book].taken =0;
 
 	//Find the book in the borrowed books (list_id[id_cursor].books[i])
 	sprintf(id, "%ld", list_book[book_cursor_book].id);
-	printf("test id :%s\n", id);
 	for(i =0; i <list_id[id_cursor].nb_borrowed_books; i++){
 		if(strcmp(id, list_id[id_cursor].books[i][0]) ==0){
 			book_cursor_id =i;
@@ -213,7 +223,7 @@ void give_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cur
 	}
 
 	//Decrease the lenght of the book list (list_id[id_cursor].books) of 1
-	tmp =realloc(list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -2], (list_id[id_cursor].nb_borrowed_books) *sizeof(char**));
+	tmp =realloc(list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1], (list_id[id_cursor].nb_borrowed_books) *sizeof(char**));
 	if(tmp ==NULL){
 		printf("Impossible d'augmenter la taille de la list (list_id[%d].books).\n", id_cursor);
 		exit(1);
@@ -234,19 +244,13 @@ int main(){
 	//Statement & Initialization :
 	Books* list_book=NULL;
 	Id* list_id =NULL;
-	int id_nb =0, book_nb =1, i =0;
+	int id_nb =0, book_nb =1, i =0, id_cursor =0;
 
 	list_book =read_book(&book_nb);
 	list_id =read_id(&id_nb);
 
-	//get_book(list_id, list_book, book_nb, id_nb, 0, "ert");
-	give_book(list_id, list_book, book_nb, id_nb, 0, "ert");
+	get_book(list_id, list_book, book_nb, id_nb, 0, "ert");
+	//give_book(list_id, list_book, book_nb, id_nb, 0, "ert");
 
 	return 0;
 }
-
-
-
-
-
-
