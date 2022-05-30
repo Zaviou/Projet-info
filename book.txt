@@ -18,7 +18,7 @@
 	},
 	{
 		"Title"  : "bouahahahaha";
-		"Author" : "1fg";
+		"Author" : "MAMADOU SAKO";
 		"Genre"  : "1vb";
 		"Release": "12/03/04";
  		"ID"     : "178";
