@@ -3,6 +3,8 @@
 #include <string.h>
 #include <time.h>
 
+#define PRESENTATION system("clear");printf("______________________________________________________________________________\n\n");printf("                          Application CY-BiblioTECH                             ");printf("______________________________________________________________________________\n\n");
+
 #define SIZE_MAX 50
 //Colors
 #define ANSI_COLOR_RED     "\x1b[31m"
@@ -40,9 +42,15 @@ void book_is_taken(int book_cursor, char* title);
 void get_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cursor, char* title);
 void give_book();*/
 
+//display_list_book.c
+void display_book(Id* list_id ,char* login ,Books* list_book ,int id_nb, int book_nb);
+
 //translate.c
 long int char_to_long(char* str);
 
+//connect.c
+int connect(Books* list_book, Id* list_id, int id_nb, int book_nb);
+
 //iu.o
-void start();
-void book_management ();
+void start(Books* list_book, Id* list_id, int id_nb, int book_nb, int cursor_id);
+void book_management (Books* list_book, Id* list_id, int id_nb, int book_nb, int cursor_id);

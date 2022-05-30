@@ -1,22 +1,9 @@
 #include "headers.h"
 
-void display(Id* list_id, int id_nb, char* login){
-	int i,cursor;
-	for(i=0;i<id_nb; i++){
-		if(strcmp(login, list_id[i].login) ==0){
-			cursor=i;
-		}
-	}
-
-	printf("list_id[cursor].nb_borrowed_books : %d !\n", list_id[cursor].nb_borrowed_books);
-	printf("Vous avez emprunté les livres suivant :\n");
-	for(i=0;i<list_id[cursor].nb_borrowed_books; i++){
-		printf("%s\n",list_id[cursor].books[i][0]);
-		printf("%s\n",list_id[cursor].books[i][1]);
-	}
-}
-
 int date_comparison(long borrow_date, int type_user, long int* comparison){
+	/*
+	This function calculates if the user is late or not to return the books he borrowed. The time allowed to keep the book is 120 seconds for a student and 180 seconds for a teacher. It returns 1 if the user is not late and 0 if he is.
+	*/
 	time_t seconds;
 	seconds = time(NULL);
 	(*comparison)=seconds-borrow_date;
@@ -39,6 +26,9 @@ int date_comparison(long borrow_date, int type_user, long int* comparison){
 }
 
 Books get_book_from_id (Books* list_book, char* id_book, int book_nb){
+	/*
+	This function uses an ID of a book and returns the book's information after recognizing the ID.
+	*/
 	int i, id_char;
 	for(i=0; i<book_nb; i++){
 		id_char=char_to_long(id_book);
@@ -55,6 +45,8 @@ void display_book(Id* list_id ,char* login ,Books* list_book ,int id_nb, int boo
 	
 	list_id: list of ids contained in the ID's file (id.txt).
 	login: login of the user ~~~~~
+	id_nb: 
+	book_nb:
 	*/
 	int i =0, cursor_id =0;
 	long int* comparison;
@@ -88,7 +80,7 @@ void display_book(Id* list_id ,char* login ,Books* list_book ,int id_nb, int boo
 
 
 
-int main(){
+/*int main(){
 	//tmp
 	long id_book=123;
 	int type_user=2;
@@ -111,3 +103,4 @@ int main(){
 //	date_comparison(1, "Thu May 19 15:52:30 2022");
 	return 0;
 }
+*/
