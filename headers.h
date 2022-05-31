@@ -43,17 +43,17 @@ void get_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_curs
 void give_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cursor, char* title);
 
 //display_list_book.c
-void display_book(Id* list_id ,char* login ,Books* list_book ,int id_nb, int book_nb);
+void display_book(Id* list_id ,char* login ,Books* list_book ,int id_nb, int book_nb, int* cursor_id);
 
 //translate.c
 long int char_to_long(char* str);
 
 //connect.c
-int connect(Books* list_book, Id* list_id, int id_nb, int book_nb);
+int connect(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id);
 
 //iu.o
-void start(Books* list_book, Id* list_id, int id_nb, int book_nb, int cursor_id);
-void book_management (Books* list_book, Id* list_id, int id_nb, int book_nb, int cursor_id);
+void start(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id);
+void book_management (Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id);
 
 //scan_all_types.c
 void scan_text(char* ask, char* text, int taille_max);
