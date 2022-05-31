@@ -33,6 +33,7 @@ Books get_book_from_id (Books* list_book, char* id_book, int book_nb){
 	for(i=0; i<book_nb; i++){
 		id_char=char_to_long(id_book);
 		if(id_char==list_book[i].id){
+	//	printf("
 			return list_book[i];
 		}	
 	}
@@ -48,30 +49,28 @@ void display_book(Id* list_id, char* login, Books* list_book, int id_nb, int boo
 	id_nb: 
 	book_nb:
 	*/
-	
-	printf("oui\n");
-	printf("list_id[*cursor_id].nb_borrowed_books=%d.\n", list_id[*cursor_id].nb_borrowed_books);
-
 
 	int i =0;
-	*cursor_id =0;
-	long int* comparison;
-	Books current_book;
+	long int* comparison =0;
+	Books* current_book;
 
-	printf("oui");
 	printf("list_id[*cursor_id].nb_borrowed_books=%d.\n", list_id[*cursor_id].nb_borrowed_books);
 
 	if(list_id[*cursor_id].nb_borrowed_books==0){
-		printf("Vous n'avez emprunté aucun livre.\n\n");
+		printf("\nVous n'avez emprunté aucun livre.\n\n");
 	}
 
 	else{
 		printf("\nVoici les livres que vous avez emprunté :\n\n\n");
 		for(i=0;i<list_id[*cursor_id].nb_borrowed_books;i++){
 			current_book =get_book_from_id (list_book, list_id[*cursor_id].books[i][0], book_nb);
-			if(date_comparison(char_to_long(list_id[*cursor_id].books[i][1]), list_id[*cursor_id].role, comparison)==1){
+
+		/*	if(date_comparison(char_to_long(list_id[*cursor_id].books[i][1]), list_id[*cursor_id].role, comparison)==1){
 				printf("\"%s\" par %s\n", current_book.title, current_book.author);
 				printf("Il vous reste %d de secondes pour le rendre.\n\n", 120-(*comparison));
+			}*/
+
+			if(i==14){
 			}
 			else{
 				printf(ANSI_COLOR_RED "\"%s\" par %s\n\n" ANSI_COLOR_RESET, current_book.title, current_book.author);
@@ -85,8 +84,8 @@ void display_book(Id* list_id, char* login, Books* list_book, int id_nb, int boo
 
 
 
-
-/*int main(){
+/*
+int main(){
 	//tmp
 	long id_book=123;
 	int type_user=2;
