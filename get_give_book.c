@@ -118,9 +118,7 @@ void rewrite_borrowed_book(Id* list_id, int id_cursor){
 			fgets(tmp2, 14, file);
 			 if(strcmp(tmp2, "Books\"    : [") ==0){
 				fseek(file, 4, SEEK_CUR);
-	printf("list_id[id_cursor].nb_borrowed_books :%d!\n", list_id[id_cursor].nb_borrowed_books);
-	printf("list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][0] :%d!\n", list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][0]);
-				for(i =0; (i <list_id[id_cursor].nb_borrowed_books -1 && i <nb_allowed_books -1); i++){
+				for(i =0; (i <list_id[id_cursor].nb_borrowed_books && i <nb_allowed_books); i++){
 					fprintf(file, "%s : ", list_id[id_cursor].books[i][0]);
 					fprintf(file, "%s;\n			", list_id[id_cursor].books[i][1]);
 				}
@@ -179,10 +177,8 @@ void get_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_curs
 
 	//Add the values
 	list_id[id_cursor].nb_borrowed_books ++;
-	sprintf(list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][1], "%ld", date);
-	sprintf(list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][0], "%ld", list_book[book_cursor].id);
-	printf("list_book[book_cursor].id :%d!\n", list_book[book_cursor].id);
-	printf("list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][0] :%d!\n", list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][0]);
+	snprintf(list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][1], 11 *sizeof(char), "%ld", date);
+	snprintf(list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][0], 4 *sizeof(char), "%ld", list_book[book_cursor].id);
 	list_book[book_cursor].taken =1;
 
 	//Write in the files (book.txt and id.txt)

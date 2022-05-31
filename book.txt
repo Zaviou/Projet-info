@@ -13,8 +13,8 @@
 		"Author" : "1fg";
 		"Genre"  : "1vb";
 		"Release": "12/03/04";
- 		"ID"     : "156";
- 		"taken"  : "0";
+ 		"ID"     : "726";
+ 		"taken"  : "1";
 	},
 	{
 		"Title"  : "bouahahahaha";
@@ -22,7 +22,7 @@
 		"Genre"  : "1vb";
 		"Release": "12/03/04";
  		"ID"     : "178";
- 		"taken"  : "0";
+ 		"taken"  : "1";
 	},
 	{
 		"Title"  : "NBFDsDEKID";
