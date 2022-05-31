@@ -14,11 +14,11 @@ void create_id(Id* list_id, int id_nb){
 
 		//Ask the user the informations about the book
 	//Login
-	printf("Veuillez entrer un login.\n");
-	scanf("%s", login);
+	scan_word("Veuillez entrer un login.", login, SIZE_MAX);
+
 	//Password
-	printf("Veuillez entrer un mot de passe.\n");
-	scanf("%s", pw);
+	scan_word("Veuillez entrer un mot de passe.", pw, SIZE_MAX);
+
 	//Role
 	printf("Veuillez spécifier si vous êtes :\n1. un étudiant ?\n2. un professeur ?\n");
 	scanf("%d", &role);
@@ -231,7 +231,7 @@ Id* read_id(int id_nb[1]){
 	fclose(file);
 	return list;
 }
-/*
+
 int main(){
 	//
 
@@ -242,7 +242,7 @@ int main(){
 	seconds =time(NULL);
 
 	list_id =read_id(&id_nb);
-	//create_id(list_id, id_nb);
+	create_id(list_id, id_nb);
 
 	return 0;
-}*/
+}

@@ -56,6 +56,6 @@ void start(Books* list_book, Id* list_id, int id_nb, int book_nb, int cursor_id)
 void book_management (Books* list_book, Id* list_id, int id_nb, int book_nb, int cursor_id);
 
 //scan_all_types.c
-void scan_text(char* ask, char* text, int taille_max)
-void scan_word(char* ask, char* word, int taille_max)
-long int scan_long(char* ask, char* lg, int taille_max)
+void scan_text(char* ask, char* text, int taille_max);
+void scan_word(char* ask, char* word, int taille_max);
+long int scan_long(char* ask, char* lg, int taille_max);

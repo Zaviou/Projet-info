@@ -226,6 +226,7 @@ void give_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cur
 	free(tmp);
 }
 
+/*
 int main(){
 	//Exemples of how to use all functions in this file.
 
@@ -242,3 +243,4 @@ int main(){
 
 	return 0;
 }
+*/
