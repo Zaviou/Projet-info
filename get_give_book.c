@@ -1,18 +1,5 @@
 #include "headers.h"
 
-char* get_date(){
-	//
-
-	//Statement & Initialization :
-	time_t rawtime;
-	struct tm * timeinfo;
-
-	time(&rawtime);
-	timeinfo =localtime(&rawtime);
-
-	return asctime(timeinfo);
-}
-
 void book_is_taken(int book_cursor, char* title, char taken){
 	//
 
@@ -58,6 +45,8 @@ void book_is_taken(int book_cursor, char* title, char taken){
 			tempo_title[0] ='\0';
 			fgets(tmp2, 12, file);
 			 if(strcmp(tmp2, "taken\"  : \"") ==0){
+
+				//Change value of taken
 				fprintf(file, "%c", taken);
 				change =1;
 			}
@@ -84,7 +73,6 @@ void rewrite_borrowed_book(Id* list_id, int id_cursor){
 		exit(1);
 	}
 
-		//Find the place where to add the book in "id.txt"
 	//Find login
 	rewind(file);
 	do{
@@ -105,18 +93,22 @@ void rewrite_borrowed_book(Id* list_id, int id_cursor){
 		}
 	}while(tmp !=EOF && (strcmp(tempo_login, list_id[id_cursor].login) !=0));
 
-	//Find books
+	//Find nb_allowed_books
 	if(list_id[id_cursor].role ==1){
 		nb_allowed_books =3;
 	} else{
 		nb_allowed_books =5;
 	}
+
+	//Find the place where to add the book in "id.txt"
 	do{
 		tmp =fgetc(file);
 		if(tmp =='"'){
 			tempo_login[0] ='\0';
 			fgets(tmp2, 14, file);
 			 if(strcmp(tmp2, "Books\"    : [") ==0){
+
+				//Write the informations
 				fseek(file, 4, SEEK_CUR);
 				for(i =0; (i <list_id[id_cursor].nb_borrowed_books && i <nb_allowed_books); i++){
 					fprintf(file, "%s : ", list_id[id_cursor].books[i][0]);
@@ -235,17 +227,17 @@ void give_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cur
 }
 
 int main(){
-	//
+	//Exemples of how to use all functions in this file.
 
 	//Statement & Initialization :
 	Books* list_book=NULL;
 	Id* list_id =NULL;
-	int id_nb =0, book_nb =1, i =0, id_cursor =0;
+	int id_nb =0, book_nb =1;
 
 	list_book =read_book(&book_nb);
 	list_id =read_id(&id_nb);
 
-	get_book(list_id, list_book, book_nb, id_nb, 0, "ert");
+	//get_book(list_id, list_book, book_nb, id_nb, 0, "ert");
 	//give_book(list_id, list_book, book_nb, id_nb, 0, "ert");
 
 	return 0;
