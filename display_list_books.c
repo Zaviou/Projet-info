@@ -13,7 +13,7 @@ int date_comparison(long borrow_date, int type_user, long int* comparison){
 		}
 		else{
 			return 0;
-		}
+		} 
 	}
 	else{
 		if(*comparison<=180 && *comparison>0){
@@ -51,11 +51,20 @@ void display_book(Id* list_id ,char* login ,Books* list_book ,int id_nb, int boo
 	int i =0, cursor_id =0;
 	long int* comparison;
 	Books current_book;
+
+	printf("oki\n");
+	printf("id_nb=%d\n", id_nb);
+
+
 	for(i=0;i<id_nb; i++){
+		printf("list_id[i].login=%d\n", list_id[i].login);
 		if(strcmp(login, list_id[i].login) ==0){
 			cursor_id=i;
+		} else {
+			printf("oiyghb\n");
 		}
 	}
+	printf("cursor_id=%d\n.", cursor_id);
 	if(list_id[cursor_id].nb_borrowed_books==0){
 		printf("Vous n'avez emprunté aucun livre.\n\n");
 	}

@@ -43,3 +43,17 @@
 		"Books"    : [
 			]
 	},
+	{
+		"Login"    : "pandaa";
+		"Password" : "oui";
+		"Role"     : "2";
+		"Books"    : [
+			]
+	},
+	{
+		"Login"    : "oui";
+		"Password" : "non";
+		"Role"     : "1";
+		"Books"    : [
+			]
+	},

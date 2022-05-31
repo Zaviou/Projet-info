@@ -26,7 +26,7 @@ void start(Books* list_book, Id* list_id, int id_nb, int book_nb, int cursor_id)
 void book_management (Books* list_book, Id* list_id, int id_nb, int book_nb, int cursor_id){
 	int answer;
 	PRESENTATION
-	//display_book(list_id ,list_id[cursor_id].login ,list_book ,id_nb, book_nb);
+	display_book(list_id ,list_id[cursor_id].login ,list_book ,id_nb , book_nb);
 	do{
 		printf("Quelle action souhaitez-vous réaliser ?\n");
 		printf("1. Emprunter un nouveau livre\n"); 
