@@ -39,7 +39,7 @@ Books get_book_from_id (Books* list_book, char* id_book, int book_nb){
 }
 
 
-void display_book(Id* list_id ,char* login ,Books* list_book ,int id_nb, int book_nb){
+void display_book(Id* list_id, char* login, Books* list_book, int id_nb, int book_nb, int* cursor_id){
 	/*
 	This function prints the list of the books borrowed with the name and the author. It also prints the time remaining to return it, if the time has passed the name and author of the book are written in red.
 	
@@ -48,31 +48,28 @@ void display_book(Id* list_id ,char* login ,Books* list_book ,int id_nb, int boo
 	id_nb: 
 	book_nb:
 	*/
-	int i =0, cursor_id =0;
+	
+	printf("oui\n");
+	printf("list_id[*cursor_id].nb_borrowed_books=%d.\n", list_id[*cursor_id].nb_borrowed_books);
+
+
+	int i =0;
+	*cursor_id =0;
 	long int* comparison;
 	Books current_book;
 
-	printf("oki\n");
-	printf("id_nb=%d\n", id_nb);
+	printf("oui");
+	printf("list_id[*cursor_id].nb_borrowed_books=%d.\n", list_id[*cursor_id].nb_borrowed_books);
 
-
-	for(i=0;i<id_nb; i++){
-		printf("list_id[i].login=%d\n", list_id[i].login);
-		if(strcmp(login, list_id[i].login) ==0){
-			cursor_id=i;
-		} else {
-			printf("oiyghb\n");
-		}
-	}
-	printf("cursor_id=%d\n.", cursor_id);
-	if(list_id[cursor_id].nb_borrowed_books==0){
+	if(list_id[*cursor_id].nb_borrowed_books==0){
 		printf("Vous n'avez emprunté aucun livre.\n\n");
 	}
+
 	else{
 		printf("\nVoici les livres que vous avez emprunté :\n\n\n");
-		for(i=0;i<list_id[cursor_id].nb_borrowed_books;i++){
-			current_book =get_book_from_id (list_book, list_id[cursor_id].books[i][0], book_nb);
-			if(date_comparison(char_to_long(list_id[cursor_id].books[i][1]), list_id[cursor_id].role, comparison)==1){
+		for(i=0;i<list_id[*cursor_id].nb_borrowed_books;i++){
+			current_book =get_book_from_id (list_book, list_id[*cursor_id].books[i][0], book_nb);
+			if(date_comparison(char_to_long(list_id[*cursor_id].books[i][1]), list_id[*cursor_id].role, comparison)==1){
 				printf("\"%s\" par %s\n", current_book.title, current_book.author);
 				printf("Il vous reste %d de secondes pour le rendre.\n\n", 120-(*comparison));
 			}

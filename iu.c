@@ -1,6 +1,6 @@
 #include "headers.h"
 
-void start(Books* list_book, Id* list_id, int id_nb, int book_nb, int cursor_id){
+void start(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id){
 	int answer;
 	PRESENTATION
 	printf("Bienvenue dans la bibliothèque de CY-TECH!\n\n");
@@ -11,7 +11,7 @@ void start(Books* list_book, Id* list_id, int id_nb, int book_nb, int cursor_id)
 		scanf("%d",&answer);
 		if(answer==1){
 			PRESENTATION
-			connect(list_book, list_id, id_nb, book_nb);
+			connect(list_book, list_id, id_nb, book_nb, cursor_id);
 			book_management (list_book, list_id,  id_nb, book_nb, cursor_id);
 		}
 		else if(answer==2){
@@ -23,10 +23,10 @@ void start(Books* list_book, Id* list_id, int id_nb, int book_nb, int cursor_id)
 
 
 
-void book_management (Books* list_book, Id* list_id, int id_nb, int book_nb, int cursor_id){
+void book_management (Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id){
 	int answer;
 	PRESENTATION
-	display_book(list_id ,list_id[cursor_id].login ,list_book ,id_nb , book_nb);
+	display_book(list_id ,list_id[*cursor_id].login ,list_book ,id_nb , book_nb, cursor_id);
 	do{
 		printf("Quelle action souhaitez-vous réaliser ?\n");
 		printf("1. Emprunter un nouveau livre\n"); 
@@ -68,7 +68,7 @@ int main(){
 	list_id =read_id(&id_nb);
 	list_book =read_book(&book_nb);
 
-	start(list_book, list_id, id_nb, book_nb, cursor_id);
+	start(list_book, list_id, id_nb, book_nb, &cursor_id);
 //	book_management ();
 	return 0;
 }
