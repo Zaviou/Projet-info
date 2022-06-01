@@ -127,12 +127,13 @@ void scan_word(char* ask, char* word, int taille_max){
 	}
 }
 
-long int scan_long(char* ask, char* lg, int taille_max){
+long int scan_long(char* ask, int taille_max){
 	//
 
 	//Statement & Initialization :
 	int check_len, check_char;
 	int i;
+	char* lg;
 	char* error_char ="Vous ne pouvez pas saisir des caractères différents des chiffres\n";
 	char* error_len ="Vous ne pouvez pas saisir autant de caractères\n";
 	char test_len[taille_max];
