@@ -231,7 +231,7 @@ Id* read_id(int id_nb[1]){
 	fclose(file);
 	return list;
 }
-
+/*
 int main(){
 	//
 
@@ -246,4 +246,4 @@ int main(){
 
 	return 0;
 }
-
+*/
