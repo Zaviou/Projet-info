@@ -1,7 +1,7 @@
 all: exe
 
-exe: run_id.o run_book.o connect.o iu.o display_list_books.o translate.o
-	gcc run_id.o run_book.o connect.o iu.o display_list_books.o translate.o -o exe
+exe: run_id.o run_book.o connect.o iu.o display_list_books.o translate.o scan_all_types.o get_give_book.o
+	gcc run_id.o run_book.o connect.o iu.o display_list_books.o translate.o scan_all_types.o get_give_book.o -o exe
 
 exec: get_give_book.o run_id.o run_book.o
 	gcc get_give_book.o run_id.o run_book.o -o exec

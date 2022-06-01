@@ -225,7 +225,6 @@ void give_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cur
 
 	free(tmp);
 }
-
 /*
 int main(){
 	//Exemples of how to use all functions in this file.
@@ -238,7 +237,7 @@ int main(){
 	list_book =read_book(&book_nb);
 	list_id =read_id(&id_nb);
 
-	//get_book(list_id, list_book, book_nb, id_nb, 0, "ert");
+	get_book(list_id, list_book, book_nb, id_nb, 0, "ert");
 	//give_book(list_id, list_book, book_nb, id_nb, 0, "ert");
 
 	return 0;

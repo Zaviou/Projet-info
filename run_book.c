@@ -14,20 +14,20 @@ void create_book(Books* list_book, int book_nb){
 
 		//Ask the user the informations about the book
 	//Title
-	printf("Title of the book\n");
-	scanf("%s", bookt.title);
+	scan_text("Title of the book", bookt.title, SIZE_MAX);
+
 	//Author
-	printf("Name of the author\n");
-	scanf("%s", bookt.author);
+	scan_text("Name of the author", bookt.author, SIZE_MAX);
+
 	//Genre
 	printf("Genre of the book\n");
 	scanf("%s", bookt.genre);
+
 	//Date of release (release)
-	printf("Release date of the book\n");
-	scanf("%s", bookt.release);
+	scan_text("Release date of the book", bookt.release, SIZE_MAX);
+
 	//Id
-	printf("ID of the book\n");
-	scanf("%s", bookt.id);
+	bookt.id =scan_long("ID of the book", SIZE_MAX);
 
 	bookt.taken=0;
 
