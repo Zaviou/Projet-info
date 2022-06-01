@@ -80,5 +80,5 @@ void book_management (Books* list_book, Id* list_id, int id_nb, int book_nb, int
 //scan_all_types.c
 void scan_text(char* ask, char* text, int taille_max);
 void scan_word(char* ask, char* word, int taille_max);
-long int scan_long(char* ask, char* lg, int taille_max);
+long int scan_long(char* ask, int taille_max);
 int scan_int(char* ask, int min, int max);
