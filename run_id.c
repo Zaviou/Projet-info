@@ -176,6 +176,13 @@ Id* read_id(int id_nb[1]){
 						exit(1);
 					}
 
+					//Get nb_allowed_books
+					if(list[i].role ==1){
+						nb_allowed_books =3;
+					} else{
+						nb_allowed_books =5;
+					}
+
 					//Allocate memory and fill the list of book's id and their date of borrowing (list[i].books)
 					fseek(file, -4 -(nb_allowed_books *21), SEEK_CUR);
 					for(j =0; j <nb_borrowed_books; j++){
