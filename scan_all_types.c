@@ -24,7 +24,7 @@ void scan_text(char* ask, char* text, int taille_max){
 				i ++;
 			} while(text[i] !='\n' && i <taille_max);
 			text[i] ='\0';
-			} while(strlen(text) ==0);
+		} while(strlen(text) ==0);
 
 		//Fill the test_len value if needed
 		if(strlen(text) ==taille_max -1){
@@ -52,7 +52,7 @@ void scan_text(char* ask, char* text, int taille_max){
 			printf(ANSI_COLOR_RED "%s" ANSI_COLOR_RESET, error_len);
 		}
 
-	} while(check_len !=0 || text[0] =='\n');
+	} while(check_len !=0 || text[0] =='\0');
 
 	//Delete spaces if there are
 	while(text[strlen(text) -1] ==' '){
@@ -80,7 +80,14 @@ void scan_word(char* ask, char* word, int taille_max){
 
 		//Enter word
 		printf("\n%s\n", ask);
-		fgets(word, taille_max, stdin);
+		do{
+			fgets(word, taille_max, stdin);
+			//Delete the '\n' character from text
+			do{
+				i ++;
+			} while(word[i] !='\n' && i <taille_max);
+			word[i] ='\0';
+		} while(strlen(word) ==0);
 
 		//Fill the test_len value if needed
 		if(strlen(word) ==taille_max -1){
@@ -97,7 +104,6 @@ void scan_word(char* ask, char* word, int taille_max){
 		if(word[i] =='\n'){
 			word[i] ='\0';
 		}
-
 
 		//Check if space (' ') has been given
 		for(i =0; i <strlen(word); i++){
@@ -118,7 +124,7 @@ void scan_word(char* ask, char* word, int taille_max){
 			printf(ANSI_COLOR_RED "%s" ANSI_COLOR_RESET, error_space);
 		}
 
-	} while(check_len !=0 || check_space !=0 || word[0] =='\n');
+	} while(check_len !=0 || check_space !=0 || word[0] =='\0');
 
 	//Delete spaces if there are
 	while(word[strlen(word) -1] ==' '){
@@ -186,7 +192,7 @@ long int scan_long(char* ask, int taille_max){
 		}
 
 
-	} while(check_len !=0 || check_char !=0 || lg[0] =='\n');
+	} while(check_len !=0 || check_char !=0 || lg[0] =='\0');
 
 	return strtol(lg, NULL, 10);
 }
@@ -256,7 +262,7 @@ int scan_int(char* ask, int min, int max){
 		}
 
 
-	} while(check_len !=0 || check_char !=0 || check_gap !=0 || value[0] =='\n');
+	} while(check_len !=0 || check_char !=0 || check_gap !=0 || value[0] =='\0');
 
 	return res;
 }

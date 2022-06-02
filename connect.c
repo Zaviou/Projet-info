@@ -4,7 +4,7 @@
 
 
 
-int connect(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id){
+void connect(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id){
 	int i =0;
 	*cursor_id =-1;
 	char entered_login[SIZE_MAX];
@@ -35,6 +35,8 @@ int connect(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_i
 		printf(ANSI_COLOR_RED "Votre mot de passe est invalide\n\n" ANSI_COLOR_RESET); 
 		connect(list_book, list_id, id_nb, book_nb, cursor_id);
 	}
+
+	printf("in connect cursor_id=%d!\n", *cursor_id);
 }
 
 

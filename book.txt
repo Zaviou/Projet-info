@@ -22,7 +22,7 @@
 		"Genre"  : "1vb";
 		"Release": "12/03/04";
  		"ID"     : "357";
- 		"taken"  : "1";
+ 		"taken"  : "0";
 	},
 	{
 		"Title"  : "platano";
@@ -37,7 +37,7 @@
 		"Author" : "1fg";
 		"Genre"  : "1vb";
 		"Release": "12/03/04";
- 		"ID"     : "357";
+ 		"ID"     : "103";
  		"taken"  : "0";
 	},
 

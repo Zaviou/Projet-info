@@ -37,7 +37,7 @@ void create_book(Books* list_book, int book_nb);
 Books* read_book(int book_nb[1]);
 
 //run_id.o
-void create_id(Id* list_id, int id_nb);
+void create_id(Id* list_id, int id_nb[1]);
 void line_to_id_date(char* line, char* id, char* date);
 Id* read_id();
 
@@ -71,7 +71,7 @@ void all_books(Books* list_book, int book_nb);
 long int char_to_long(char* str);
 
 //connect.c
-int connect(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id);
+void connect(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id);
 
 //iu.o
 void start(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id);
