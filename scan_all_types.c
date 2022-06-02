@@ -4,9 +4,8 @@ void scan_text(char* ask, char* text, int taille_max){
 	//
 
 	//Statement & Initialization :
-	int check_len, check_char;
+	int check_len;
 	int i;
-	char* error_char ="Vous ne pouvez pas saisir des caractères différents des lettres\n";
 	char* error_len ="Vous ne pouvez pas saisir autant de caractères\n";
 	char test_len[taille_max];
 
@@ -15,7 +14,6 @@ void scan_text(char* ask, char* text, int taille_max){
 		i =-1;
 		text[0] ='\0';
 		check_len =0;
-		check_char =0;
 		test_len[0] ='\0';
 
 		//Enter text
@@ -36,13 +34,6 @@ void scan_text(char* ask, char* text, int taille_max){
 		} while(text[i] !='\n' && i <taille_max);
 		text[i] ='\0';
 
-		//Check if only letters have been given
-		for(i =0; i <strlen(text); i++){
-			if((text[i] <65 && text[i] !=32) || (text[i] >90 && text[i] <96) || text[i] >122){
-				check_char =1;
-			}
-		}
-
 		//Check the lenght of what's given
 		if (test_len[0] !='\0'){
 			check_len =1;
@@ -51,11 +42,9 @@ void scan_text(char* ask, char* text, int taille_max){
 		//Explain the problem if there is one
 		if (check_len ==1){
 			printf(ANSI_COLOR_RED "%s" ANSI_COLOR_RESET, error_len);
-		} if (check_char ==1){
-			printf(ANSI_COLOR_RED "%s" ANSI_COLOR_RESET, error_char);
 		}
 
-	} while(check_len !=0 || check_char !=0);
+	} while(check_len !=0);
 
 	//Delete spaces if there are
 	while(text[strlen(text) -1] ==' '){
@@ -87,9 +76,8 @@ void scan_word(char* ask, char* word, int taille_max){
 
 		//Fill the test_len value if needed
 		if(strlen(word) ==taille_max -1){
-			printf("oki\n");
 			do{
-				fgets(test_len, taille_max +1, stdin);
+				fgets(test_len, taille_max, stdin);
 				test_len[0] ='a';
 			}while(strlen(test_len) ==taille_max);
 		}
@@ -116,7 +104,7 @@ void scan_word(char* ask, char* word, int taille_max){
 		if (check_len ==1){
 			printf(ANSI_COLOR_RED "%s" ANSI_COLOR_RESET, error_len);
 		} if (check_space ==1){
-			printf(ANSI_COLOR_RED "%s\n" ANSI_COLOR_RESET, error_space);
+			printf(ANSI_COLOR_RED "%s" ANSI_COLOR_RESET, error_space);
 		}
 
 	} while(check_len !=0 || check_space !=0);
@@ -152,7 +140,6 @@ long int scan_long(char* ask, int taille_max){
 
 		//Fill the test_len value if needed
 		if(strlen(lg) ==taille_max -1){
-			printf("oki\n");
 			do{
 				fgets(test_len, taille_max +1, stdin);
 				test_len[0] ='a';

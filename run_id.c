@@ -20,7 +20,6 @@ void create_id(Id* list_id, int id_nb){
 	scan_word("Veuillez entrer un mot de passe.", pw, SIZE_MAX);
 
 	//Role
-	printf("Veuillez spécifier si vous êtes :\n1. un étudiant ?\n2. un professeur ?\n");
 	role =scan_int("Veuillez spécifier si vous êtes :\n1. un étudiant ?\n2. un professeur ?\n", 0, 2);
 
 		//Put the informations in the list of ID (list_id)
