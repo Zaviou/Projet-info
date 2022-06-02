@@ -1,8 +1,12 @@
 #include "headers.h"
 
-void merge_string(char* receive, char* give){
+void merge_string(char* receive, char* give, int size_max){
+	//
+
+	//Statement & Initialization :
 	int i;
-	for(i =0; i <strlen(give) && i <strlen(receive); i++){
+
+	for(i =0; i <strlen(give) && i <size_max; i++){
 		receive[i] =give[i];
 	}
 }
@@ -27,9 +31,9 @@ void create_book(Books* list_book, int book_nb){
 	char* genre8 ="Didactique";
 	char* genre9 ="Historique";
 
-	system("clear");
 
 		//Ask the user the informations about the book
+	PRESENTATION
 	//Title
 	scan_text("Title of the book", bookt.title, SIZE_MAX);
 
@@ -40,41 +44,42 @@ void create_book(Books* list_book, int book_nb){
 	id =scan_int("Genre of the book\n0. Action\n1. Aventures\n2. Comédie\n3. Horreur\n4. Romance\n5. Science-fiction\n6. Tragédie\n7. Mystère\n8. Didactique\n9. Historique\n", 0, 9);
 	switch (id){
 		case 0 :
-			merge_string(bookt.genre, genre0);
+			merge_string(bookt.genre, genre0, SIZE_MAX);
 		break;
 		case 1 :
-			merge_string(bookt.genre, genre1);
+			merge_string(bookt.genre, genre1, SIZE_MAX);
 		break;
 		case 2 :
-			merge_string(bookt.genre, genre2);
+			merge_string(bookt.genre, genre2, SIZE_MAX);
 		break;
 		case 3 :
-			merge_string(bookt.genre, genre3);
+			merge_string(bookt.genre, genre3, SIZE_MAX);
 		break;
 		case 4 :
-			merge_string(bookt.genre, genre4);
+			merge_string(bookt.genre, genre4, SIZE_MAX);
 		break;
 		case 5 :
-			merge_string(bookt.genre, genre5);
+			merge_string(bookt.genre, genre5, SIZE_MAX);
 		break;
 		case 6 :
-			merge_string(bookt.genre, genre6);
+			merge_string(bookt.genre, genre6, SIZE_MAX);
 		break;
 		case 7 :
-			merge_string(bookt.genre, genre7);
+			merge_string(bookt.genre, genre7, SIZE_MAX);
 		break;
 		case 8 :
-			merge_string(bookt.genre, genre8);
+			merge_string(bookt.genre, genre8, SIZE_MAX);
 		break;
 		default :
-			merge_string(bookt.genre, genre9);
+			merge_string(bookt.genre, genre9, SIZE_MAX);
 	}
 
 	//Date of release (release)
-	scan_text("Release date of the book", bookt.release, 11);
+	scan_text("Release date of the book", bookt.release, 12);
 
 	//Id
-	bookt.id =scan_long("ID of the book", SIZE_MAX);
+	bookt.id =scan_long("ID of the book", 4);
+	printf("bookt.id :%ld!\n", bookt.id);
 
 	bookt.taken=0;
 
@@ -127,17 +132,11 @@ void create_book(Books* list_book, int book_nb){
 	fprintf(file, "%s","		\"Release\": ");
 	fprintf(file, "\"%s\";\n  ",bookt.release);
 	fprintf(file, "%s","		\"ID\"     : ");
-	fprintf(file, "\"%s\";\n  ",bookt.id);
+	fprintf(file, "\"%ld\";\n  ",bookt.id);
 	fprintf(file, "%s","		\"taken\"  : ");
 	fprintf(file, "\"%d\";\n",bookt.taken);
-	fprintf(file, "%s","\n");
 	fprintf(file, "%s","	},");
 	fprintf(file, "%s","\n");
-
-	/*fseek(file, -0, SEEK_END);
-	if(fgetc(file)!=']'){
-		fprintf(file,"%s","]\n");
-	}*/
 
 	fclose(file);
 }
@@ -238,7 +237,7 @@ Books* read_book(int book_nb[1]){
 
 	return list;
 }
-/*
+
 int main(){
 	//
 
@@ -250,4 +249,4 @@ int main(){
 	create_book(list_books, book_nb);
 
 	return 0;
-}*/
+}
