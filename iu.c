@@ -42,10 +42,15 @@ void book_management (Books* list_book, Id* list_id, int id_nb, int book_nb, int
 			printf("title=%s\n", title);
 			printf("oki1\n");
 			get_book(list_id, list_book, book_nb, id_nb, *cursor_id, title);
-			book_management (list_book, list_id, id_nb, book_nb, cursor_id);
+			printf("OUH IH OUH AH AH\n");
+		//	book_management (list_book, list_id, id_nb, book_nb, cursor_id);
 		}
 		else if(answer==2){
-			printf("nion è_é\n\n\n");
+			PRESENTATION
+			display_book(list_id ,list_id[*cursor_id].login ,list_book ,id_nb , book_nb, cursor_id);
+			scan_text("Quel livre souhaitez-vous rendre ?", title, SIZE_MAX);
+			give_book(list_id, list_book, book_nb, id_nb, *cursor_id, title);
+			book_management (list_book, list_id, id_nb, book_nb, cursor_id);
 		}
 		else if(answer==3){
 			start(list_book, list_id, id_nb, book_nb, cursor_id);
@@ -73,6 +78,8 @@ int main(){
 	Id* list_id =NULL;
 	int cursor_id;
 	int id_cursor;
+
+	printf("nion è_é\n\n\n");
 	list_id =read_id(&id_nb);
 	list_book =read_book(&book_nb);
 
