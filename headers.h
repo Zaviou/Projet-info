@@ -71,11 +71,11 @@ void all_books(Books* list_book, int book_nb);
 long int char_to_long(char* str);
 
 //connect.c
-int connect(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id, int id_cursor, char* title);
+int connect(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id);
 
 //iu.o
-void start(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id,  int id_cursor, char* title);
-void book_management (Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id, int id_cursor, char* title);
+void start(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id);
+void book_management (Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id);
 
 //scan_all_types.c
 void scan_text(char* ask, char* text, int taille_max);

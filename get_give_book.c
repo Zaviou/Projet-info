@@ -130,6 +130,7 @@ void rewrite_borrowed_book(Id* list_id, int id_cursor){
 
 void get_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cursor, char* title){
 	//
+	printf("oki2\n");
 
 	//Statement & Initialization :
 	int i =0, book_cursor =0;
@@ -143,6 +144,8 @@ void get_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_curs
 			book_cursor =i;
 		}
 	}
+	printf("oki3\n");
+	printf("list_id[id_cursor].nb_borrowed_books :%d\n", list_id[id_cursor].nb_borrowed_books);
 
 		//Add the book in the id's list (list_id[id_cursor].books)
 	//Increase the lenght of the book list (list_id[id_cursor].books) of 1
@@ -152,6 +155,7 @@ void get_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_curs
 		exit(1);
 	}
 	list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books] =tmp;
+	printf("oki4\n");
 
 	//Allocate memory for the list of borrowed books (list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books][0])
 	list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books][0] =malloc(3 *sizeof(char));
@@ -159,6 +163,7 @@ void get_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_curs
 		printf("Impossible d'allouer de l'espace pour l'id du livre emprunté (list_id[%d].books[%d][0]).\n", id_cursor, list_id[id_cursor].nb_borrowed_books);
 		exit(1);
 	}
+	printf("oki5\n");
 
 	//Allocate memory for the list of borrowed books (list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books][1])
 	list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books][1] =malloc(10 *sizeof(char));
@@ -166,12 +171,14 @@ void get_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_curs
 		printf("Impossible d'allouer de l'espace pour la date d'emprunt (list_id[%d].books[%d][1]).\n", id_cursor, list_id[id_cursor].nb_borrowed_books);
 		exit(1);
 	}
+	printf("oki6\n");
 
 	//Add the values
 	list_id[id_cursor].nb_borrowed_books ++;
 	snprintf(list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][1], 11 *sizeof(char), "%ld", date);
 	snprintf(list_id[id_cursor].books[list_id[id_cursor].nb_borrowed_books -1][0], 4 *sizeof(char), "%ld", list_book[book_cursor].id);
 	list_book[book_cursor].taken =1;
+
 
 	//Write in the files (book.txt and id.txt)
 	book_is_taken(book_cursor, title, '1');

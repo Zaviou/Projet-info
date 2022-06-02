@@ -16,7 +16,8 @@ void start(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id
 		}
 		else if(answer==2){
 			PRESENTATION
-			create_id(list_id, id_nb);
+			//create_id(list_id, id_nb);
+			start(list_book, list_id, id_nb, book_nb, cursor_id);
 		}
 	}while(answer!=1 && answer !=2);
 }
@@ -25,6 +26,7 @@ void start(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id
 
 void book_management (Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id){
 	int answer;
+	char title[SIZE_MAX] ={0};
 	PRESENTATION
 	display_book(list_id ,list_id[*cursor_id].login ,list_book ,id_nb , book_nb, cursor_id);
 	do{
@@ -34,8 +36,13 @@ void book_management (Books* list_book, Id* list_id, int id_nb, int book_nb, int
 		printf("3. Se déconnecter.\n\n\n");
 		scanf("%d",&answer);
 		if(answer==1){
-
-			printf("ui\n\n\n");
+			PRESENTATION
+			all_books(list_book, book_nb);
+			scan_text("Quel livre souhaitez-vous emprunter ?", title, SIZE_MAX);
+			printf("title=%s\n", title);
+			printf("oki1\n");
+			get_book(list_id, list_book, book_nb, id_nb, *cursor_id, title);
+			book_management (list_book, list_id, id_nb, book_nb, cursor_id);
 		}
 		else if(answer==2){
 			printf("nion è_é\n\n\n");
@@ -65,9 +72,11 @@ int main(){
 	Books* list_book =NULL;
 	Id* list_id =NULL;
 	int cursor_id;
+	int id_cursor;
 	list_id =read_id(&id_nb);
 	list_book =read_book(&book_nb);
 
+	printf("nion è_é\n\n\n");
 	start(list_book, list_id, id_nb, book_nb, &cursor_id);
 //	book_management ();
 	return 0;
