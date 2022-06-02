@@ -1,11 +1,11 @@
 #include "headers.h"
 
-int date_comparison(long borrow_date, int type_user, long int* comparison){
-	/*
-	This function calculates if the user is late or not to return the books he borrowed. The time allowed to keep the book is 120 seconds for a student and 180 seconds for a teacher. It returns 1 if the user is not late and 0 if he is.
-	*/
+int date_comparison(long borrow_date, int type_user, int* comparison){
+
 	time_t seconds;
 	seconds = time(NULL);
+	
+//	printf("%ld\n", seconds);
 	(*comparison)=seconds-borrow_date;
 	if(type_user==1){
 		if(*comparison<=120 && *comparison>0){
@@ -26,14 +26,10 @@ int date_comparison(long borrow_date, int type_user, long int* comparison){
 }
 
 Books get_book_from_id (Books* list_book, char* id_book, int book_nb){
-	/*
-	This function uses an ID of a book and returns the book's information after recognizing the ID.
-	*/
 	int i, id_char;
 	for(i=0; i<book_nb; i++){
 		id_char=char_to_long(id_book);
 		if(id_char==list_book[i].id){
-	//	printf("
 			return list_book[i];
 		}	
 	}
@@ -41,45 +37,47 @@ Books get_book_from_id (Books* list_book, char* id_book, int book_nb){
 
 
 void display_book(Id* list_id, char* login, Books* list_book, int id_nb, int book_nb, int* cursor_id){
-	/*
-	This function prints the list of the books borrowed with the name and the author. It also prints the time remaining to return it, if the time has passed the name and author of the book are written in red.
 	
-	list_id: list of ids contained in the ID's file (id.txt).
-	login: login of the user ~~~~~
-	id_nb: 
-	book_nb:
-	*/
 
 	int i =0;
-	long int* comparison =0;
-	Books* current_book;
-
-	printf("list_id[*cursor_id].nb_borrowed_books=%d.\n", list_id[*cursor_id].nb_borrowed_books);
+	int comparison =0;
+	Books current_book;
 
 	if(list_id[*cursor_id].nb_borrowed_books==0){
 		printf("\nVous n'avez emprunté aucun livre.\n\n");
 	}
 
 	else{
-		printf("\nVoici les livres que vous avez emprunté :\n\n\n");
+		printf("\nVoici les livres que vous avez emprunté :\n\n");
+
 		for(i=0;i<list_id[*cursor_id].nb_borrowed_books;i++){
+
 			current_book =get_book_from_id (list_book, list_id[*cursor_id].books[i][0], book_nb);
 
-		/*	if(date_comparison(char_to_long(list_id[*cursor_id].books[i][1]), list_id[*cursor_id].role, comparison)==1){
+			if(date_comparison(char_to_long(list_id[*cursor_id].books[i][1]), list_id[*cursor_id].role, &comparison)==1){
 				printf("\"%s\" par %s\n", current_book.title, current_book.author);
-				printf("Il vous reste %d de secondes pour le rendre.\n\n", 120-(*comparison));
-			}*/
-
-			if(i==14){
+				printf("Il vous reste %d secondes pour le rendre.\n\n", 120-(comparison));
 			}
 			else{
-				printf(ANSI_COLOR_RED "\"%s\" par %s\n\n" ANSI_COLOR_RESET, current_book.title, current_book.author);
+				printf(ANSI_COLOR_RED "\"%s\" de %s\n\n" ANSI_COLOR_RESET, current_book.title, current_book.author);
 			}
 		}
 	}
 }
 
-
+void all_books(Books* list_book, int book_nb){
+	int i;
+	printf("Voici la liste des livres de notre bibliothèque\n\n");
+	for(i=0;i<book_nb;i++){
+		printf("\"%s\" par %s\n", list_book[i].title, list_book[i].author);
+		if(list_book[i].taken==1){
+		printf(ANSI_COLOR_RED "déjà emprunté\n\n" ANSI_COLOR_RESET);
+		}
+		else{
+		printf(ANSI_COLOR_BLUE "disponible\n\n" ANSI_COLOR_RESET);
+		}	
+	}
+}
 
 
 

@@ -10,7 +10,6 @@ void scan_text(char* ask, char* text, int taille_max){
 	char* error_len ="Vous ne pouvez pas saisir autant de caractères\n";
 	char test_len[taille_max];
 
-
 	do{
 		i =-1;
 		text[0] ='\0';
@@ -20,7 +19,14 @@ void scan_text(char* ask, char* text, int taille_max){
 
 		//Enter text
 		printf("\n%s\n", ask);
-		fgets(text, taille_max, stdin);
+		do{
+			fgets(text, taille_max, stdin);
+			//Delete the '\n' character from text
+			do{
+				i ++;
+			} while(text[i] !='\n' && i <taille_max);
+			text[i] ='\0';
+			} while(strlen(text) ==0);
 
 		//Fill the test_len value if needed
 		if(strlen(text) ==taille_max -1){
