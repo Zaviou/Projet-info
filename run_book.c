@@ -1,5 +1,12 @@
 #include "headers.h"
 
+void merge_string(char* receive, char* give){
+	int i;
+	for(i =0; i <strlen(give) && i <strlen(receive); i++){
+		receive[i] =give[i];
+	}
+}
+
 void create_book(Books* list_book, int book_nb){
 	//
 
@@ -8,7 +15,17 @@ void create_book(Books* list_book, int book_nb){
 	Books bookt;
 	file=NULL;
 	Books* list_book_tmp =NULL;
-	int i;
+	int i, id;
+	char* genre0 ="Action";
+	char* genre1 ="Aventures";
+	char* genre2 ="Comédies";
+	char* genre3 ="Horreur";
+	char* genre4 ="Romance";
+	char* genre5 ="Science-fiction";
+	char* genre6 ="Tragédie";
+	char* genre7 ="Mystère";
+	char* genre8 ="Didactique";
+	char* genre9 ="Historique";
 
 	system("clear");
 
@@ -20,11 +37,41 @@ void create_book(Books* list_book, int book_nb){
 	scan_text("Name of the author", bookt.author, SIZE_MAX);
 
 	//Genre
-	printf("Genre of the book\n");
-	scanf("%s", bookt.genre);
+	id =scan_int("Genre of the book\n0. Action\n1. Aventures\n2. Comédie\n3. Horreur\n4. Romance\n5. Science-fiction\n6. Tragédie\n7. Mystère\n8. Didactique\n9. Historique\n", 0, 9);
+	switch (id){
+		case 0 :
+			merge_string(bookt.genre, genre0);
+		break;
+		case 1 :
+			merge_string(bookt.genre, genre1);
+		break;
+		case 2 :
+			merge_string(bookt.genre, genre2);
+		break;
+		case 3 :
+			merge_string(bookt.genre, genre3);
+		break;
+		case 4 :
+			merge_string(bookt.genre, genre4);
+		break;
+		case 5 :
+			merge_string(bookt.genre, genre5);
+		break;
+		case 6 :
+			merge_string(bookt.genre, genre6);
+		break;
+		case 7 :
+			merge_string(bookt.genre, genre7);
+		break;
+		case 8 :
+			merge_string(bookt.genre, genre8);
+		break;
+		default :
+			merge_string(bookt.genre, genre9);
+	}
 
 	//Date of release (release)
-	scan_text("Release date of the book", bookt.release, SIZE_MAX);
+	scan_text("Release date of the book", bookt.release, 11);
 
 	//Id
 	bookt.id =scan_long("ID of the book", SIZE_MAX);
@@ -191,7 +238,7 @@ Books* read_book(int book_nb[1]){
 
 	return list;
 }
-/*
+
 int main(){
 	//
 
@@ -203,4 +250,4 @@ int main(){
 	create_book(list_books, book_nb);
 
 	return 0;
-}*/
+}
