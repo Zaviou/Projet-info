@@ -33,18 +33,44 @@ typedef struct {
 	char*** books;
 } Id;
 
-//run_book.o
+	//run_book.o
 void copy_string(char* receive, char* give, int size_max);
+/*This function put caracters of a string into another tring.
+receive: is the tring that take the caracters.
+give: is the tring that give the caracters.
+size_max: is the maximal numbers of caracters.
+*/
 void create_book(Books* list_book, int book_nb);
+/*This function ask the user all infomartion needed to create a book, add it the list_book and write it in the book.txt.
+list_book: list of books contained in the book's file (book.txt).
+book_nb: is the number of book saved.
+*/
 Books* read_book(int book_nb[1]);
+/*This function explore the book.txt file and return a list of Books containing all the informations read.
+book_nb: is the number of book saved.
+*/
 
-//run_id.o
+	//run_id.o
 void create_id(Id* list_id, int id_nb);
+/*This function ask the user all infomartion needed to create an id, add it the list_id and write it in the id.txt.
+list_id: list of ids contained in the id's file (id.txt).
+id_nb: is the number of ids saved.
+*/
 void line_to_id_date(char* line, char* id, char* date);
-Id* read_id();
+/*This function get from a string, an id and a date.
+line: is the string.
+id: is an identification number of a book.
+date: is the number of second elapsed between the 1st of january in 1970 and the date of borrowing.
+*/
+Id* read_id(int id_nb[1]);
+/*This function explore the id.txt file and return a list of Id containing all the informations read.
+id_nb: is the number of ids saved.
+*/
 
-//get_give_book.c
-int right_to_borow(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cursor, char* title);
+	//get_give_book.c
+int right_to_borrow(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cursor, char* title);
+/*Ths function checks if the users can or not borrow a book. It returns 0 if he can or 1 if he can't.
+*/
 int right_to_give_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cursor, char* title);
 void book_is_taken(int book_cursor, char* title, char taken);
 void rewrite_borrowed_book(Id* list_id, int id_cursor);

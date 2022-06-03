@@ -1,6 +1,6 @@
 #include "headers.h"
 
-int right_to_borow(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cursor, char* title){
+int right_to_borrow(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cursor, char* title){
 
 	//Statement & Initialization :
 	int nb_allowed_books =0;
