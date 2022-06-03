@@ -51,8 +51,7 @@ void scan_text(char* ask, char* text, int taille_max){
 		if (check_len ==1){
 			printf(ANSI_COLOR_RED "%s" ANSI_COLOR_RESET, error_len);
 		}
-
-	} while(check_len !=0 || text[0] =='\0');
+	} while(check_len !=0);
 
 	//Delete spaces if there are
 	while(text[strlen(text) -1] ==' '){
@@ -123,8 +122,7 @@ void scan_word(char* ask, char* word, int taille_max){
 		} if (check_space ==1){
 			printf(ANSI_COLOR_RED "%s" ANSI_COLOR_RESET, error_space);
 		}
-
-	} while(check_len !=0 || check_space !=0 || word[0] =='\0');
+	} while(check_len !=0 || check_space !=0);
 
 	//Delete spaces if there are
 	while(word[strlen(word) -1] ==' '){
@@ -152,8 +150,15 @@ long int scan_long(char* ask, int taille_max){
 		test_len[0] ='\0';
 
 		//Enter long
-		fgets(lg, taille_max, stdin);
-		printf("lg :%s!\n", lg);
+		printf("\n%s\n", ask);
+		do{
+			fgets(lg, taille_max, stdin);
+			//Delete the '\n' character from text
+			do{
+				i ++;
+			} while(lg[i] !='\n' && i <taille_max);
+			lg[i] ='\0';
+		} while(strlen(lg) ==0);
 
 		//Fill the test_len value if needed
 		if(strlen(lg) ==taille_max -1){
@@ -190,9 +195,7 @@ long int scan_long(char* ask, int taille_max){
 		} if (check_char ==1){
 			printf(ANSI_COLOR_RED "%s" ANSI_COLOR_RESET, error_char);
 		}
-
-
-	} while(check_len !=0 || check_char !=0 || lg[0] =='\0');
+	} while(check_len !=0 || check_char !=0);
 
 	return strtol(lg, NULL, 10);
 }
@@ -220,7 +223,14 @@ int scan_int(char* ask, int min, int max){
 
 		//Enter long
 		printf("\n%s\n", ask);
-		fgets(value, 2, stdin);
+		do{
+			fgets(value, 2, stdin);
+			//Delete the '\n' character from text
+			do{
+				i ++;
+			} while(value[i] !='\n' && i <2);
+			value[i] ='\0';
+		} while(strlen(value) ==0);
 
 		//Fill the test_len value if needed
 		do{
@@ -260,9 +270,7 @@ int scan_int(char* ask, int min, int max){
 			check_gap =1;
 			printf(ANSI_COLOR_RED "%s" ANSI_COLOR_RESET, error_gap);
 		}
-
-
-	} while(check_len !=0 || check_char !=0 || check_gap !=0 || value[0] =='\0');
+	} while(check_len !=0 || check_char !=0 || check_gap !=0);
 
 	return res;
 }

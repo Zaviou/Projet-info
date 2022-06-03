@@ -1,10 +1,15 @@
 #include "headers.h"
 
-void merge_string(char* receive, char* give, int size_max){
+void copy_string(char* receive, char* give, int size_max){
 	//
 
 	//Statement & Initialization :
 	int i;
+
+	//Fill the values
+	for(i =0; i <size_max; i++){
+		receive[i] ='\0';
+	}
 
 	for(i =0; i <strlen(give) && i <size_max; i++){
 		receive[i] =give[i];
@@ -31,7 +36,6 @@ void create_book(Books* list_book, int book_nb){
 	char* genre8 ="Didactique";
 	char* genre9 ="Historique";
 
-
 		//Ask the user the informations about the book
 	PRESENTATION
 	//Title
@@ -44,34 +48,34 @@ void create_book(Books* list_book, int book_nb){
 	id =scan_int("Genre of the book\n0. Action\n1. Aventures\n2. Comédie\n3. Horreur\n4. Romance\n5. Science-fiction\n6. Tragédie\n7. Mystère\n8. Didactique\n9. Historique\n", 0, 9);
 	switch (id){
 		case 0 :
-			merge_string(bookt.genre, genre0, SIZE_MAX);
+			copy_string(bookt.genre, genre0, SIZE_MAX);
 		break;
 		case 1 :
-			merge_string(bookt.genre, genre1, SIZE_MAX);
+			copy_string(bookt.genre, genre1, SIZE_MAX);
 		break;
 		case 2 :
-			merge_string(bookt.genre, genre2, SIZE_MAX);
+			copy_string(bookt.genre, genre2, SIZE_MAX);
 		break;
 		case 3 :
-			merge_string(bookt.genre, genre3, SIZE_MAX);
+			copy_string(bookt.genre, genre3, SIZE_MAX);
 		break;
 		case 4 :
-			merge_string(bookt.genre, genre4, SIZE_MAX);
+			copy_string(bookt.genre, genre4, SIZE_MAX);
 		break;
 		case 5 :
-			merge_string(bookt.genre, genre5, SIZE_MAX);
+			copy_string(bookt.genre, genre5, SIZE_MAX);
 		break;
 		case 6 :
-			merge_string(bookt.genre, genre6, SIZE_MAX);
+			copy_string(bookt.genre, genre6, SIZE_MAX);
 		break;
 		case 7 :
-			merge_string(bookt.genre, genre7, SIZE_MAX);
+			copy_string(bookt.genre, genre7, SIZE_MAX);
 		break;
 		case 8 :
-			merge_string(bookt.genre, genre8, SIZE_MAX);
+			copy_string(bookt.genre, genre8, SIZE_MAX);
 		break;
 		default :
-			merge_string(bookt.genre, genre9, SIZE_MAX);
+			copy_string(bookt.genre, genre9, SIZE_MAX);
 	}
 
 	//Date of release (release)
@@ -237,8 +241,8 @@ Books* read_book(int book_nb[1]){
 
 	return list;
 }
-
-/*int main(){
+/*
+int main(){
 	//
 
 	//Statement & Initialization :
@@ -249,4 +253,5 @@ Books* read_book(int book_nb[1]){
 	create_book(list_books, book_nb);
 
 	return 0;
-}*/
+}
+*/

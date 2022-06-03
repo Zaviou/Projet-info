@@ -1,7 +1,7 @@
 [
 	{
-		"Title"  : "aze";
-		"Author" : "qsd";
+		"Title"  : "abaa";
+		"Author" : "aaaa";
 		"Genre"  : "wxc";
 		"Release": "01/02/03";
   		"ID"     : "483";
@@ -9,15 +9,15 @@
 
 	},
 	{
-		"Title"  : "ert";
-		"Author" : "1fg";
+		"Title"  : "aaaa";
+		"Author" : "bbaa";
 		"Genre"  : "1vb";
 		"Release": "12/03/04";
  		"ID"     : "951";
  		"taken"  : "0";
 	},
 	{
-		"Title"  : "bouahahahaha";
+		"Title"  : "aaba";
 		"Author" : "MAMADOU SAKO";
 		"Genre"  : "1vb";
 		"Release": "12/03/04";
@@ -25,19 +25,18 @@
  		"taken"  : "0";
 	},
 	{
-		"Title"  : "platano";
-		"Author" : "1fg";
+		"Title"  : "aaaaa";
+		"Author" : "baaaa";
 		"Genre"  : "1vb";
 		"Release": "12/03/04";
  		"ID"     : "741";
  		"taken"  : "0";
 	},
 	{
-		"Title"  : "pollos";
-		"Author" : "1fg";
+		"Title"  : "aaa";
+		"Author" : "abaa";
 		"Genre"  : "1vb";
 		"Release": "12/03/04";
  		"ID"     : "103";
  		"taken"  : "0";
 	},
-
