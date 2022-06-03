@@ -1,13 +1,10 @@
 all: exe
 
-exe: run_id.o run_book.o connect.o iu.o display_list_books.o translate.o scan_all_types.o get_give_book.o
-	gcc run_id.o run_book.o connect.o iu.o display_list_books.o translate.o scan_all_types.o get_give_book.o -o exe
-
-exec: run_id.o run_book.o scan_all_types.o translate.o display_list_books.o
-	gcc run_id.o run_book.o scan_all_types.o translate.o display_list_books.o -o exec
+exe: run_id.o run_book.o display_list_books.o get_give_book.o translate.o iu.o connect.o scan_all_types.o main.o
+	gcc run_id.o run_book.o display_list_books.o get_give_book.o translate.o iu.o connect.o scan_all_types.o main.o -o exe
 
 main.o: main.c run_book.o
-	gcc -c main.c main.o
+	gcc -c main.c -o main.o
 
 scan_all_types.o: scan_all_types.c headers.h
 	gcc -c scan_all_types.c -o scan_all_types.o

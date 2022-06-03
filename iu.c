@@ -1,132 +1,115 @@
 #include "headers.h"
 
 void start(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id){
-	int answer;
+
+	//Statement & Initialization :
+	int answer =0;
+
 	PRESENTATION
 	printf("Bienvenue dans la bibliothèque de CY-TECH!\n\n");
+	answer =scan_int("Que souhaitez-vous faire ?\n1. Se connecter\n2. S'identifier\n", 1, 2);
 
-	do{
-		printf("Que souhaitez-vous faire ?\n");
-		printf("1. Se connecter \n"); 
-		printf("2. S'identifier\n\n\n\n");
-		scanf("%d",&answer);
-		if(answer==1){
-			PRESENTATION
-			connect(list_book, list_id, id_nb, book_nb, cursor_id);
-			printf("in start cursor_id=%d!\n", *cursor_id);
-			book_management (list_book, list_id,  id_nb, book_nb, cursor_id);
-		}
-		else if(answer==2){
-			PRESENTATION
-			create_id(list_id, &id_nb);
-			*cursor_id =id_nb -1;
-			book_management (list_book, list_id,  id_nb, book_nb, cursor_id);
-		}
-	}while(answer!=1 && answer !=2);
+	//Connect
+	if(answer==1){
+		PRESENTATION
+		connect(list_book, list_id, id_nb, book_nb, cursor_id);
+		book_management (list_book, list_id,  id_nb, book_nb, cursor_id);
+	}
+
+	//Identification
+	else if(answer==2){
+		PRESENTATION
+		create_id(list_id, &id_nb);
+		*cursor_id =id_nb -1;
+		book_management (list_book, list_id,  id_nb, book_nb, cursor_id);
+	}
 }
-/*
-void triSelection_all_title(Books* list_book, int book_nb, int SIZE_MAX);
-void triSelection_all_author(Books* list_book, int book_nb, int SIZE_MAX);
-void triSelection_your_title(Books* list_book, Id* list_id, int book_nb, int id_cursor, int SIZE_MAX);
-void look_for_by_title(Books* list_book, int book_nb);
-void look_for_by_author(Books* list_book, int book_nb);
-void look_for_by_genre(Books* list_book, int book_nb);
-int right_to_borrow(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cursor, char* title);
-int right_to_give_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cursor, char* title);
-*/
+
 void book_management (Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id){
-	int answer=0, come_back=0;
+
+	//Statement & Initialization :
+	int answer=0, right =0;
 	char title[SIZE_MAX] ={0};
+
 	PRESENTATION
 
 	triSelection_your_title( list_book, list_id, book_nb, *cursor_id, SIZE_MAX);
-	//if(list_id[*cursor_id].role==1){
-	do{/*
-		printf("Quelle action souhaitez-vous réaliser ?\n");
-		printf("1. Emprunter un nouveau livre\n"); 
-		printf("2. Rendre un livre\n");
+	printf("Quelle action souhaitez-vous réaliser ?\n");
+	printf("1. Emprunter un nouveau livre\n"); 
+	printf("2. Rendre un livre\n");
+
+	//Dissociate the case : user is a student from the case : student is a teacher
+	if(list_id[*cursor_id].role==1){
+		printf("3. Se déconnecter.\n\n\n");
+		answer=scan_int("", 1, 3);
+	}else{
 		printf("3. Ajouter un livre à la bibliothèque\n");
-		printf("4. Se déconnecter.\n\n\n");*/
+		printf("4. Se déconnecter.\n\n\n");
 		answer=scan_int("", 1, 4);
-		/*if(answer==1){
-			PRESENTATION
-			
-			triSelection_your_title(list_book, list_id, book_nb, *cursor_id, SIZE_MAX);
+	}
 
-			scan_text("Quel livre souhaitez-vous emprunter ? Appuyez sur 0 pour quitter, 1 pour lancer une recherche par auteur, 2 pour lancer une recherche par genre\n", title, SIZE_MAX);
-			printf("title[0]=%c!\n", title[0]);
-			if(title[0]=='0'){
-				printf("oki\n");
-				book_management (list_book, list_id, id_nb, book_nb, cursor_id);
-			}
-			else if(title[0]=='1'){
-				PRESENTATION
-				triSelection_all_author(list_book, book_nb, SIZE_MAX);
-				look_for_by_author(list_book, book_nb);
-				}
-			else if(title[0]=='2'){
-				PRESENTATION
-				
-			}
-			else {		
-				right_to_borrow(list_id, list_book, book_nb, id_nb, *cursor_id, title);
-				give_book(list_id, list_book, book_nb, id_nb, *cursor_id, title);
-				book_management (list_book, list_id, id_nb, book_nb, cursor_id);
-			}
-		}
-		else if(answer==2){
-			if(list_id[*cursor_id].nb_borrowed_books==0){
-				come_back=scan_int("Vous n'avez aucun livre à rendre, appuyez sur 0 pour revenir en arrière\n", 0, 1);
-				if(come_back==0){
-					book_management (list_book, list_id, id_nb, book_nb, cursor_id);
-				}
-			}
-			else{
-				PRESENTATION
+	//Borrow book
+	if(answer==1){
 
-				triSelection_your_title(list_book, list_id, book_nb, *cursor_id, SIZE_MAX);
-				scan_text("Quel livre souhaitez-vous rendre ?\n", title, SIZE_MAX);
-				right_to_give_book( list_id, list_book, book_nb, id_nb, *cursor_id, title);
-				give_book(list_id, list_book, book_nb, id_nb, *cursor_id, title);
-				book_management (list_book, list_id, id_nb, book_nb, cursor_id);
-			}
-		}
-		else if(answer==3){
-			create_book(list_book, book_nb);
+		PRESENTATION
+		triSelection_your_title(list_book, list_id, book_nb, *cursor_id, SIZE_MAX);
+		scan_text("Appuyez sur 0 pour quitter,\n1 pour lancer une recherche par auteur,\n2 pour lancer une recherche par genre,\nou indiquer le titre du livre que vous souhaitez emprunter", title, SIZE_MAX);
+
+		//Quit
+		if(title[0]=='0'){
 			book_management (list_book, list_id, id_nb, book_nb, cursor_id);
-		}			
-		else if(answer==4){
-			start(list_book, list_id, id_nb, book_nb, cursor_id);
-		}*/
-	}while(answer!=1 && answer !=2 && answer!=3 && (answer !=4 && list_id[*cursor_id].role==2));
+		}
+
+		//Look by author
+		else if(title[0]=='1'){
+			PRESENTATION
+			triSelection_all_author(list_book, book_nb, SIZE_MAX);
+			look_for_by_author(list_book, book_nb);
+		}
+
+		//Look by genre
+		else if(title[0]=='2'){
+			PRESENTATION
+			look_for_by_genre(list_book, book_nb);
+		}
+
+		//Borrow book
+		else {
+			right =right_to_borrow(list_id, list_book, book_nb, id_nb, *cursor_id, title);
+			if(right ==0){
+				get_book(list_id, list_book, book_nb, id_nb, *cursor_id, title);
+				book_management(list_book, list_id, id_nb, book_nb, cursor_id);
+			}else{
+				book_management(list_book, list_id, id_nb, book_nb, cursor_id);
+			}
+		}
+	}
+
+	//Return book
+	else if(answer==2){
+
+		PRESENTATION
+		triSelection_your_title(list_book, list_id, book_nb, *cursor_id, SIZE_MAX);
+		scan_text("Quel livre souhaitez-vous rendre ?\n", title, SIZE_MAX);
+
+		right =right_to_give_book(list_id, list_book, book_nb, id_nb, *cursor_id, title);
+		if(right ==0){
+			give_book(list_id, list_book, book_nb, id_nb, *cursor_id, title);
+			book_management(list_book, list_id, id_nb, book_nb, cursor_id);
+		}else{
+			book_management(list_book, list_id, id_nb, book_nb, cursor_id);
+		}
+
+	}
+
+	//Add book to the library
+	else if(answer==3 && list_id[*cursor_id].role==2){
+		create_book(list_book, book_nb);
+		book_management (list_book, list_id, id_nb, book_nb, cursor_id);
+	}
+
+	//Add book to the library
+	else if(answer==4 || (answer==3 && list_id[*cursor_id].role==1)){
+		start(list_book, list_id, id_nb, book_nb, cursor_id);
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-int main(){
-	int id_nb =0;
-	int book_nb =0;
-	Books* list_book =NULL;
-	Id* list_id =NULL;
-	int cursor_id=0;
-	int id_cursor=0;
-
-	list_id =read_id(&id_nb);
-	list_book =read_book(&book_nb);
-
-	start(list_book, list_id, id_nb, book_nb, &cursor_id);
-	return 0;
-}
-
