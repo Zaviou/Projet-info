@@ -55,7 +55,6 @@ void scan_text(char* ask, char* text, int taille_max){
 		if (check_len ==1){
 			printf(ANSI_COLOR_RED "%s" ANSI_COLOR_RESET, error_len);
 		}
-
 	} while(check_len !=0);
 
 	//Delete spaces if there are
@@ -114,7 +113,6 @@ void scan_word(char* ask, char* word, int taille_max){
 			test_len[i] ='\0';
 		}
 
-
 		//Check if space (' ') has been given
 		for(i =0; i <strlen(word); i++){
 			if(word[i] ==' '){
@@ -133,7 +131,6 @@ void scan_word(char* ask, char* word, int taille_max){
 		} if (check_space ==1){
 			printf(ANSI_COLOR_RED "%s" ANSI_COLOR_RESET, error_space);
 		}
-
 	} while(check_len !=0 || check_space !=0);
 
 	//Delete spaces if there are
@@ -212,8 +209,6 @@ long int scan_long(char* ask, int taille_max){
 		} if (check_char ==1){
 			printf(ANSI_COLOR_RED "%s" ANSI_COLOR_RESET, error_char);
 		}
-
-
 	} while(check_len !=0 || check_char !=0);
 
 	return strtol(lg, NULL, 10);
@@ -291,8 +286,6 @@ int scan_int(char* ask, int min, int max){
 			check_gap =1;
 			printf(ANSI_COLOR_RED "%s" ANSI_COLOR_RESET, error_gap);
 		}
-
-
 	} while(check_len !=0 || check_char !=0 || check_gap !=0);
 
 	return res;

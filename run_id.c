@@ -1,6 +1,6 @@
 #include "headers.h"
 
-void create_id(Id* list_id, int id_nb){
+void create_id(Id* list_id, int id_nb[1]){
 	//This function has to ask the user his login, password and role, then put thoses informations in the file "id.tkt".
 
 	//Statement & Initialization :
@@ -24,7 +24,7 @@ void create_id(Id* list_id, int id_nb){
 
 		//Put the informations in the list of ID (list_id)
 	//Increase the lenght of the ID list (list_id)
-	list_id_tmp =realloc(list_id, (id_nb +1) *sizeof(Id));
+	list_id_tmp =realloc(list_id, (*id_nb +1) *sizeof(Id));
 	if(list_id_tmp ==NULL){
 		printf("Impossible d'augmenter la taille de la list d'id.\n");
 		exit(1);
@@ -33,11 +33,12 @@ void create_id(Id* list_id, int id_nb){
 
 	//Add the informations
 	for(i =0; i <SIZE_MAX; i++){
-		list_id[id_nb].login[i] =login[i];
-		list_id[id_nb].password[i] =pw[i];
+		list_id[*id_nb].login[i] =login[i];
+		list_id[*id_nb].password[i] =pw[i];
 	}
-	list_id[id_nb].role =role;
-	list_id[id_nb].nb_borrowed_books =0;
+	list_id[*id_nb].role =role;
+	list_id[*id_nb].nb_borrowed_books =0;
+	*id_nb ++;
 
 		//Write the informations in the file "id.txt"
 	//Open the file "id.txt"
@@ -74,7 +75,7 @@ void create_id(Id* list_id, int id_nb){
 		nb_allowed_books =5;
 	}
 	for(i =0; i <nb_allowed_books; i++){
-		fprintf(file, "%s", "			                 \n");
+		fprintf(file, "%s", "\n			                 ");
 	}
 	fprintf(file, "%s", "\n			]");
 	fprintf(file, "%s", "\n	},");
@@ -250,7 +251,7 @@ int main(){
 	seconds =time(NULL);
 
 	list_id =read_id(&id_nb);
-	create_id(list_id, id_nb);
+	create_id(list_id, &id_nb);
 
 	return 0;
 }

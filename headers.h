@@ -51,7 +51,7 @@ book_nb: is the number of book saved.
 */
 
 	//run_id.o
-void create_id(Id* list_id, int id_nb);
+void create_id(Id* list_id, int id_nb[1]);
 /*This function ask the user all infomartion needed to create an id, add it the list_id and write it in the id.txt.
 list_id: list of ids contained in the id's file (id.txt).
 id_nb: is the number of ids saved.
@@ -115,27 +115,28 @@ id_nb: is the number of ids saved.
 id_cursor: is the place of the user in list_id.
 title: is the title of the book wished to return.
 */
-
-	//display_list_book.c
+	//date.c
 int date_comparison(long borrow_date, int type_user, int* comparison);
 /*This function calculates if the user is late or not to return the books he borrowed. The time allowed to keep the book is 120 seconds for a student and 180 seconds for a teacher. It returns 1 if the user is not late and 0 if he is.
 borrow_date: is the number of second elapsed between the 1st of january in 1970 and the date of borrowing.
 type_user: equals 1 if the user is a student, or 2 if the user is a teacher.
 comparison: is the number of seconds left to return the book (if the user insn't late).
 */
-void triSelection_all_title(Books* list_book, int book_nb, int TAILLE);
+
+	//display_list_book.c
+int triSelection_all_title(Books* list_book, int book_nb, int TAILLE);
 /*This function create a list of book, use the "copy_string" function to copy the titles in "list_book", then sort it, lorking the titles, in the ASCII (not alphabetical) order. At the end, it use the "all_books_title" function to displays them.
 list_book: list of books contained in the book's file (book.txt).
 book_nb: is the number of book saved.
 TAILLE: is the maximum lenght (number of character) of the titles.
 */
-void triSelection_all_author(Books* list_book, int book_nb, int TAILLE);
+int triSelection_all_author(Books* list_book, int book_nb, int TAILLE);
 /*This function create a list of book use the "copy_string" function to copy the authors in "list_book", then sort it, lorking the auhtor, in the ASCII (not alphabetical) order. At the end, it use the "all_books_author" function to displays them.
 list_book: list of books contained in the book's file (book.txt).
 book_nb: is the number of book saved.
 TAILLE: is the maximum lenght (number of character) of the authors.
 */
-void triSelection_your_title(Books* list_book, Id* list_id, int book_nb, int id_cursor, int TAILLE);
+int triSelection_your_title(Books* list_book, Id* list_id, int book_nb, int id_cursor, int TAILLE);
 /*This function create a list of book and sort it, lorking the titles, use the "copy_string" function to copy the titles of the borrowed books, then sort it, lorking the titles, in the ASCII (not alphabetical) order. At the end, it use the "all_books_title" function to displays them.
 list_book: list of books contained in the book's file (book.txt).
 list_id: list of ids contained in the id's file (id.txt).
@@ -204,14 +205,20 @@ book_nb: is the number of book saved.
 */
 
 	//connect.c
-int connect(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id);
-/*
+void connect(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id);
+/*This function asks your log informations, verifies them to permit you to get you to the book management page or ask you to try again if they are false.
 */
 
 	//iu.o
 void start(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id);
+/*This function displays the user interface of the starting page. It offers to the user the possibility to connect if they have already registered or to identify for new users. If you connect successfuly you get to the book management page.*/
 void book_management (Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id);
-
+/*This function displays the list of the books you borrowed then give the choice to choose between:
+borrow a book:
+return a borrowed book:
+add a book to the library:
+deconnect(only for teachers):
+*/
 	//scan_all_types.c
 void scan_text(char* ask, char* text, int taille_max);
 /*This function ask the user to enter text, then take it. If the user took to many characters then the function displays an error and ask again until having a text with the right amont of characters.

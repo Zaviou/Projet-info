@@ -1,6 +1,6 @@
 #include "headers.h"
 
-int connect(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id){
+void connect(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id){
 
 	//Statement & Initialization :
 	int i =0;

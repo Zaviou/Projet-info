@@ -1,6 +1,6 @@
 #include "headers.h"
 
-void triSelection_all_title(Books* list_book, int book_nb, int TAILLE){
+int triSelection_all_title(Books* list_book, int book_nb, int TAILLE){
 
 	//Statement & Initialization :
 	int i =0, j =0, cursor =0;
@@ -49,9 +49,11 @@ void triSelection_all_title(Books* list_book, int book_nb, int TAILLE){
 
 	all_books_title(list_book,book_nb, list_title_sorted);
 	free(list_title_sorted);
+
+	return 0;
 }
 
-void triSelection_all_author(Books* list_book, int book_nb, int TAILLE){
+int triSelection_all_author(Books* list_book, int book_nb, int TAILLE){
 
 	//Statement & Initialization :
 	int i =0, j =0, cursor =0;
@@ -100,9 +102,11 @@ void triSelection_all_author(Books* list_book, int book_nb, int TAILLE){
 
 	all_books_author(list_book, book_nb, list_author_sorted);
 	free(list_author_sorted);
+
+	return 0;
 }
 
-void triSelection_your_title(Books* list_book, Id* list_id, int book_nb, int id_cursor, int TAILLE){
+int triSelection_your_title(Books* list_book, Id* list_id, int book_nb, int id_cursor, int TAILLE){
 
 	//Statement & Initialization :
 	int i =0, j =0, cursor =0;
@@ -159,6 +163,8 @@ void triSelection_your_title(Books* list_book, Id* list_id, int book_nb, int id_
 	}
 
 	free(list_title_sorted);
+
+	return 0;
 }
 
 void all_books_title(Books* list_book, int book_nb, char** title){
@@ -380,5 +386,4 @@ int main(){
 //	look_for_by_genre(list_book, book_nb);
 
 	return 0;
-}
-*/
+}*/
