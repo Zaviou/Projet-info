@@ -3,8 +3,8 @@ all: exe
 exe: run_id.o run_book.o connect.o iu.o display_list_books.o translate.o scan_all_types.o get_give_book.o
 	gcc run_id.o run_book.o connect.o iu.o display_list_books.o translate.o scan_all_types.o get_give_book.o -o exe
 
-exec: run_id.o run_book.o scan_all_types.o translate.o display_list_books.o
-	gcc run_id.o run_book.o scan_all_types.o translate.o display_list_books.o -o exec
+exec: run_id.o run_book.o scan_all_types.o translate.o get_give_book.o
+	gcc run_id.o run_book.o scan_all_types.o translate.o get_give_book.o -o exec
 
 main.o: main.c run_book.o
 	gcc -c main.c main.o
@@ -23,6 +23,9 @@ translate.o: translate.c headers.h
 
 get_give_book.o: get_give_book.c headers.h
 	gcc -c get_give_book.c -o get_give_book.o
+
+date.o: date.c headers.h
+	gcc -c date.c -o date.o
 
 display_list_books.o: display_list_books.c headers.h
 	gcc -c  display_list_books.c -o display_list_books.o

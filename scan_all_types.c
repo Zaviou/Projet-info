@@ -1,11 +1,10 @@
 #include "headers.h"
 
 void scan_text(char* ask, char* text, int taille_max){
-	//
 
 	//Statement & Initialization :
 	int check_len;
-	int i;
+	int i=0;
 	char* error_len ="Vous ne pouvez pas saisir autant de caractères\n";
 	char test_len[taille_max];
 
@@ -64,15 +63,13 @@ void scan_text(char* ask, char* text, int taille_max){
 }
 
 void scan_word(char* ask, char* word, int taille_max){
-	//
 
 	//Statement & Initialization :
 	int check_len, check_space;
-	int i;
+	int i=0;
 	char* error_space ="Vous ne pouvez pas saisir d'espaces\n";
 	char* error_len ="Vous ne pouvez pas saisir autant de caractères\n";
 	char test_len[taille_max];
-
 
 	do{
 		i =-1;
@@ -140,11 +137,10 @@ void scan_word(char* ask, char* word, int taille_max){
 }
 
 long int scan_long(char* ask, int taille_max){
-	//
 
 	//Statement & Initialization :
 	int check_len =-1, check_char =-1;
-	int i;
+	int i=0;
 	char lg[taille_max];
 	char test_len[taille_max];
 	char* error_char ="Vous ne pouvez pas saisir des caractères différents des chiffres\n";
@@ -215,11 +211,10 @@ long int scan_long(char* ask, int taille_max){
 }
 
 int scan_int(char* ask, int min, int max){
-	//
 
 	//Statement & Initialization :
 	int check_len, check_char, check_gap;
-	int i, res;
+	int i=0, res=0;
 	char value[2];
 	char* error_char ="Vous ne pouvez pas saisir des caractères différents des chiffres\n";
 	char* error_len ="Vous ne pouvez pas saisir autant de caractères\n";

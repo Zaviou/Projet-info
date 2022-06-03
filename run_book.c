@@ -1,7 +1,6 @@
 #include "headers.h"
 
 void copy_string(char* receive, char* give, int size_max){
-	//
 
 	//Statement & Initialization :
 	int i;
@@ -17,7 +16,6 @@ void copy_string(char* receive, char* give, int size_max){
 }
 
 void create_book(Books* list_book, int book_nb){
-	//
 
 	//Statement & Initialization :
 	FILE* file;
@@ -36,7 +34,7 @@ void create_book(Books* list_book, int book_nb){
 	char* genre8 ="Didactique";
 	char* genre9 ="Historique";
 
-		//Ask the user the informations about the book
+	//Ask the user the informations about the book
 	PRESENTATION
 	//Title
 	scan_text("Title of the book", bookt.title, SIZE_MAX);
@@ -146,7 +144,6 @@ void create_book(Books* list_book, int book_nb){
 }
 
 Books* read_book(int book_nb[1]){
-	//
 
 	//Statement & Initialization :
 	int i =0, j =0;

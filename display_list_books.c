@@ -170,7 +170,7 @@ int triSelection_your_title(Books* list_book, Id* list_id, int book_nb, int id_c
 void all_books_title(Books* list_book, int book_nb, char** title){
 
 	//Statement & Initialization :
-	int i, cursor =-1;
+	int i=0, cursor =-1;
 
 	printf("Voici la liste des livres de notre bibliothèque\n\n");
 	for(i=0;i <book_nb;i++){
@@ -190,7 +190,7 @@ void all_books_title(Books* list_book, int book_nb, char** title){
 void all_books_author(Books* list_book, int book_nb, char** author){
 
 	//Statement & Initialization :
-	int i, cursor =-1;
+	int i=0, cursor =-1;
 
 	printf("Voici la liste des livres de notre bibliothèque\n\n");
 	for(i=0;i <book_nb;i++){
@@ -210,7 +210,7 @@ void all_books_author(Books* list_book, int book_nb, char** author){
 void your_books_title(Id* list_id, Books* list_book, int id_cursor, int book_nb, char** title){
 
 	//Statement & Initialization :
-	int i, cursor =-1;
+	int i=0, cursor =-1;
 
 	printf("Voici les livres que vous avez emprunté :\n\n");
 	for(i=0;i <list_id[id_cursor].nb_borrowed_books; i++){
@@ -228,7 +228,6 @@ void your_books_title(Id* list_id, Books* list_book, int id_cursor, int book_nb,
 }
 
 void look_for_by_title(Books* list_book, int book_nb){
-	//
 
 	//Statement & Initialization :
 	char title[SIZE_MAX];
@@ -253,7 +252,6 @@ void look_for_by_title(Books* list_book, int book_nb){
 
 
 void look_for_by_author(Books* list_book, int book_nb){
-	//
 
 	//Statement & Initialization :
 	char author[SIZE_MAX];
@@ -289,7 +287,6 @@ void look_for_by_author(Books* list_book, int book_nb){
 }
 
 void look_for_by_genre(Books* list_book, int book_nb){
-	//
 
 	//Statement & Initialization :
 	int nb_book =0, i =-1;
