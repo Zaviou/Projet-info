@@ -1,10 +1,9 @@
 #include "headers.h"
 
 long int char_to_long(char* str){
-	//
 
 	//Statement & Initialization :
-	char *ptr;
+	char *ptr=NULL;
 	long int res =1000000000;
 
 	res = strtol(str, NULL, 10);
@@ -13,10 +12,9 @@ long int char_to_long(char* str){
 }
 
 Books get_book_from_id (Books* list_book, char* id_book, int book_nb){
-	//
 
 	//Statement & Initialization :
-	int i, id_char;
+	int i=0, id_char=0;
 
 	for(i=0; i<book_nb; i++){
 		id_char =char_to_long(id_book);
@@ -27,10 +25,9 @@ Books get_book_from_id (Books* list_book, char* id_book, int book_nb){
 }
 
 int get_book_from_title (Books* list_book, char* title, int book_nb){
-	//
 
 	//Statement & Initialization :
-	int i;
+	int i=0;
 
 	for(i=0; i<book_nb; i++){
 		if(strcmp(title, list_book[i].title) ==0){
@@ -41,10 +38,9 @@ int get_book_from_title (Books* list_book, char* title, int book_nb){
 }
 
 int get_book_from_author (Books* list_book, char* author, int book_nb){
-	//
 
 	//Statement & Initialization :
-	int i;
+	int i=0;
 
 	for(i=0; i<book_nb; i++){
 		if(strcmp(author, list_book[i].author) ==0){

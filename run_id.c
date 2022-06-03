@@ -1,7 +1,6 @@
 #include "headers.h"
 
 void create_id(Id* list_id, int id_nb[1]){
-	//This function has to ask the user his login, password and role, then put thoses informations in the file "id.tkt".
 
 	//Statement & Initialization :
 	char login[SIZE_MAX] ={0};
@@ -86,7 +85,6 @@ void create_id(Id* list_id, int id_nb[1]){
 }
 
 void line_to_id_date(char* line, char* id, char* date){
-	//
 
 	//Statement & Initialization :
 	int i =0, mark_id =0, mark_date =0;
@@ -94,7 +92,6 @@ void line_to_id_date(char* line, char* id, char* date){
 	char tmp2[11] ="1653310346";
 	char* resserve;
 
-	//
 	for(i =0; i <strlen(line); i++){
 		//Get id
 		if(i >2 && i <6){
@@ -109,8 +106,7 @@ void line_to_id_date(char* line, char* id, char* date){
 }
 
 Id* read_id(int id_nb[1]){
-	//
-	
+
 	//Statement & Initialization :
 	Id* list;
 	(*id_nb)=0;
@@ -242,7 +238,7 @@ Id* read_id(int id_nb[1]){
 }
 /*
 int main(){
-	//
+	//Exemples of how to use all functions in this file.
 
 	//Statement & Initialization :
 	int id_nb =0;

@@ -33,7 +33,7 @@ typedef struct {
 	char*** books;
 } Id;
 
-	//run_book.o
+	//run_book.c
 void copy_string(char* receive, char* give, int size_max);
 /*This function put characters of a string into another tring.
 receive: is the tring that take the characters.
@@ -50,7 +50,7 @@ Books* read_book(int book_nb[1]);
 book_nb: is the number of book saved.
 */
 
-	//run_id.o
+	//run_id.c
 void create_id(Id* list_id, int id_nb[1]);
 /*This function ask the user all infomartion needed to create an id, add it the list_id and write it in the id.txt.
 list_id: list of ids contained in the id's file (id.txt).
@@ -207,17 +207,29 @@ book_nb: is the number of book saved.
 	//connect.c
 void connect(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id);
 /*This function asks your log informations, verifies them to permit you to get you to the book management page or ask you to try again if they are false.
+list_book: list of books contained in the book's file (book.txt).
+list_id: list of ids contained in the id's file (id.txt).
+id_nb: is the number of ids saved.
+book_nb: is the number of book saved.
+cursor_id: is the place of the user in list_id.
 */
 
-	//iu.o
+	//iu.c
 void start(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id);
-/*This function displays the user interface of the starting page. It offers to the user the possibility to connect if they have already registered or to identify for new users. If you connect successfuly you get to the book management page.*/
+/*This function displays the user interface of the starting page. It offers to the user the possibility to connect if they have already registered or to identify for new users. If you connect successfuly you get to the book management page.
+list_book: list of books contained in the book's file (book.txt).
+list_id: list of ids contained in the id's file (id.txt).
+id_nb: is the number of ids saved.
+book_nb: is the number of book saved.
+cursor_id: is the place of the user in list_id.
+*/
 void book_management (Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id);
-/*This function displays the list of the books you borrowed then give the choice to choose between:
-borrow a book:
-return a borrowed book:
-add a book to the library:
-deconnect(only for teachers):
+/*This function displays the list of the books you borrowed then give the choice to choose between borrowing a book, return a book, adding a book in the library or deconnect.
+list_book: list of books contained in the book's file (book.txt).
+list_id: list of ids contained in the id's file (id.txt).
+id_nb: is the number of ids saved.
+book_nb: is the number of book saved.
+cursor_id: is the place of the user in list_id.
 */
 	//scan_all_types.c
 void scan_text(char* ask, char* text, int taille_max);

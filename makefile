@@ -21,6 +21,9 @@ translate.o: translate.c headers.h
 get_give_book.o: get_give_book.c headers.h
 	gcc -c get_give_book.c -o get_give_book.o
 
+date.o: date.c headers.h
+	gcc -c date.c -o date.o
+
 display_list_books.o: display_list_books.c headers.h
 	gcc -c  display_list_books.c -o display_list_books.o
 
