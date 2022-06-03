@@ -1,25 +1,11 @@
 #include "headers.h"
-/*
-void affiche(char** tab, int taille1, int taille2){
-	int i, j;
 
-	printf("affiche :\n");
-	for(i =0; i <taille1; i ++){
-		for(j =0; j <taille2; j ++){
-			printf("%c", tab[i][j]);
-		}
-		printf("\n");
-	}
-	printf("fin.\n\n");
-}
-*/
 void triSelection_all_title(Books* list_book, int book_nb, int TAILLE){
-	//
 
 	//Statement & Initialization :
-	int i, j, cursor =0;
-	char tempo[TAILLE];
-	char** list_title_sorted;
+	int i =0, j =0, cursor =0;
+	char tmp[TAILLE];
+	char** list_title_sorted =NULL;
 
 	//Allocate memory for the new list of title (list_title_sorted)
 	list_title_sorted =malloc (book_nb * sizeof(char*));
@@ -54,9 +40,9 @@ void triSelection_all_title(Books* list_book, int book_nb, int TAILLE){
 
 			//Exchange values in list_title_sorted if needed
 			if (list_title_sorted[i][cursor] >list_title_sorted[j][cursor]){
-				copy_string(tempo, list_title_sorted[i], TAILLE);
+				copy_string(tmp, list_title_sorted[i], TAILLE);
 				copy_string(list_title_sorted[i], list_title_sorted[j], TAILLE);
-				copy_string(list_title_sorted[j], tempo, TAILLE);
+				copy_string(list_title_sorted[j], tmp, TAILLE);
 			}
 		}
 	}
@@ -66,12 +52,11 @@ void triSelection_all_title(Books* list_book, int book_nb, int TAILLE){
 }
 
 void triSelection_all_author(Books* list_book, int book_nb, int TAILLE){
-	//
 
 	//Statement & Initialization :
-	int i, j, cursor =0;
-	char tempo[TAILLE];
-	char** list_author_sorted;
+	int i =0, j =0, cursor =0;
+	char tmp[TAILLE];
+	char** list_author_sorted =NULL;
 
 	//Allocate memory for the new list of author (list_author_sorted)
 	list_author_sorted =malloc (book_nb * sizeof(char*));
@@ -106,9 +91,9 @@ void triSelection_all_author(Books* list_book, int book_nb, int TAILLE){
 
 			//Exchange values in list_title_sorted if needed
 			if (list_author_sorted[i][cursor] >list_author_sorted[j][cursor]){
-				copy_string(tempo, list_author_sorted[i], TAILLE);
+				copy_string(tmp, list_author_sorted[i], TAILLE);
 				copy_string(list_author_sorted[i], list_author_sorted[j], TAILLE);
-				copy_string(list_author_sorted[j], tempo, TAILLE);
+				copy_string(list_author_sorted[j], tmp, TAILLE);
 			}
 		}
 	}
@@ -118,13 +103,12 @@ void triSelection_all_author(Books* list_book, int book_nb, int TAILLE){
 }
 
 void triSelection_your_title(Books* list_book, Id* list_id, int book_nb, int id_cursor, int TAILLE){
-	//
 
 	//Statement & Initialization :
-	int i, j, cursor =0;
-	char tempo[TAILLE];
+	int i =0, j =0, cursor =0;
+	char tmp[TAILLE];
+	char** list_title_sorted =NULL;
 	Books bookt;
-	char** list_title_sorted;
 
 	//Allocate memory for the new list of title (list_title_sorted)
 	list_title_sorted =malloc (book_nb * sizeof(char*));
@@ -160,15 +144,16 @@ void triSelection_your_title(Books* list_book, Id* list_id, int book_nb, int id_
 
 			//Exchange values in list_title_sorted if needed
 			if (list_title_sorted[i][cursor] >list_title_sorted[j][cursor]){
-				copy_string(tempo, list_title_sorted[i], TAILLE);
+				copy_string(tmp, list_title_sorted[i], TAILLE);
 				copy_string(list_title_sorted[i], list_title_sorted[j], TAILLE);
-				copy_string(list_title_sorted[j], tempo, TAILLE);
+				copy_string(list_title_sorted[j], tmp, TAILLE);
 			}
 		}
 	}
 
+	//Dissociate the case the case : user have no book borrowed from the case : user have borrowed books
 	if(list_id[id_cursor].nb_borrowed_books ==0){
-		printf("Vous n'avez pas encore emprunter de livre\n");
+		printf("Vous n'avez pas encore emprunté de livre\n");
 	}else{
 		your_books_title(list_id, list_book, id_cursor, book_nb, list_title_sorted);
 	}
@@ -176,35 +161,7 @@ void triSelection_your_title(Books* list_book, Id* list_id, int book_nb, int id_
 	free(list_title_sorted);
 }
 
-int date_comparison(long borrow_date, int type_user, int* comparison){
-	//
-
-	//Statement & Initialization :
-	time_t seconds;
-	seconds = time(NULL);
-	
-//	printf("%ld\n", seconds);
-	(*comparison)=seconds-borrow_date;
-	if(type_user==1){
-		if(*comparison<=120 && *comparison>0){
-			return 1;
-		}
-		else{
-			return 0;
-		} 
-	}
-	else{
-		if(*comparison<=180 && *comparison>0){
-			return 1;
-		}
-		else{
-			return 0;
-		}
-	}
-}
-
 void all_books_title(Books* list_book, int book_nb, char** title){
-	//
 
 	//Statement & Initialization :
 	int i, cursor =-1;
@@ -213,6 +170,8 @@ void all_books_title(Books* list_book, int book_nb, char** title){
 	for(i=0;i <book_nb;i++){
 		cursor =get_book_from_title(list_book, title[i], book_nb);
 		printf("\"%s\" par %s\n", title[i], list_book[cursor].author);
+
+		//Dissociate the case the case : book is unavailable from the case : book is available
 		if(list_book[cursor].taken==1){
 			printf(ANSI_COLOR_RED "déjà emprunté\n\n" ANSI_COLOR_RESET);
 		}
@@ -223,7 +182,6 @@ void all_books_title(Books* list_book, int book_nb, char** title){
 }
 
 void all_books_author(Books* list_book, int book_nb, char** author){
-	//
 
 	//Statement & Initialization :
 	int i, cursor =-1;
@@ -232,6 +190,8 @@ void all_books_author(Books* list_book, int book_nb, char** author){
 	for(i=0;i <book_nb;i++){
 		cursor =get_book_from_author(list_book, author[i], book_nb);
 		printf("\"%s\" par %s\n", list_book[cursor].title, author[i]);
+
+		//Dissociate the case the case : book is unavailable from the case : book is available
 		if(list_book[cursor].taken==1){
 			printf(ANSI_COLOR_RED "déjà emprunté\n\n" ANSI_COLOR_RESET);
 		}
@@ -242,7 +202,6 @@ void all_books_author(Books* list_book, int book_nb, char** author){
 }
 
 void your_books_title(Id* list_id, Books* list_book, int id_cursor, int book_nb, char** title){
-	//
 
 	//Statement & Initialization :
 	int i, cursor =-1;
@@ -251,6 +210,8 @@ void your_books_title(Id* list_id, Books* list_book, int id_cursor, int book_nb,
 	for(i=0;i <list_id[id_cursor].nb_borrowed_books; i++){
 		cursor =get_book_from_title(list_book, title[i], book_nb);
 		printf("\"%s\" par %s\n", title[i], list_book[cursor].author);
+
+		//Dissociate the case the case : book is unavailable from the case : book is available
 		if(list_book[cursor].taken==1){
 			printf(ANSI_COLOR_RED "déjà emprunté\n\n" ANSI_COLOR_RESET);
 		}
@@ -411,7 +372,6 @@ int main(){
 	list_id =read_id(&id_nb);
 	list_book =read_book(&book_nb);
 
-//	date_comparison(borrow_date, type_user);
 //	triSelection_all_title(list_book, book_nb, SIZE_MAX);
 //	triSelection_all_author(list_book, book_nb, SIZE_MAX);
 //	triSelection_your_title(list_book, list_id, book_nb, 0, SIZE_MAX);
