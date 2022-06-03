@@ -63,8 +63,9 @@ login: login of the user ~~~~~
 id_nb: 
 book_nb:
 */
-void triSelection_all_title(Books* list_book, int book_nb, char** list_title_sorted, int TAILLE);
-void triSelection_all_author(Books* list_book, int book_nb, char** list_author_sorted, int TAILLE);
+void triSelection_all_title(Books* list_book, int book_nb, int TAILLE);
+void triSelection_all_author(Books* list_book, int book_nb, int TAILLE);
+void triSelection_your_title(Books* list_book, Id* list_id, int book_nb, int id_cursor, int TAILLE);
 void all_books_title(Books* list_book, int book_nb, char** title);
 void all_books_author(Books* list_book, int book_nb, char** author);
 void your_books_title(Id* list_id, Books* list_book, int id_cursor, int book_nb, char** title);
