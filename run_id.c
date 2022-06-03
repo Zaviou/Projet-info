@@ -54,6 +54,13 @@ void create_id(Id* list_id, int id_nb[1]){
 		fprintf(file,"%s","[\n");
 	}
 
+	//Get nb_allowed_books
+	if(role ==1){
+		nb_allowed_books =3;
+	} else{
+		nb_allowed_books =5;
+	}
+
 	fprintf(file, "%s", "	{\n");
 	fprintf(file, "%s", "		\"Login\"    : ");
 	fprintf(file, "\"%s\";\n", login);
