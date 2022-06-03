@@ -70,12 +70,23 @@
 		"Password" : "edouard";
 		"Role"     : "2";
 		"Books"    : [
-			951 : 1654189274;
 			                 
                  
                  
                  
+                 
+  
   
      
+			]
+	},
+	{
+		"Login"    : "theo";
+		"Password" : "bogosse";
+		"Role"     : "1";
+		"Books"    : [
+			                 
+			                 
+			                 
 			]
 	},

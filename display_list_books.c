@@ -1,5 +1,5 @@
 #include "headers.h"
-
+/*
 void affiche(char** tab, int taille1, int taille2){
 	int i, j;
 
@@ -12,13 +12,14 @@ void affiche(char** tab, int taille1, int taille2){
 	}
 	printf("fin.\n\n");
 }
-
-void triSelection_all_title(Books* list_book, int book_nb, char** list_title_sorted, int TAILLE){
+*/
+void triSelection_all_title(Books* list_book, int book_nb, int TAILLE){
 	//
 
 	//Statement & Initialization :
 	int i, j, cursor =0;
 	char tempo[TAILLE];
+	char** list_title_sorted;
 
 	//Allocate memory for the new list of title (list_title_sorted)
 	list_title_sorted =malloc (book_nb * sizeof(char*));
@@ -60,17 +61,17 @@ void triSelection_all_title(Books* list_book, int book_nb, char** list_title_sor
 		}
 	}
 
-	all_books_title(list_book, book_nb, list_title_sorted);
-
+	all_books_title(list_book,book_nb, list_title_sorted);
 	free(list_title_sorted);
 }
 
-void triSelection_all_author(Books* list_book, int book_nb, char** list_author_sorted, int TAILLE){
+void triSelection_all_author(Books* list_book, int book_nb, int TAILLE){
 	//
 
 	//Statement & Initialization :
 	int i, j, cursor =0;
 	char tempo[TAILLE];
+	char** list_author_sorted;
 
 	//Allocate memory for the new list of author (list_author_sorted)
 	list_author_sorted =malloc (book_nb * sizeof(char*));
@@ -113,17 +114,17 @@ void triSelection_all_author(Books* list_book, int book_nb, char** list_author_s
 	}
 
 	all_books_author(list_book, book_nb, list_author_sorted);
-
 	free(list_author_sorted);
 }
 
-void triSelection_your_title(Books* list_book, Id* list_id, int book_nb, int id_cursor, char** list_title_sorted, int TAILLE){
+void triSelection_your_title(Books* list_book, Id* list_id, int book_nb, int id_cursor, int TAILLE){
 	//
 
 	//Statement & Initialization :
 	int i, j, cursor =0;
 	char tempo[TAILLE];
 	Books bookt;
+	char** list_title_sorted;
 
 	//Allocate memory for the new list of title (list_title_sorted)
 	list_title_sorted =malloc (book_nb * sizeof(char*));
@@ -166,7 +167,11 @@ void triSelection_your_title(Books* list_book, Id* list_id, int book_nb, int id_
 		}
 	}
 
-	your_books_title(list_id, list_book, id_cursor, book_nb, list_title_sorted);
+	if(list_id[id_cursor].nb_borrowed_books ==0){
+		printf("Vous n'avez pas encore emprunter de livre\n");
+	}else{
+		your_books_title(list_id, list_book, id_cursor, book_nb, list_title_sorted);
+	}
 
 	free(list_title_sorted);
 }
@@ -402,18 +407,14 @@ void look_for_by_genre(Books* list_book, int book_nb){
 	Books* list_book =NULL;
 	Id* list_id =NULL;
 	int id_nb =0, book_nb =0;
-	char** list_title_sorted;
-	char** list_author;
 
 	list_id =read_id(&id_nb);
 	list_book =read_book(&book_nb);
 
 //	date_comparison(borrow_date, type_user);
-//	display_book(list_id,login ,list_book, id_nb, book_nb);
-//	display(list_id, id_nb, "zaviou");
-//	triSelection_all_title(list_book, book_nb, list_title_sorted, SIZE_MAX);
-//	triSelection_all_author(list_book, book_nb, list_author, SIZE_MAX);
-//	triSelection_your_title(list_book, list_id, book_nb, 0, list_title_sorted, SIZE_MAX);
+//	triSelection_all_title(list_book, book_nb, SIZE_MAX);
+//	triSelection_all_author(list_book, book_nb, SIZE_MAX);
+//	triSelection_your_title(list_book, list_id, book_nb, 0, SIZE_MAX);
 //	look_for_by_title(list_book, book_nb);
 //	look_for_by_author(list_book, book_nb);
 //	look_for_by_genre(list_book, book_nb);

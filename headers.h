@@ -52,14 +52,15 @@ void give_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cur
 //display_list_book.c
 int date_comparison(long borrow_date, int type_user, int* comparison);
 /*This function calculates if the user is late or not to return the books he borrowed. The time allowed to keep the book is 120 seconds for a student and 180 seconds for a teacher. It returns 1 if the user is not late and 0 if he is.*/
-void triSelection_all_title(Books* list_book, int book_nb, char** list_title_sorted, int TAILLE);
-void triSelection_all_author(Books* list_book, int book_nb, char** list_author_sorted, int TAILLE);
-void all_books_title(Books* list_book, int book_nb, char** title);
-void all_books_author(Books* list_book, int book_nb, char** author);
-void your_books_title(Id* list_id, Books* list_book, int id_cursor, int book_nb, char** title);
+void triSelection_all_title(Books* list_book, int book_nb, int TAILLE);
+void triSelection_all_author(Books* list_book, int book_nb, int TAILLE);
+void triSelection_your_title(Books* list_book, Id* list_id, int book_nb, int id_cursor, int TAILLE);
 void look_for_by_title(Books* list_book, int book_nb);
 void look_for_by_author(Books* list_book, int book_nb);
 void look_for_by_genre(Books* list_book, int book_nb);
+void all_books_title(Books* list_book, int book_nb, char** title);
+void all_books_author(Books* list_book, int book_nb, char** author);
+void your_books_title(Id* list_id, Books* list_book, int id_cursor, int book_nb, char** title);
 
 //translate.c
 long int char_to_long(char* str);
