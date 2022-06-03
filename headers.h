@@ -44,6 +44,8 @@ void line_to_id_date(char* line, char* id, char* date);
 Id* read_id();
 
 //get_give_book.c
+int right_to_borow(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cursor, char* title);
+int right_to_give_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cursor, char* title);
 void book_is_taken(int book_cursor, char* title, char taken);
 void rewrite_borrowed_book(Id* list_id, int id_cursor);
 void get_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cursor, char* title);
