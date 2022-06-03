@@ -255,32 +255,168 @@ void your_books_title(Id* list_id, Books* list_book, int id_cursor, int book_nb,
 	}
 }
 
-int main(){
-	//tmp
-	long id_book=123;
-	int type_user=2;
-	char* login = "Zaviou";
+void look_for_by_title(Books* list_book, int book_nb){
+	//
 
 	//Statement & Initialization :
-	Books current_book;
-	int id_nb =0;
+	char title[SIZE_MAX];
+	int cursor_book =-1;
+
+	scan_text("Vous avez choisi de rechercher un livre par son titre\nVeuillez indiquer le titre du lire que vous cherchez", title, SIZE_MAX);
+	cursor_book =get_book_from_title (list_book, title, book_nb);
+
+	//Show the users the result of the research
+	if(cursor_book ==book_nb){
+		printf("Il n'y a pas ce livre au sein de notre bibliothèque\n");
+	} else {
+		printf("Au sein de la bibliothèque vous pouvez trouver : \"%s\" par %s\n", list_book[cursor_book].title, list_book[cursor_book].author);
+		if(list_book[cursor_book].taken==1){
+			printf(ANSI_COLOR_RED "Mais il est déjà emprunté\n\n" ANSI_COLOR_RESET);
+		}
+		else{
+			printf(ANSI_COLOR_BLUE "Vous avez de la chance, il est disponible !\n\n" ANSI_COLOR_RESET);
+		}
+	}
+}
+
+
+void look_for_by_author(Books* list_book, int book_nb){
+	//
+
+	//Statement & Initialization :
+	char author[SIZE_MAX];
+	int nb_book =0, i =-1;
+
+	//Ask the user what author he wants to look for
+	scan_text("Vous avez choisi de rechercher un livre par son auteur\nVeuillez indiquer l'auteur dont vous voulez chercher les livres", author, SIZE_MAX);
+
+	//Finding books
+	for(i =0; i <book_nb; i++){
+		if(strcmp(author, list_book[i].author) ==0){
+			nb_book ++;
+
+			if(nb_book ==1){
+				printf("\nVoici les livres écrit par " ANSI_COLOR_GREEN "%s" ANSI_COLOR_RESET " au sein de la bibliothèque :\n\n", author);
+			}
+
+			//Show the users the result of the research
+			printf("\"%s\"\n", list_book[i].title);
+			if(list_book[i].taken==1){
+				printf(ANSI_COLOR_RED "Mais il est déjà emprunté\n\n" ANSI_COLOR_RESET);
+			}
+			else{
+				printf(ANSI_COLOR_BLUE "Vous avez de la chance, il est disponible !\n\n" ANSI_COLOR_RESET);
+			}
+		}
+	}
+
+	//Indicates if there is no books found
+	if(nb_book ==0){
+		printf("\nDésolée, il n'y a pas de livre dans la bibliothèque écrit par " ANSI_COLOR_GREEN "%s\n" ANSI_COLOR_RESET, author);
+	}
+}
+
+void look_for_by_genre(Books* list_book, int book_nb){
+	//
+
+	//Statement & Initialization :
+	int nb_book =0, i =-1;
+	int genre =-1;
+	char* genre0 ="Action";
+	char* genre1 ="Aventures";
+	char* genre2 ="Comédie";
+	char* genre3 ="Horreur";
+	char* genre4 ="Romance";
+	char* genre5 ="Science-fiction";
+	char* genre6 ="Tragédie";
+	char* genre7 ="Mystère";
+	char* genre8 ="Didactique";
+	char* genre9 ="Historique";
+	char** genrex =NULL;
+
+	//Genre
+	genre =scan_int("Vous avez choisi de rechercher un livre par son genre\n\nVoici les genres de livres existants\n0. Action\n1. Aventures\n2. Comédie\n3. Horreur\n4. Romance\n5. Science-fiction\n6. Tragédie\n7. Mystère\n8. Didactique\n9. Historique\n\nVeuillez indiquer le genre de livres que vous voulez rechercher", 0, 9);
+	switch (genre){
+		case 0 :
+			genrex =&genre0;
+		break;
+		case 1 :
+			genrex =&genre1;
+		break;
+		case 2 :
+			genrex =&genre2;
+		break;
+		case 3 :
+			genrex =&genre3;
+		break;
+		case 4 :
+			genrex =&genre4;
+		break;
+		case 5 :
+			genrex =&genre5;
+		break;
+		case 6 :
+			genrex =&genre6;
+		break;
+		case 7 :
+			genrex =&genre7;
+		break;
+		case 8 :
+			genrex =&genre8;
+		break;
+		default :
+			genrex =&genre9;
+	}
+
+	//Finding books
+	for(i =0; i <book_nb; i++){
+		if(strcmp(*genrex, list_book[i].genre) ==0){
+			nb_book ++;
+
+			if(nb_book ==1){
+				printf("\nVoici les livres de genre " ANSI_COLOR_GREEN "%s" ANSI_COLOR_RESET " au sein de la bibliothèque :\n\n", *genrex);
+			}
+
+			//Show the users the result of the research
+			printf("\"%s\" par \"%s\"\n", list_book[i].title, list_book[i].author);
+			if(list_book[i].taken==1){
+				printf(ANSI_COLOR_RED "Mais il est déjà emprunté\n\n" ANSI_COLOR_RESET);
+			}
+			else{
+				printf(ANSI_COLOR_BLUE "Vous avez de la chance, il est disponible !\n\n" ANSI_COLOR_RESET);
+			}
+		}
+	}
+
+	//Indicates if there is no books found
+	if(nb_book ==0){
+		printf("\nDésolée, il n'y a pas de livre " ANSI_COLOR_GREEN "%s" ANSI_COLOR_RESET " dans la bibliothèque\n", *genrex);
+	}
+
+}
+
+int main(){
+	//Exemples of how to use all functions in this file.
+
+	//Statement & Initialization :
 	Books* list_book =NULL;
-	int book_nb =0;
 	Id* list_id =NULL;
+	int id_nb =0, book_nb =0;
 	char** list_title_sorted;
 	char** list_author;
-
-//	printf("titre: %s\n", current_book);
-//	date_comparison(borrow_date, type_user);
 
 	list_id =read_id(&id_nb);
 	list_book =read_book(&book_nb);
 
+//	date_comparison(borrow_date, type_user);
 //	display_book(list_id,login ,list_book, id_nb, book_nb);
 //	display(list_id, id_nb, "zaviou");
 //	triSelection_all_title(list_book, book_nb, list_title_sorted, SIZE_MAX);
 //	triSelection_all_author(list_book, book_nb, list_author, SIZE_MAX);
-	triSelection_your_title(list_book, list_id, book_nb, 0, list_title_sorted, SIZE_MAX);
+//	triSelection_your_title(list_book, list_id, book_nb, 0, list_title_sorted, SIZE_MAX);
+//	look_for_by_title(list_book, book_nb);
+//	look_for_by_author(list_book, book_nb);
+//	look_for_by_genre(list_book, book_nb);
 
 	return 0;
 }

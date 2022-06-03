@@ -24,7 +24,7 @@ void create_book(Books* list_book, int book_nb){
 	Books bookt;
 	file=NULL;
 	Books* list_book_tmp =NULL;
-	int i, id;
+	int i, genre;
 	char* genre0 ="Action";
 	char* genre1 ="Aventures";
 	char* genre2 ="Comédies";
@@ -45,8 +45,8 @@ void create_book(Books* list_book, int book_nb){
 	scan_text("Name of the author", bookt.author, SIZE_MAX);
 
 	//Genre
-	id =scan_int("Genre of the book\n0. Action\n1. Aventures\n2. Comédie\n3. Horreur\n4. Romance\n5. Science-fiction\n6. Tragédie\n7. Mystère\n8. Didactique\n9. Historique\n", 0, 9);
-	switch (id){
+	genre =scan_int("Genre of the book\n0. Action\n1. Aventures\n2. Comédie\n3. Horreur\n4. Romance\n5. Science-fiction\n6. Tragédie\n7. Mystère\n8. Didactique\n9. Historique\n", 0, 9);
+	switch (genre){
 		case 0 :
 			copy_string(bookt.genre, genre0, SIZE_MAX);
 		break;
@@ -243,7 +243,7 @@ Books* read_book(int book_nb[1]){
 }
 /*
 int main(){
-	//
+	//Exemples of how to use all functions in this file.
 
 	//Statement & Initialization :
 	Books* list_books=NULL;
