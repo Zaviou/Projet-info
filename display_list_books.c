@@ -395,7 +395,7 @@ void look_for_by_genre(Books* list_book, int book_nb){
 
 }
 
-int main(){
+/*int main(){
 	//Exemples of how to use all functions in this file.
 
 	//Statement & Initialization :
@@ -419,5 +419,5 @@ int main(){
 //	look_for_by_genre(list_book, book_nb);
 
 	return 0;
-}
+}*/
 
