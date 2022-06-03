@@ -2,7 +2,7 @@
 	{
 		"Title"  : "abaa";
 		"Author" : "aaaa";
-		"Genre"  : "wxc";
+		"Genre"  : "Action";
 		"Release": "01/02/03";
   		"ID"     : "483";
   		"taken"  : "1";
@@ -10,8 +10,8 @@
 	},
 	{
 		"Title"  : "aaaa";
-		"Author" : "bbaa";
-		"Genre"  : "1vb";
+		"Author" : "aaaa";
+		"Genre"  : "Comédie";
 		"Release": "12/03/04";
  		"ID"     : "951";
  		"taken"  : "0";
@@ -19,15 +19,15 @@
 	{
 		"Title"  : "aaba";
 		"Author" : "MAMADOU SAKO";
-		"Genre"  : "1vb";
+		"Genre"  : "Action";
 		"Release": "12/03/04";
  		"ID"     : "357";
  		"taken"  : "0";
 	},
 	{
 		"Title"  : "aaaaa";
-		"Author" : "baaaa";
-		"Genre"  : "1vb";
+		"Author" : "aaaa";
+		"Genre"  : "Horreur";
 		"Release": "12/03/04";
  		"ID"     : "741";
  		"taken"  : "0";
@@ -35,7 +35,7 @@
 	{
 		"Title"  : "aaa";
 		"Author" : "abaa";
-		"Genre"  : "1vb";
+		"Genre"  : "Horreur";
 		"Release": "12/03/04";
  		"ID"     : "103";
  		"taken"  : "0";

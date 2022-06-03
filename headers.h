@@ -67,8 +67,10 @@ void triSelection_all_title(Books* list_book, int book_nb, char** list_title_sor
 void triSelection_all_author(Books* list_book, int book_nb, char** list_author_sorted, int TAILLE);
 void all_books_title(Books* list_book, int book_nb, char** title);
 void all_books_author(Books* list_book, int book_nb, char** author);
-
 void your_books_title(Id* list_id, Books* list_book, int id_cursor, int book_nb, char** title);
+void look_for_by_title(Books* list_book, int book_nb);
+void look_for_by_author(Books* list_book, int book_nb);
+void look_for_by_genre(Books* list_book, int book_nb);
 
 //translate.c
 long int char_to_long(char* str);

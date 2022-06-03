@@ -12,9 +12,49 @@ long int char_to_long(char* str){
 	return res;
 }
 
+Books get_book_from_id (Books* list_book, char* id_book, int book_nb){
+	//
+
+	//Statement & Initialization :
+	int i, id_char;
+
+	for(i=0; i<book_nb; i++){
+		id_char =char_to_long(id_book);
+		if(id_char==list_book[i].id){
+			return list_book[i];
+		}	
+	}
+}
+
+int get_book_from_title (Books* list_book, char* title, int book_nb){
+	//
+
+	//Statement & Initialization :
+	int i;
+
+	for(i=0; i<book_nb; i++){
+		if(strcmp(title, list_book[i].title) ==0){
+			return i;
+		}	
+	}
+}
+
+int get_book_from_author (Books* list_book, char* author, int book_nb){
+	//
+
+	//Statement & Initialization :
+	int i;
+
+	for(i=0; i<book_nb; i++){
+		if(strcmp(author, list_book[i].author) ==0){
+			return i;
+		}	
+	}
+}
+
 /*
 int main(){
-	//
+	//Exemples of how to use all functions in this file.
 
 	//Statement & Initialization :
 	int id_nb =0;

@@ -20,10 +20,13 @@ void scan_text(char* ask, char* text, int taille_max){
 		do{
 			fgets(text, taille_max, stdin);
 			//Delete the '\n' character from text
-			do{
+			i =0;
+			while(text[i] !='\n' && i <taille_max){
 				i ++;
-			} while(text[i] !='\n' && i <taille_max);
-			text[i] ='\0';
+			}
+			if(text[i] =='\n'){
+				text[i] ='\0';
+			}
 		} while(strlen(text) ==0);
 
 		//Fill the test_len value if needed
@@ -34,12 +37,13 @@ void scan_text(char* ask, char* text, int taille_max){
 			}while(strlen(test_len) ==taille_max);
 		}
 
-		//Delete the '\n' character from text
-		do{
+		//Delete the '\n' character from test_len
+		i =0;
+		while(test_len[i] !='\n' && i <taille_max){
 			i ++;
-		} while(text[i] !='\n' && i <taille_max);
-		if(text[i] =='\n'){
-			text[i] ='\0';
+		}
+		if(test_len[i] =='\n'){
+			test_len[i] ='\0';
 		}
 
 		//Check the lenght of what's given
@@ -81,11 +85,15 @@ void scan_word(char* ask, char* word, int taille_max){
 		printf("\n%s\n", ask);
 		do{
 			fgets(word, taille_max, stdin);
-			//Delete the '\n' character from text
-			do{
+
+			//Delete the '\n' character from word
+			i =0;
+			while(word[i] !='\n' && i <taille_max){
 				i ++;
-			} while(word[i] !='\n' && i <taille_max);
-			word[i] ='\0';
+			}
+			if(word[i] =='\n'){
+				word[i] ='\0';
+			}
 		} while(strlen(word) ==0);
 
 		//Fill the test_len value if needed
@@ -96,12 +104,13 @@ void scan_word(char* ask, char* word, int taille_max){
 			}while(strlen(test_len) ==taille_max);
 		}
 
-		//Delete the '\n' character from word
-		do{
+		//Delete the '\n' character from test_len
+		i =0;
+		while(test_len[i] !='\n' && i <taille_max){
 			i ++;
-		} while(word[i] !='\n' && i <taille_max);
-		if(word[i] =='\n'){
-			word[i] ='\0';
+		}
+		if(test_len[i] =='\n'){
+			test_len[i] ='\0';
 		}
 
 		//Check if space (' ') has been given
@@ -153,11 +162,15 @@ long int scan_long(char* ask, int taille_max){
 		printf("\n%s\n", ask);
 		do{
 			fgets(lg, taille_max, stdin);
-			//Delete the '\n' character from text
-			do{
+
+			//Delete the '\n' character from lg
+			i =0;
+			while(lg[i] !='\n' && i <taille_max){
 				i ++;
-			} while(lg[i] !='\n' && i <taille_max);
-			lg[i] ='\0';
+			}
+			if(lg[i] =='\n'){
+				lg[i] ='\0';
+			}
 		} while(strlen(lg) ==0);
 
 		//Fill the test_len value if needed
@@ -169,12 +182,13 @@ long int scan_long(char* ask, int taille_max){
 			}
 		}
 
-		//Delete the '\n' character from lg
-		do{
+		//Delete the '\n' character from test_len
+		i =0;
+		while(test_len[i] !='\n' && i <taille_max){
 			i ++;
-		} while(lg[i] !='\n' && i <taille_max);
-		if(lg[i] =='\n'){
-			lg[i] ='\0';
+		}
+		if(test_len[i] =='\n'){
+			test_len[i] ='\0';
 		}
 
 		//Check if only numbers have been given
@@ -225,7 +239,8 @@ int scan_int(char* ask, int min, int max){
 		printf("\n%s\n", ask);
 		do{
 			fgets(value, 2, stdin);
-			//Delete the '\n' character from text
+
+			//Delete the '\n' character from value
 			do{
 				i ++;
 			} while(value[i] !='\n' && i <2);
@@ -238,9 +253,10 @@ int scan_int(char* ask, int min, int max){
 		}while(strlen(test_len) ==10);
 
 		//Delete the '\n' character from test_len
-		do{
+		i =0;
+		while(test_len[i] !='\n' && i <10){
 			i ++;
-		} while(test_len[i] !='\n' && i <10);
+		}
 		if(test_len[i] =='\n'){
 			test_len[i] ='\0';
 		}
