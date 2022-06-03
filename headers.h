@@ -51,18 +51,7 @@ void give_book(Id* list_id, Books* list_book, int book_nb, int id_nb, int id_cur
 
 //display_list_book.c
 int date_comparison(long borrow_date, int type_user, int* comparison);
-/*
-This function calculates if the user is late or not to return the books he borrowed. The time allowed to keep the book is 120 seconds for a student and 180 seconds for a teacher. It returns 1 if the user is not late and 0 if he is.
-*/
-void display_book(Id* list_id ,char* login ,Books* list_book ,int id_nb, int book_nb, int* cursor_id);
-/*
-This function prints the list of the books borrowed with the name and the author. It also prints the time remaining to return it, if the time has passed the name and author of the book are written in red.
-
-list_id: list of ids contained in the ID's file (id.txt).
-login: login of the user ~~~~~
-id_nb: 
-book_nb:
-*/
+/*This function calculates if the user is late or not to return the books he borrowed. The time allowed to keep the book is 120 seconds for a student and 180 seconds for a teacher. It returns 1 if the user is not late and 0 if he is.*/
 void triSelection_all_title(Books* list_book, int book_nb, char** list_title_sorted, int TAILLE);
 void triSelection_all_author(Books* list_book, int book_nb, char** list_author_sorted, int TAILLE);
 void all_books_title(Books* list_book, int book_nb, char** title);
@@ -75,19 +64,25 @@ void look_for_by_genre(Books* list_book, int book_nb);
 //translate.c
 long int char_to_long(char* str);
 Books get_book_from_id (Books* list_book, char* id_book, int book_nb);
-/*
-This function uses an ID of a book and returns the book's informations after recognizing the ID.
-*/
+/*This function uses an ID of a book and returns the book's informations after recognizing the ID.*/
 int get_book_from_title (Books* list_book, char* title, int book_nb);
 int get_book_from_author (Books* list_book, char* author, int book_nb);
 
 //connect.c
 void connect(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id);
+/*This function asks your log informations, verifies them to permit you to get you to the book management page or ask you to try again if they are false.*/
 
 //iu.o
 void start(Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id);
+/*This function displays the user interface of the starting page. It offers to the user the possibility to connect if they have already registered or to identify for new users. If you connect successfuly you get to the book management page.*/
 void book_management (Books* list_book, Id* list_id, int id_nb, int book_nb, int* cursor_id);
+/*This function displays the list of the books you borrowed then give the choice to choose between:
+borrow a book:
+return a borrowed book:
+add a book to the library:
+deconnect(only for teachers):
 
+*/
 //scan_all_types.c
 void scan_text(char* ask, char* text, int taille_max);
 void scan_word(char* ask, char* word, int taille_max);
