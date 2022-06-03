@@ -37,6 +37,7 @@ int get_book_from_title (Books* list_book, char* title, int book_nb){
 			return i;
 		}	
 	}
+	return -1;
 }
 
 int get_book_from_author (Books* list_book, char* author, int book_nb){
@@ -50,6 +51,7 @@ int get_book_from_author (Books* list_book, char* author, int book_nb){
 			return i;
 		}	
 	}
+	return -1;
 }
 
 /*
