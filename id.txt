@@ -1,7 +1,7 @@
 [
 	{
-		"Login"    : "kikiriki";
-		"Password" : "cocorico";
+		"Login"    : "Camille";
+		"Password" : "UwU";
 		"Role"     : "1";
 		"Books"    : [
 			                  
@@ -10,81 +10,34 @@
 			]
 	},
 	{
+		"Login"    : "Xavier";
+		"Password" : "boot";
+		"Role"     : "1";
+		"Books"    : [
+			                 
+			                 
+			                 
+			]
+	},
+	{
 		"Login"    : "Yann";
 		"Password" : "e_ann";
-		"Role"     : "1";
+		"Role"     : "2";
 		"Books"    : [
 			                 
 			                 
 			                  
+			                 
+			                 
 			]
 	},
 	{
-		"Login"    : "1";
-		"Password" : "1";
+		"Login"    : "Alice";
+		"Password" : "ça glisse";
 		"Role"     : "2";
 		"Books"    : [
 			                 
 			                 
-			                 
-			                 
-			                 
-			]
-	},
-	{
-		"Login"    : "Xavier";
-		"Password" : "Reivax";
-		"Role"     : "2";
-		"Books"    : [
-			                 
-			                 
-			                 
-			                 
-			                 
-			]
-	},
-	{
-		"Login"    : "Couilloux";
-		"Password" : "Siuu";
-		"Role"     : "1";
-		"Books"    : [
-			                 
-			                 
-			                 
-			]
-	},
-	{
-		"Login"    : "Risson";
-		"Password" : "lehérisson";
-		"Role"     : "2";
-		"Books"    : [
-			                 
-			                 
-			                 
-			                 
-			                 
-			]
-	},
-	{
-		"Login"    : "jean-marc";
-		"Password" : "edouard";
-		"Role"     : "2";
-		"Books"    : [
-			                 
-                 
-                 
-                 
-                 
-  
-  
-     
-			]
-	},
-	{
-		"Login"    : "theo";
-		"Password" : "bogosse";
-		"Role"     : "1";
-		"Books"    : [
 			                 
 			                 
 			                 
