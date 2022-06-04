@@ -3,40 +3,56 @@
 		"Title"  : "Le Petit Prince";
 		"Author" : "Antoine de Saint-Exupéry";
 		"Genre"  : "Action";
-		"Release": "1943";
+		"Release": "00/00/1943";
   		"ID"     : "100";
-  		"taken"  : "0";
+  		"taken"  : "1";
 
 	},
 	{
 		"Title"  : "La nuit des temps";
 		"Author" : "Barjavel";
-		"Genre"  : "Science fiction";
-		"Release": "1966";
+		"Genre"  : "Science-fiction";
+		"Release": "00/00/1966";
  		"ID"     : "101";
- 		"taken"  : "0";
+ 		"taken"  : "1";
 	},
 	{
 		"Title"  : "L'Avare";
 		"Author" : "Molière";
 		"Genre"  : "Comédie";
-		"Release": "1668";
+		"Release": "00/00/1668";
  		"ID"     : "102";
  		"taken"  : "0";
 	},
 	{
-		"Title"  : "aaaaa";
-		"Author" : "aaaa";
-		"Genre"  : "Horreur";
-		"Release": "12/03/04";
- 		"ID"     : "741";
+		"Title"  : "Vingt Mille Lieues sous les mers";
+		"Author" : "Jules Verne";
+		"Genre"  : "Science-fiction";
+		"Release": "00/06/1970";
+ 		"ID"     : "103";
  		"taken"  : "0";
 	},
 	{
-		"Title"  : "aaa";
-		"Author" : "abaa";
-		"Genre"  : "Horreur";
-		"Release": "12/03/04";
+		"Title"  : "Le Tour du monde en quatre-vingts jours";
+		"Author" : "Jules Verne";
+		"Genre"  : "Aventure";
+		"Release": "00/00/1972";
  		"ID"     : "103";
+ 		"taken"  : "0";
+	},
+	{
+		"Title"  : "Les Misérables";
+		"Author" : "Victor Hugo";
+		"Genre"  : "Historique";
+		"Release": "00/00/1862";
+ 		"ID"     : "104";
+ 		"taken"  : "1";
+	},
+	{
+		"Title"  : "L'écume des jours";
+		"Author" : "Borris Vian";
+		"Genre"  : "Tragédie";
+		"Release": "00/00/1947";
+ 		"ID"     : "105";
  		"taken"  : "0";
 	},
