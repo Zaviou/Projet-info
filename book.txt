@@ -5,7 +5,7 @@
 		"Genre"  : "Action";
 		"Release": "00/00/1943";
   		"ID"     : "100";
-  		"taken"  : "1";
+  		"taken"  : "0";
 
 	},
 	{
@@ -14,7 +14,7 @@
 		"Genre"  : "Science-fiction";
 		"Release": "00/00/1966";
  		"ID"     : "101";
- 		"taken"  : "1";
+ 		"taken"  : "0";
 	},
 	{
 		"Title"  : "L'Avare";
@@ -46,7 +46,7 @@
 		"Genre"  : "Historique";
 		"Release": "00/00/1862";
  		"ID"     : "104";
- 		"taken"  : "1";
+ 		"taken"  : "0";
 	},
 	{
 		"Title"  : "L'écume des jours";
